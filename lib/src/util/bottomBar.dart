@@ -4,7 +4,6 @@ import 'package:applibre/src/pages/home.dart';
 import 'package:applibre/src/pages/maps.dart';
 import 'package:applibre/src/pages/menu.dart';
 import 'package:applibre/src/pages/profile.dart';
-import 'package:applibre/src/routes/routes.dart';
 import 'package:flutter/material.dart';
 
 class BottomBar extends StatefulWidget {
@@ -16,20 +15,20 @@ class BottomBar extends StatefulWidget {
 
 class _BottomBarState extends State<BottomBar> {
   int _selectedIndex = 0;
-    static const TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-    List<Widget> _widgetOptions = <Widget>[
-      HomePage(),
-      CuponsPage(),
-      MenuPage(),
-      MapsPage(),
-      ProfilePage()
-    ];
+  List<Widget> _widgetOptions = <Widget>[
+    HomePage(),
+    CuponsPage(),
+    MenuPage(),
+    MapsPage(),
+    ProfilePage()
+  ];
 
-  void _onItemTapped(int index) {
+  void onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,11 +57,11 @@ class _BottomBarState extends State<BottomBar> {
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.brown[900],
-        unselectedItemColor: Colors.brown[700],
-        onTap: _onItemTapped,
+        selectedItemColor: Colors.white,
+        unselectedItemColor: Colors.white,
+        onTap: onItemTapped,
         type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.orangeAccent[100],
+        backgroundColor: Colors.red,
       ),
     );
   }
