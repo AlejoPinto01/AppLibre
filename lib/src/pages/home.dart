@@ -224,7 +224,8 @@ class _HomePageState extends State<HomePage> {
                   onPressed: () => Navigator.of(context).pop(),
                   child: Text('Ok')),
             ],
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30.0)),
           );
         });
   }
