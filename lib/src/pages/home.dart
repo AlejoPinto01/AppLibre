@@ -1,4 +1,5 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+import 'package:applibre/src/pages/login.dart';
 import 'package:applibre/src/pages/profile.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:applibre/src/util/bottomBar.dart';
@@ -32,7 +33,7 @@ class _HomePageState extends State<HomePage> {
       case 3:
         return MapsPage();
       case 4:
-        return ProfilePage();
+        return LoginPage();
     }
     return generatePage();
   }

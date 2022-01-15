@@ -1,6 +1,7 @@
 // ignore_for_file: file_names, prefer_const_constructors, prefer_final_fields
 import 'package:applibre/src/pages/cupons.dart';
 import 'package:applibre/src/pages/home.dart';
+import 'package:applibre/src/pages/login.dart';
 import 'package:applibre/src/pages/maps.dart';
 import 'package:applibre/src/pages/menu.dart';
 import 'package:applibre/src/pages/profile.dart';
@@ -13,26 +14,32 @@ class BottomBar extends StatefulWidget {
   _BottomBarState createState() => _BottomBarState();
 }
 
+int index = 0;
+void setStateItem(int i) {
+  index = i;
+  _BottomBarState().onItemTapped(i);
+}
+
 class _BottomBarState extends State<BottomBar> {
-  int _selectedIndex = 0;
+  int selectedIndex = index;
   List<Widget> _widgetOptions = <Widget>[
     HomePage(),
     CuponsPage(),
     MenuPage(),
     MapsPage(),
-    ProfilePage()
+    LoginPage()
   ];
 
   void onItemTapped(int index) {
     setState(() {
-      _selectedIndex = index;
+      selectedIndex = index;
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _widgetOptions.elementAt(_selectedIndex),
+      body: _widgetOptions.elementAt(selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem> [
           BottomNavigationBarItem (
@@ -56,7 +63,7 @@ class _BottomBarState extends State<BottomBar> {
             label: 'Perfil',
           ),
         ],
-        currentIndex: _selectedIndex,
+        currentIndex: selectedIndex,
         selectedItemColor: Colors.white,
         unselectedItemColor: Colors.white,
         onTap: onItemTapped,
