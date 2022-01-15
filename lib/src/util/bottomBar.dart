@@ -14,8 +14,14 @@ class BottomBar extends StatefulWidget {
   _BottomBarState createState() => _BottomBarState();
 }
 
+int index = 0;
+void setStateItem(int i) {
+  index = i;
+  _BottomBarState().onItemTapped(i);
+}
+
 class _BottomBarState extends State<BottomBar> {
-  int _selectedIndex = 0;
+  int selectedIndex = index;
   List<Widget> _widgetOptions = <Widget>[
     HomePage(),
     CuponsPage(),
@@ -26,14 +32,14 @@ class _BottomBarState extends State<BottomBar> {
 
   void onItemTapped(int index) {
     setState(() {
-      _selectedIndex = index;
+      selectedIndex = index;
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _widgetOptions.elementAt(_selectedIndex),
+      body: _widgetOptions.elementAt(selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem> [
           BottomNavigationBarItem (
@@ -57,7 +63,7 @@ class _BottomBarState extends State<BottomBar> {
             label: 'Perfil',
           ),
         ],
-        currentIndex: _selectedIndex,
+        currentIndex: selectedIndex,
         selectedItemColor: Colors.white,
         unselectedItemColor: Colors.white,
         onTap: onItemTapped,
