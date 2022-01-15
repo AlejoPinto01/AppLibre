@@ -34,24 +34,24 @@ class _BottomBarState extends State<BottomBar> {
     return Scaffold(
       body: _widgetOptions.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem> [
-          BottomNavigationBarItem (
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
           ),
-          BottomNavigationBarItem (
+          BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Cupones',
           ),
-          BottomNavigationBarItem (
+          BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Carta',
           ),
-          BottomNavigationBarItem (
+          BottomNavigationBarItem(
             icon: Icon(Icons.add_location_alt_outlined),
             label: 'Mapa',
           ),
-          BottomNavigationBarItem (
+          BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Perfil',
           ),

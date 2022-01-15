@@ -20,12 +20,17 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    switch(_changePage) {
-      case 0: return generatePage();
-      case 1: return CuponsPage();
-      case 2: return MenuPage();
-      case 3: return MapsPage();
-      case 4: return ProfilePage();
+    switch (_changePage) {
+      case 0:
+        return generatePage();
+      case 1:
+        return CuponsPage();
+      case 2:
+        return MenuPage();
+      case 3:
+        return MapsPage();
+      case 4:
+        return ProfilePage();
     }
     return generatePage();
   }
@@ -43,7 +48,8 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget generarCabecera() { //Mejor una imagen con un logo
+  Widget generarCabecera() {
+    //Mejor una imagen con un logo
     return Center(
       child: Text(
         'Kebab4U',
@@ -73,29 +79,25 @@ class _HomePageState extends State<HomePage> {
             width: 300,
             height: 100,
             child: Center(
-              child: ListView(
-              children: 
-              [ Center(
-                child: Text(
+              child: ListView(children: [
+                Center(
+                  child: Text(
                     'Todavía no estás registrado?',
                     style: GoogleFonts.permanentMarker(
                         textStyle: TextStyle(
-                        color: Colors.white,
-                        fontSize: 25,
-                        height: 3.0,
-                        fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      fontSize: 25,
+                      height: 3.0,
+                      fontWeight: FontWeight.bold,
                     )),
                   ),
-              ),
+                ),
                 Center(
                   child: Text(
                     'Haz click aquí',
                     style: GoogleFonts.permanentMarker(
                         textStyle: TextStyle(
-                      color: Colors.white,
-                      fontSize: 15,
-                      height: 2.0
-                    )),
+                            color: Colors.white, fontSize: 15, height: 2.0)),
                   ),
                 )
               ]),
