@@ -1,6 +1,7 @@
 // ignore_for_file: file_names, prefer_const_constructors, prefer_final_fields
 import 'package:applibre/src/pages/cupons.dart';
 import 'package:applibre/src/pages/home.dart';
+import 'package:applibre/src/pages/login.dart';
 import 'package:applibre/src/pages/maps.dart';
 import 'package:applibre/src/pages/menu.dart';
 import 'package:applibre/src/pages/profile.dart';
@@ -20,7 +21,7 @@ class _BottomBarState extends State<BottomBar> {
     CuponsPage(),
     MenuPage(),
     MapsPage(),
-    ProfilePage()
+    LoginPage()
   ];
 
   void onItemTapped(int index) {
