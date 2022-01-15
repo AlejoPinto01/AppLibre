@@ -1,4 +1,5 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+import 'package:applibre/src/pages/login.dart';
 import 'package:applibre/src/pages/profile.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:applibre/src/util/bottomBar.dart';
@@ -17,9 +18,11 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _changePage = 0;
+  var size;
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     switch (_changePage) {
       case 0:
         return generatePage();
@@ -30,7 +33,7 @@ class _HomePageState extends State<HomePage> {
       case 3:
         return MapsPage();
       case 4:
-        return ProfilePage();
+        return LoginPage();
     }
     return generatePage();
   }
@@ -43,6 +46,12 @@ class _HomePageState extends State<HomePage> {
           generarCabecera(),
           Divider(),
           generarTarjetaPerfil(),
+          Divider(),
+          generarCardImagen(),
+          Divider(),
+          generarCuponesCabecera(),
+          Divider(),
+          generarCupones(),
         ],
       ),
     );
@@ -111,5 +120,113 @@ class _HomePageState extends State<HomePage> {
       ),
       height: 150,
     );
+  }
+
+  Widget generarCardImagen() {
+    return Container(
+      child: ClipRRect(
+        child: Card(
+          child: InkWell(
+            splashColor: Colors.green[700],
+            onTap: () {
+              setState(() {
+                _changePage = 2;
+              });
+            },
+            child: FadeInImage(
+              placeholder: AssetImage('assets/cargando.gif'),
+              image: NetworkImage(
+                  'https://abancommercials.com/es/uploadComercial/7108.jpg'),
+              fadeInDuration: Duration(milliseconds: 100),
+              height: 250,
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+        borderRadius: BorderRadius.circular(30.0),
+      ),
+    );
+  }
+
+  Widget generarCuponesCabecera() {
+    return ListTile(
+      title: Text('Cupones'),
+      trailing: TextButton(
+        onPressed: () {
+          setState(() {
+            _changePage = 1;
+          });
+        },
+        child: Text('Ver todo'),
+      ),
+    );
+  }
+
+  Widget generarCupones() {
+    return Container(
+      margin: EdgeInsets.only(bottom: 30),
+      width: double.infinity,
+      height: 180,
+      // color: Colors.red,
+      child: ListView.builder(
+          itemCount: 10,
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (BuildContext context, int index) =>
+              generarCuponesSlider()),
+    );
+  }
+
+  Widget generarCuponesSlider() {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 10),
+      width: 110,
+      height: 100,
+      // color: Colors.green,
+      child: InkWell(
+        child: Column(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: FadeInImage(
+                placeholder: AssetImage('assets/cargando.gif'),
+                image: NetworkImage('https://via.placeholder.com/150x300'),
+                height: 140,
+                width: 100,
+                fit: BoxFit.cover,
+              ),
+            ),
+            SizedBox(
+              height: 5,
+            ),
+          ],
+        ),
+        onTap: () {
+          setState(() {
+            _mostrarAlert(context);
+          });
+        },
+      ),
+    );
+  }
+
+  void _mostrarAlert(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('Código de promoción'),
+            content: Text('sdgfsdfgsdf'),
+            actions: [
+              TextButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                  child: Text('Cancelar')),
+              TextButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                  child: Text('Ok')),
+            ],
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30.0)),
+          );
+        });
   }
 }
