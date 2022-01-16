@@ -1,8 +1,10 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 import 'package:applibre/src/pages/login.dart';
 import 'package:applibre/src/pages/profile.dart';
+import 'package:applibre/src/pages/root_page.dart';
+import 'package:applibre/src/util/pages.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:applibre/src/util/bottomBar.dart';
+import 'package:applibre/src/util/data.dart';
 import 'package:flutter/material.dart';
 
 import 'cupons.dart';
@@ -17,31 +19,15 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _changePage = 0;
-  var size;
-
+  String nombreUsuario = getNombreUsuario();
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    switch (_changePage) {
-      case 0:
-        return generatePage();
-      case 1:
-        return CuponsPage();
-      case 2:
-        return MenuPage();
-      case 3:
-        return MapsPage();
-      case 4:
-        return LoginPage();
-    }
     return generatePage();
   }
 
   Widget generatePage() {
-    return Container(
-      color: Colors.yellow[100],
-      child: ListView(
+    return Scaffold(
+      body: ListView(
         children: [
           generarCabecera(),
           Divider(),
@@ -78,47 +64,92 @@ class _HomePageState extends State<HomePage> {
     return Container(
       child: Card(
         child: InkWell(
-          splashColor: Colors.green[700],
-          onTap: () {
-            setState(() {
-              _changePage = 4;
-            });
-          },
-          child: SizedBox(
-            width: 300,
-            height: 100,
-            child: Center(
-              child: ListView(children: [
-                Center(
-                  child: Text(
-                    'Todavía no estás registrado?',
-                    style: GoogleFonts.permanentMarker(
-                        textStyle: TextStyle(
-                      color: Colors.white,
-                      fontSize: 25,
-                      height: 3.0,
-                      fontWeight: FontWeight.bold,
-                    )),
-                  ),
-                ),
-                Center(
-                  child: Text(
-                    'Haz click aquí',
-                    style: GoogleFonts.permanentMarker(
-                        textStyle: TextStyle(
-                            color: Colors.white, fontSize: 15, height: 2.0)),
-                  ),
-                )
-              ]),
-            ),
-          ),
-        ),
+            splashColor: Colors.green[700],
+            onTap: () {
+              setState(() {
+                setIndex(4);
+                Navigator.pushReplacement(
+                    context,
+                    PageRouteBuilder(
+                        pageBuilder: (context, animation1, animation2) =>
+                            RootPage(),
+                        transitionDuration: Duration.zero));
+              });
+            },
+            child: compruebaEstado()),
         color: Colors.red,
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(40.0),
       ),
-      height: 150,
+      height: compruebaAltura(),
+    );
+  }
+
+  double compruebaAltura() {
+    if (getRegistre()) {
+      return 100;
+    } else {
+      return 150;
+    }
+  }
+
+  Widget compruebaEstado() {
+    if (getRegistre()) {
+      return boxRegistrado();
+    } else {
+      return boxNoRegistrado();
+    }
+  }
+
+  Widget boxRegistrado() {
+    return SizedBox(
+      width: 300,
+      height: 50,
+      child: Center(
+        child: Text(
+          'Hola, ${nombreUsuario}',
+          style: GoogleFonts.permanentMarker(
+            textStyle: TextStyle(
+              color: Colors.white,
+              fontSize: 25,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget boxNoRegistrado() {
+    return SizedBox(
+      width: 300,
+      height: 100,
+      child: Center(
+        child: ListView(children: [
+          Center(
+            child: Text(
+              'Todavía no estás registrado?',
+              style: GoogleFonts.permanentMarker(
+                textStyle: TextStyle(
+                  color: Colors.white,
+                  fontSize: 25,
+                  height: 3.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+          Center(
+            child: Text(
+              'Haz click aquí',
+              style: GoogleFonts.permanentMarker(
+                  textStyle: TextStyle(
+                      color: Colors.white, fontSize: 15, height: 2.0)),
+            ),
+          )
+        ]),
+      ),
     );
   }
 
@@ -130,7 +161,13 @@ class _HomePageState extends State<HomePage> {
             splashColor: Colors.green[700],
             onTap: () {
               setState(() {
-                _changePage = 2;
+                setIndex(2);
+                Navigator.pushReplacement(
+                    context,
+                    PageRouteBuilder(
+                        pageBuilder: (context, animation1, animation2) =>
+                            RootPage(),
+                        transitionDuration: Duration.zero));
               });
             },
             child: FadeInImage(
@@ -154,7 +191,13 @@ class _HomePageState extends State<HomePage> {
       trailing: TextButton(
         onPressed: () {
           setState(() {
-            _changePage = 1;
+            setIndex(1);
+            Navigator.pushReplacement(
+                context,
+                PageRouteBuilder(
+                    pageBuilder: (context, animation1, animation2) =>
+                        RootPage(),
+                    transitionDuration: Duration.zero));
           });
         },
         child: Text('Ver todo'),

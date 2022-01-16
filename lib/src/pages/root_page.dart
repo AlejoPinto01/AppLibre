@@ -1,47 +1,32 @@
-// ignore_for_file: file_names, prefer_const_constructors, prefer_final_fields
-import 'package:applibre/src/pages/cupons.dart';
-import 'package:applibre/src/pages/home.dart';
-import 'package:applibre/src/pages/login.dart';
-import 'package:applibre/src/pages/maps.dart';
-import 'package:applibre/src/pages/menu.dart';
-import 'package:applibre/src/pages/profile.dart';
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+
+import 'package:applibre/src/util/data.dart';
+import 'package:applibre/src/util/pages.dart';
 import 'package:flutter/material.dart';
 
-class BottomBar extends StatefulWidget {
-  BottomBar({Key? key}) : super(key: key);
+class RootPage extends StatefulWidget {
+  RootPage({Key? key}) : super(key: key);
 
   @override
-  _BottomBarState createState() => _BottomBarState();
+  _RootPageState createState() => _RootPageState();
 }
 
-int index = 0;
-void setStateItem(int i) {
-  index = i;
-  _BottomBarState().onItemTapped(i);
-}
-
-class _BottomBarState extends State<BottomBar> {
-  int selectedIndex = index;
-  List<Widget> _widgetOptions = <Widget>[
-    HomePage(),
-    CuponsPage(),
-    MenuPage(),
-    MapsPage(),
-    LoginPage()
-  ];
+class _RootPageState extends State<RootPage> {
+  int _changePage = getIndex();
+  List<Widget> widgetOptions = createPages(getRegistre());
 
   void onItemTapped(int index) {
     setState(() {
-      selectedIndex = index;
+      _changePage = index;
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _widgetOptions.elementAt(selectedIndex),
+      body: widgetOptions.elementAt(_changePage),
       bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
+        items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
@@ -63,8 +48,8 @@ class _BottomBarState extends State<BottomBar> {
             label: 'Perfil',
           ),
         ],
-        currentIndex: selectedIndex,
-        selectedItemColor: Colors.white,
+        currentIndex: _changePage,
+        selectedItemColor: Colors.black,
         unselectedItemColor: Colors.white,
         onTap: onItemTapped,
         type: BottomNavigationBarType.fixed,
