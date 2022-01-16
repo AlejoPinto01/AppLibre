@@ -18,15 +18,22 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _changePage = 0;
+  var size;
 
   @override
   Widget build(BuildContext context) {
-    switch(_changePage) {
-      case 0: return generatePage();
-      case 1: return CuponsPage();
-      case 2: return MenuPage();
-      case 3: return MapsPage();
-      case 4: return LoginPage();
+    final size = MediaQuery.of(context).size;
+    switch (_changePage) {
+      case 0:
+        return generatePage();
+      case 1:
+        return CuponsPage();
+      case 2:
+        return MenuPage();
+      case 3:
+        return MapsPage();
+      case 4:
+        return LoginPage();
     }
     return generatePage();
   }
@@ -39,12 +46,19 @@ class _HomePageState extends State<HomePage> {
           generarCabecera(),
           Divider(),
           generarTarjetaPerfil(),
+          Divider(),
+          generarCardImagen(),
+          Divider(),
+          generarCuponesCabecera(),
+          Divider(),
+          generarCupones(),
         ],
       ),
     );
   }
 
-  Widget generarCabecera() { //Mejor una imagen con un logo
+  Widget generarCabecera() {
+    //Mejor una imagen con un logo
     return Center(
       child: Text(
         'Kebab4U',
@@ -74,29 +88,25 @@ class _HomePageState extends State<HomePage> {
             width: 300,
             height: 100,
             child: Center(
-              child: ListView(
-              children: 
-              [ Center(
-                child: Text(
+              child: ListView(children: [
+                Center(
+                  child: Text(
                     'Todavía no estás registrado?',
                     style: GoogleFonts.permanentMarker(
                         textStyle: TextStyle(
-                        color: Colors.white,
-                        fontSize: 25,
-                        height: 3.0,
-                        fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      fontSize: 25,
+                      height: 3.0,
+                      fontWeight: FontWeight.bold,
                     )),
                   ),
-              ),
+                ),
                 Center(
                   child: Text(
                     'Haz click aquí',
                     style: GoogleFonts.permanentMarker(
                         textStyle: TextStyle(
-                      color: Colors.white,
-                      fontSize: 15,
-                      height: 2.0
-                    )),
+                            color: Colors.white, fontSize: 15, height: 2.0)),
                   ),
                 )
               ]),
@@ -110,5 +120,113 @@ class _HomePageState extends State<HomePage> {
       ),
       height: 150,
     );
+  }
+
+  Widget generarCardImagen() {
+    return Container(
+      child: ClipRRect(
+        child: Card(
+          child: InkWell(
+            splashColor: Colors.green[700],
+            onTap: () {
+              setState(() {
+                _changePage = 2;
+              });
+            },
+            child: FadeInImage(
+              placeholder: AssetImage('assets/cargando.gif'),
+              image: NetworkImage(
+                  'https://abancommercials.com/es/uploadComercial/7108.jpg'),
+              fadeInDuration: Duration(milliseconds: 100),
+              height: 250,
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+        borderRadius: BorderRadius.circular(30.0),
+      ),
+    );
+  }
+
+  Widget generarCuponesCabecera() {
+    return ListTile(
+      title: Text('Cupones'),
+      trailing: TextButton(
+        onPressed: () {
+          setState(() {
+            _changePage = 1;
+          });
+        },
+        child: Text('Ver todo'),
+      ),
+    );
+  }
+
+  Widget generarCupones() {
+    return Container(
+      margin: EdgeInsets.only(bottom: 30),
+      width: double.infinity,
+      height: 180,
+      // color: Colors.red,
+      child: ListView.builder(
+          itemCount: 10,
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (BuildContext context, int index) =>
+              generarCuponesSlider()),
+    );
+  }
+
+  Widget generarCuponesSlider() {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 10),
+      width: 110,
+      height: 100,
+      // color: Colors.green,
+      child: InkWell(
+        child: Column(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: FadeInImage(
+                placeholder: AssetImage('assets/cargando.gif'),
+                image: NetworkImage('https://via.placeholder.com/150x300'),
+                height: 140,
+                width: 100,
+                fit: BoxFit.cover,
+              ),
+            ),
+            SizedBox(
+              height: 5,
+            ),
+          ],
+        ),
+        onTap: () {
+          setState(() {
+            _mostrarAlert(context);
+          });
+        },
+      ),
+    );
+  }
+
+  void _mostrarAlert(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('Código de promoción'),
+            content: Text('sdgfsdfgsdf'),
+            actions: [
+              TextButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                  child: Text('Cancelar')),
+              TextButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                  child: Text('Ok')),
+            ],
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30.0)),
+          );
+        });
   }
 }
