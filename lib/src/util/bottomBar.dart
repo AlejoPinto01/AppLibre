@@ -47,11 +47,11 @@ class _BottomBarState extends State<BottomBar> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(Icons.savings),
             label: 'Cupones',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(Icons.fastfood),
             label: 'Carta',
           ),
           BottomNavigationBarItem(
@@ -59,7 +59,7 @@ class _BottomBarState extends State<BottomBar> {
             label: 'Mapa',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(Icons.account_circle),
             label: 'Perfil',
           ),
         ],
