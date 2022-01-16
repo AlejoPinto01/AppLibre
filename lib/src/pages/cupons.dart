@@ -12,16 +12,6 @@ class CuponsPage extends StatefulWidget {
 }
 
 class _CuponsPageState extends State<CuponsPage> {
-  int _changePage = 0;
-  List<Widget> _widgetOptions = createPages();
-
-  void onItemTapped(int index) {
-    setState(() {
-      print(index);
-      _changePage = index;
-      Navigator.push(context, MaterialPageRoute(builder: (context) => _widgetOptions.elementAt(index)));
-    });
-  }
     
   @override
   Widget build(BuildContext context) {

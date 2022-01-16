@@ -16,8 +16,6 @@ class ImageWidget extends StatelessWidget {
     required this.onClicked,
   }) : super(key: key);
 
- 
-
   @override
   Widget build(BuildContext context) {
     final color = Theme.of(context).colorScheme.primary;
