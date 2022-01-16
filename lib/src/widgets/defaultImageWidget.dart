@@ -7,12 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 class DefaultImageWidget extends StatelessWidget {
-  final Image image;
   final ValueChanged<ImageSource> onClicked;
 
   const DefaultImageWidget({
     Key? key,
-    required this.image,
     required this.onClicked,
   }) : super(key: key);
 

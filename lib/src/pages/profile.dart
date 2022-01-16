@@ -1,6 +1,9 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'dart:async';
 import 'dart:io';
 
+import 'package:applibre/src/models/user.dart';
 import 'package:applibre/src/widgets/defaultImageWidget.dart';
 import 'package:applibre/src/widgets/imageWidget.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +13,8 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'package:path_provider/path_provider.dart';
 
 class ProfilePage extends StatefulWidget {
-  ProfilePage({Key? key}) : super(key: key);
+  final User? user;
+  ProfilePage({Key? key, this.user }) : super(key: key);
 
   @override
   _ProfilePageState createState() => _ProfilePageState();
@@ -28,11 +32,15 @@ _defaultImage() async {
     File f = await getImageFileFromAssets('noImageProgile.png');
     return f;
 }
+
 class _ProfilePageState extends State<ProfilePage> {
   File? image;
-  //File f = _defaultImage();
-  
-  //File f = await getImageFileFromAssets('assets/myImage.jpg');
+  Icon icon = Icon(Icons.edit);
+  bool read = true;
+  bool edit = false;
+  String? userName;
+  String? text;
+  final _formKey = GlobalKey<FormState>();
   Future pickImage(ImageSource imageSource) async{
     try {
       final image = await ImagePicker().pickImage(source: imageSource);
@@ -45,6 +53,22 @@ class _ProfilePageState extends State<ProfilePage> {
     }
   }
 
+  late final TextEditingController controller; 
+  @override
+  void initState() {
+    super.initState();
+
+    controller = TextEditingController(text: widget.user!.name);
+    userName = widget.user!.name;
+  }
+
+  @override
+  void dispose(){
+    controller.dispose();
+
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,88 +79,96 @@ class _ProfilePageState extends State<ProfilePage> {
       body: Container(
         padding: EdgeInsets.all(32),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Spacer(),
+            SizedBox(height: 30),
             image != null
              ? ImageWidget(
                 image: image!,
                 onClicked: (source) => pickImage(source),
               )
             : DefaultImageWidget(
-                image: Image.asset("assets/noImageProfile.png"),
                 onClicked: (source) => pickImage(source),
               ),
-            SizedBox(height: 24),
-            _buildbutton(
-              title: 'Pick image from gallery', 
-              icon: Icons.image_outlined,
-              onClicked: () => pickImage(ImageSource.gallery),
-            ),
-            SizedBox(height: 24),
-            _buildbutton(
-              title: 'Pick image from camera', 
-              icon: Icons.camera_alt_outlined,
-              onClicked: () => pickImage(ImageSource.camera),
-            ),
+            SizedBox(height: 30),
+            _buildName(),
+            SizedBox(height: 25),
+            _buildEmail(),
           ],
         ),
       ),
     );
   }
 
-  _pickerDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      //permet tancar l'alerta quan es pitja defora
-      barrierDismissible: true,
-      builder: (context){
-      return AlertDialog(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
-          title: Text('Títol de la alerta'),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              _buildbutton(
-                title: 'Pick image from gallery', 
-                icon: Icons.image_outlined,
-                onClicked: () => pickImage(ImageSource.gallery),
-              ),
-              _buildbutton(
-                title: 'Pick image from camera', 
-                icon: Icons.camera_alt_outlined,
-                onClicked: () {}
-              ),
-            ],
+  _buildName() {
+    return Form(
+      key: _formKey,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "Nombre",
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
           ),
-          actions: [
-            TextButton(onPressed: () => Navigator.of(context).pop(), child: Text('Cancel·lar')),
-          ], 
-        );
-      }
+          Row(
+            children: [
+              Expanded(
+                flex: 8,
+                child: TextFormField(
+                controller: controller,
+                readOnly: read,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                validator: (text) {
+                  if (text == null || text.isEmpty) {
+                    return 'El usuario no puede estar vacío';
+                  }
+                  if (text.length < 4) {
+                    return 'El nombre de usuario es muy corto';
+                  }
+                  return null;
+                },
+                onChanged: (text) => setState((){text = text;}),
+                )
+              ),
+              IconButton(
+                onPressed: () {
+                  if(_formKey.currentState!.validate()){
+                    setState(() {
+                      if (!edit) {
+                        edit = true;
+                        icon = Icon(Icons.check);
+                        read = false;
+                      } else {
+                        edit = false;
+                        userName = text;
+                        icon = Icon(Icons.edit);
+                        read = true;
+                      }
+                    });
+                  } else {
+                    null;
+                  }
+                },
+                icon: icon,
+              )
+            ],
+          )
+        ],
+      )
     );
   }
 
-  Widget _buildbutton({
-    required String title,
-    required IconData icon,
-    required VoidCallback onClicked,
-  }) => 
-        ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            minimumSize: Size.fromHeight(56),
-            primary: Colors.white,
-            onPrimary: Colors.black,
-            textStyle: TextStyle(fontSize: 20),
-          ),
-          onPressed: onClicked, 
-          child: Row(
-            children: [
-              Icon(icon, size: 28),
-              const SizedBox(width: 16),
-              Text(title),
-            ],
-          ),
-        );
-
-  
+  _buildEmail() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "Correo",
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+        ),
+        SizedBox(height: 5,),
+        Text(widget.user!.email)
+      ]
+    );
+  }
 } 
