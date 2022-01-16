@@ -1,11 +1,36 @@
+import 'package:applibre/src/models/category.dart';
+import 'package:applibre/src/pages/category_page.dart';
 import 'package:flutter/material.dart';
 
 class CategoryCard extends StatelessWidget {
+  Category category;
+
+  CategoryCard({required this.category});
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => print('tapped'),
+      onTap: () {
+        print(category.name);
+        final route = MaterialPageRoute(
+          builder: (context) {
+            return CategoryPage(category: category);
+          },
+        );
+        Navigator.push(context, route);
+      },
       child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(20)),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.3),
+              spreadRadius: 2,
+              blurRadius: 5,
+              offset: Offset(0, 3),
+            )
+          ],
+        ),
         margin: EdgeInsets.all(20),
         height: 150,
         child: Stack(
@@ -14,7 +39,7 @@ class CategoryCard extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
                 child: Image.network(
-                  'https://saborgourmet.com//wp-content/uploads/el-kebab-tipico-de-turquia-istock.jpg',
+                  category.imageURL,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -46,16 +71,13 @@ class CategoryCard extends StatelessWidget {
                   children: [
                     ClipOval(
                       child: Container(
-                        color: Colors.red,
+                        color: category.color,
                         padding: EdgeInsets.all(10),
-                        child: Icon(
-                          Icons.fastfood,
-                          color: Colors.white,
-                        ),
+                        child: category.icon,
                       ),
                     ),
                     SizedBox(width: 10),
-                    Text('Kebabs',
+                    Text(category.name,
                         style: TextStyle(color: Colors.white, fontSize: 25))
                   ],
                 ),
