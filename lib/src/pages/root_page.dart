@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+
 import 'package:applibre/src/util/data.dart';
 import 'package:applibre/src/util/pages.dart';
 import 'package:flutter/material.dart';
@@ -11,19 +13,18 @@ class RootPage extends StatefulWidget {
 
 class _RootPageState extends State<RootPage> {
   int _changePage = getIndex();
-  List<Widget> _widgetOptions = createPages();
+  List<Widget> widgetOptions = createPages(getRegistre());
 
   void onItemTapped(int index) {
     setState(() {
-      print(index);
-      _changePage = index;
+        _changePage = index;
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _widgetOptions.elementAt(_changePage),
+      body: widgetOptions.elementAt(_changePage),
       bottomNavigationBar: BottomNavigationBar(
       items: <BottomNavigationBarItem>[
         BottomNavigationBarItem(

@@ -1,5 +1,7 @@
 import 'package:applibre/src/models/user.dart';
 import 'package:applibre/src/pages/profile.dart';
+import 'package:applibre/src/pages/root_page.dart';
+import 'package:applibre/src/util/data.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -42,10 +44,7 @@ class _LoginPageState extends State<LoginPage> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Expanded(
-                    flex: 8,
-                    child: _crearPassword()
-                  ),
+                  Expanded(flex: 8, child: _crearPassword()),
                   _crearInfoPass(),
                 ],
               ),
@@ -78,7 +77,9 @@ class _LoginPageState extends State<LoginPage> {
           icon: Icon(Icons.person),
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
         ),
-        autovalidateMode: _submited ? AutovalidateMode.onUserInteraction : AutovalidateMode.disabled,
+        autovalidateMode: _submited
+            ? AutovalidateMode.onUserInteraction
+            : AutovalidateMode.disabled,
         validator: (text) {
           if (text == null || text.isEmpty) {
             return 'El usuario no puede estar vacío';
@@ -104,7 +105,9 @@ class _LoginPageState extends State<LoginPage> {
           icon: Icon(Icons.email),
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
         ),
-        autovalidateMode: _submited ? AutovalidateMode.onUserInteraction : AutovalidateMode.disabled,
+        autovalidateMode: _submited
+            ? AutovalidateMode.onUserInteraction
+            : AutovalidateMode.disabled,
         validator: (String? value) {
           RegExp mailExp = new RegExp(
               r"^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$");
@@ -121,28 +124,28 @@ class _LoginPageState extends State<LoginPage> {
 //crear input de password, posant el valor ocult
   Widget _crearPassword() {
     return TextFormField(
-      obscureText: true,
-      decoration: InputDecoration(
-        hintText: 'Password',
-        labelText: 'Password',
-        suffixIcon: Icon(Icons.lock_open),
-        icon: Icon(Icons.lock),
-        border:
-          OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
-      ),
-      autovalidateMode: _submited ? AutovalidateMode.onUserInteraction : AutovalidateMode.disabled,
-      validator: (String? value) {
-        RegExp passRegEx =
-            new RegExp(r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$");
-        if (value == null || value.isEmpty) {
-          return 'La contraseña no puede estar vacia';
-        } else if (!passRegEx.hasMatch(value)) {
-          return 'La contraseña no està en el formato correcto'; 
-        }
-      },
-      //el valor es posa dins la variable _passs
-      onChanged: (text) => setState(() => pass = text)
-    );
+        obscureText: true,
+        decoration: InputDecoration(
+          hintText: 'Password',
+          labelText: 'Password',
+          suffixIcon: Icon(Icons.lock_open),
+          icon: Icon(Icons.lock),
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
+        ),
+        autovalidateMode: _submited
+            ? AutovalidateMode.onUserInteraction
+            : AutovalidateMode.disabled,
+        validator: (String? value) {
+          RegExp passRegEx =
+              new RegExp(r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$");
+          if (value == null || value.isEmpty) {
+            return 'La contraseña no puede estar vacia';
+          } else if (!passRegEx.hasMatch(value)) {
+            return 'La contraseña no està en el formato correcto';
+          }
+        },
+        //el valor es posa dins la variable _passs
+        onChanged: (text) => setState(() => pass = text));
   }
 
   Widget _crearInfoPass() {
@@ -174,30 +177,29 @@ class _LoginPageState extends State<LoginPage> {
 //boto per registrarse
   Widget _buttonLogin(BuildContext context) {
     return Center(
-      child: ElevatedButton(
-        child: Text('Login'),
-        style: ElevatedButton.styleFrom(
-          shape: StadiumBorder(),
-        ),
-        onPressed: () { 
-          _submited = true;
-          if(_formKey.currentState!.validate()){ 
-            _openData(context);
-          }else{
-            null;
-          } 
-        } //_loginDialog(context),
-      )
-    );
-  }
-
-  _openData(BuildContext context) {
-    if (_formKey.currentState!.validate()) {     
-      User? newUser = User(name: user, email: email, password: pass); 
-      final route = MaterialPageRoute(builder: (context) {
-        return ProfilePage(user: newUser);
-      });
-      Navigator.push(context, route);
-    }
+        child: ElevatedButton(
+            child: Text('Login'),
+            style: ElevatedButton.styleFrom(
+              shape: StadiumBorder(),
+            ),
+            onPressed: () {
+              _submited = true;
+              if (_formKey.currentState!.validate()) {
+                setState(() {
+                  setUser(user, email, pass);
+                  setNombreUsuario(user);
+                  setRegistre(true);
+                  setIndex(4);
+                  print(getIndex());
+                  Navigator.pushReplacement(
+                      context,
+                      PageRouteBuilder(
+                          pageBuilder: (context, animation1, animation2) =>
+                              RootPage(),
+                          transitionDuration: Duration.zero));
+                });
+              }
+            } //_loginDialog(context),
+            ));
   }
 }
