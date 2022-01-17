@@ -1,4 +1,16 @@
-import 'dart:async';
+import 'package:flutter/material.dart';
+
+class MapsPage extends StatelessWidget {
+  const MapsPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Mapa'),),
+    );
+  }
+}
+/*import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -44,4 +56,4 @@ Completer<GoogleMapController> _controller = Completer();
     final GoogleMapController controller = await _controller.future;
     controller.animateCamera(CameraUpdate.newCameraPosition(_kLake));
   }
-}
+}*/

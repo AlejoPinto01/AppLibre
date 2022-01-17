@@ -1,8 +1,11 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+import 'dart:io';
+
 import 'package:applibre/src/pages/login.dart';
 import 'package:applibre/src/pages/profile.dart';
 import 'package:applibre/src/pages/root_page.dart';
 import 'package:applibre/src/util/pages.dart';
+import 'package:applibre/src/widgets/imageWidget.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:applibre/src/util/data.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +23,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   String nombreUsuario = getNombreUsuario();
+  AssetImage defaultimg = AssetImage("assets/noImageProfile.png");
   @override
   Widget build(BuildContext context) {
     return generatePage();
@@ -103,20 +107,58 @@ class _HomePageState extends State<HomePage> {
       width: 300,
       height: 50,
       child: Center(
-        child: Text(
-          'Hola, ${nombreUsuario}',
-          style: GoogleFonts.permanentMarker(
-            textStyle: TextStyle(
-              color: Colors.white,
-              fontSize: 25,
-              fontWeight: FontWeight.bold,
+        child: Column(
+          children: [
+            Text(
+              'Hola, ${nombreUsuario}',
+              style: GoogleFonts.permanentMarker(
+                textStyle: TextStyle(
+                  color: Colors.white,
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
-          ),
+            getImage() != null ? _imgPerfil() : _imgDefaultPerfil(),
+          ],
         ),
       ),
     );
   }
 
+  Widget _imgDefaultPerfil(){
+    return ClipOval(
+      child: Material(
+        color: Colors.transparent,
+      child: Ink.image(
+        image: defaultimg,
+        fit: BoxFit.cover,
+        width: 50,
+        height: 50,
+        ),
+      ),
+    );
+  }
+
+Widget _imgPerfil(){
+    final imagePath = image!.path;
+    final finalImage = imagePath.contains('https://')
+        ? NetworkImage(imagePath)
+        : FileImage(File(imagePath));
+
+    return ClipOval(
+      child: Material(
+        color: Colors.transparent,
+      child: Ink.image(
+        image: finalImage as ImageProvider,
+        fit: BoxFit.cover,
+        width: 50,
+        height: 50,
+        ),
+      ),
+    );
+  }
+  
   Widget boxNoRegistrado() {
     return SizedBox(
       width: 300,

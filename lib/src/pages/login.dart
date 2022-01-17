@@ -196,6 +196,7 @@ class _LoginPageState extends State<LoginPage> {
       child: ElevatedButton(
         child: Text('Login'),
         style: ElevatedButton.styleFrom(
+          minimumSize: Size.fromHeight(40),
           shape: StadiumBorder(),
         ),
         onPressed: () {
