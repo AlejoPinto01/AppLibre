@@ -1,10 +1,29 @@
 import 'package:applibre/src/models/category.dart';
+import 'package:applibre/src/models/dish.dart';
+import 'package:applibre/src/widgets/dishcard.dart';
 import 'package:flutter/material.dart';
 
 class CategoryPage extends StatelessWidget {
   Category category;
 
   CategoryPage({required this.category});
+
+  List<Dish> _dishes = [
+    Dish(
+      name: 'Kebab1234',
+      description: 'asdfasdf',
+      price: 2.45,
+      image: 'assets/images/food/dishes/kebab.jpg',
+      categoryName: 'Kebabs',
+    ),
+    Dish(
+      name: 'Pizza1234',
+      description: 'asdfasdf',
+      price: 2.45,
+      image: 'assets/images/food/dishes/kebab.jpg',
+      categoryName: 'Pizzas',
+    ),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +46,7 @@ class CategoryPage extends StatelessWidget {
               background: Stack(
                 fit: StackFit.expand,
                 children: <Widget>[
-                  Image.network(
+                  Image.asset(
                     category.imageURL,
                     fit: BoxFit.cover,
                   ),
@@ -53,7 +72,7 @@ class CategoryPage extends StatelessWidget {
           ),
           new SliverList(
             delegate: new SliverChildListDelegate(
-              _buildList(50),
+              _buildList2(),
             ),
           ),
         ],
@@ -65,12 +84,35 @@ class CategoryPage extends StatelessWidget {
     List<Widget> listItems = [];
 
     for (int i = 0; i < count; i++) {
-      listItems.add(new Padding(
+      listItems.add(
+        new Padding(
           padding: new EdgeInsets.all(20.0),
-          child: new Text('Item ${i.toString()}',
-              style: new TextStyle(fontSize: 25.0))));
+          child: new Text(
+            'Item ${i.toString()}',
+            style: new TextStyle(fontSize: 25.0),
+          ),
+        ),
+      );
     }
 
+    return listItems;
+  }
+
+  List<Widget> _buildList2() {
+    List<Widget> listItems = [];
+    for (int i = 0; i < _dishes.length; i++) {
+      if (_dishes[i].categoryName == category.name) {
+        listItems.add(
+          new Padding(
+            padding: new EdgeInsets.all(20.0),
+            child: new Text(
+              'Item ${_dishes[i].name}',
+              style: new TextStyle(fontSize: 25.0),
+            ),
+          ),
+        );
+      }
+    }
     return listItems;
   }
 }

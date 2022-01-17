@@ -11,7 +11,7 @@ class MenuPage extends StatelessWidget {
           color: Colors.white,
         ),
         imageURL:
-            'https://www.gourmetkebab.es/wp-content/uploads/2021/04/kebab-que-es.jpg',
+            'assets/images/food/categories/kebab.jpg',
         color: Colors.orange),
     Category(
         name: 'Pizzas',
@@ -20,7 +20,7 @@ class MenuPage extends StatelessWidget {
           color: Colors.white,
         ),
         imageURL:
-            'https://www.unileverfoodsolutions.es/dam/global-ufs/mcos/SPAIN/calcmenu/recipes/ES-recipes/general/pizza-kebab/main-header.jpg',
+            'assets/images/food/categories/pizza.jpg',
         color: Colors.red),
     Category(
         name: 'Bebidas',
@@ -29,7 +29,7 @@ class MenuPage extends StatelessWidget {
           color: Colors.white,
         ),
         imageURL:
-            'https://www.clikisalud.net/wp-content/uploads/2019/07/refrescos-aumentan-riesgo-cancer.jpg',
+            'assets/images/food/categories/drink.jpg',
         color: Colors.blue),
     Category(
         name: 'Postres',
@@ -37,7 +37,7 @@ class MenuPage extends StatelessWidget {
           Icons.cake,
           color: Colors.white,
         ),
-        imageURL: 'https://i.ytimg.com/vi/2_FUW8y2J1M/maxresdefault.jpg',
+        imageURL: 'assets/images/food/categories/dessert.jpg',
         color: Colors.pink),
     Category(
         name: 'Ensaladas',
@@ -46,7 +46,7 @@ class MenuPage extends StatelessWidget {
           color: Colors.white,
         ),
         imageURL:
-            'http://www.comedera.com/wp-content/uploads/2015/10/ensalada-de-pollo.jpg',
+            'assets/images/food/categories/salad.jpg',
         color: Colors.green),
   ];
 

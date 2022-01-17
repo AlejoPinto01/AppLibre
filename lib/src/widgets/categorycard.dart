@@ -38,7 +38,7 @@ class CategoryCard extends StatelessWidget {
             Positioned.fill(
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
-                child: Image.network(
+                child: Image.asset(
                   category.imageURL,
                   fit: BoxFit.cover,
                 ),

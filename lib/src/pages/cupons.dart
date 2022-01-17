@@ -10,28 +10,28 @@ class CuponsPage extends StatelessWidget {
           'Con este cupón podrás de disfrutar dos Kebabs por el precio de uno!',
       code: '4862',
       imageURL:
-          'https://www.gourmetkebab.es/wp-content/uploads/2021/04/kebab-que-es.jpg',
+          'assets/images/food/cupons/kebab.jpg',
     ),
     Cupon(
-      name: 'Kebab + patatas',
-      description: 'Las patatas te salen a mitad de precio!',
+      name: 'Durum',
+      description: 'Kebab rollo! WOW! AMAZING!',
       code: '456456',
       imageURL:
-          'https://kebabvarillas.com/wp-content/uploads/2020/08/Tapa-Varillas-Carne-con-Patatas-y-Ensalada.png',
+          'assets/images/food/cupons/durum.jpg',
     ),
     Cupon(
       name: 'Menú kebab',
       description: 'asdfasdfasfd',
       code: '12341234',
       imageURL:
-          'https://kebabvarillas.com/wp-content/uploads/2020/08/Menu-Doner-Kebab-Falafel-Patatas-Bebida.png',
+          'assets/images/food/cupons/menu.png',
     ),
     Cupon(
         name: 'Double crispy',
         description: 'La doble crispy del nimbuu, siuuuu',
         code: 'D3334',
         imageURL:
-            'https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_312,h_196,c_fill/bxwvkxjdxx5hhsjobgea')
+            'assets/images/food/cupons/doublecrispy.jfif')
   ];
 
   @override
