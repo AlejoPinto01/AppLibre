@@ -19,6 +19,7 @@ class _LoginPageState extends State<LoginPage> {
   bool _isOpen = false;
   bool _submited = false;
   Icon _infoIcon = Icon(Icons.info);
+  bool _passwordVisible = false;
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -124,13 +125,28 @@ class _LoginPageState extends State<LoginPage> {
 //crear input de password, posant el valor ocult
   Widget _crearPassword() {
     return TextFormField(
-        obscureText: true,
+        obscureText: !_passwordVisible,
         decoration: InputDecoration(
           hintText: 'Password',
           labelText: 'Password',
-          suffixIcon: Icon(Icons.lock_open),
+          suffixIcon: IconButton(
+            icon: Icon(
+              // Based on passwordVisible state choose the icon
+              _passwordVisible
+              ? Icons.visibility
+              : Icons.visibility_off,
+              color: Theme.of(context).primaryColorDark,
+              ),
+            onPressed: () {
+              // Update the state i.e. toogle the state of passwordVisible variable
+              setState(() {
+                _passwordVisible = !_passwordVisible;
+              });
+            },
+          ),
           icon: Icon(Icons.lock),
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
+          
         ),
         autovalidateMode: _submited
             ? AutovalidateMode.onUserInteraction
@@ -177,29 +193,31 @@ class _LoginPageState extends State<LoginPage> {
 //boto per registrarse
   Widget _buttonLogin(BuildContext context) {
     return Center(
-        child: ElevatedButton(
-            child: Text('Login'),
-            style: ElevatedButton.styleFrom(
-              shape: StadiumBorder(),
-            ),
-            onPressed: () {
-              _submited = true;
-              if (_formKey.currentState!.validate()) {
-                setState(() {
-                  setUser(user, email, pass);
-                  setNombreUsuario(user);
-                  setRegistre(true);
-                  setIndex(4);
-                  print(getIndex());
-                  Navigator.pushReplacement(
-                      context,
-                      PageRouteBuilder(
-                          pageBuilder: (context, animation1, animation2) =>
-                              RootPage(),
-                          transitionDuration: Duration.zero));
-                });
-              }
-            } //_loginDialog(context),
-            ));
+      child: ElevatedButton(
+        child: Text('Login'),
+        style: ElevatedButton.styleFrom(
+          shape: StadiumBorder(),
+        ),
+        onPressed: () {
+          _submited = true;
+          if (_formKey.currentState!.validate()) {
+            setState(() {
+              setUser(user, email, pass);
+              setNombreUsuario(user);
+              setRegistre(true);
+              setIndex(4);
+              print(getIndex());
+              Navigator.pushReplacement(
+                context,
+                PageRouteBuilder(
+                  pageBuilder: (context, animation1, animation2) => RootPage(),
+                  transitionDuration: Duration.zero
+                )
+              );
+            });
+          }
+        } //_loginDialog(context),
+      )
+    );
   }
 }
