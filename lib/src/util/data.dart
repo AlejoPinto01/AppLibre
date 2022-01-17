@@ -1,4 +1,5 @@
 import 'package:applibre/src/models/user.dart';
+import 'package:flutter/material.dart';
 
 int index = 0;
 bool registre = false;
@@ -37,3 +38,8 @@ void setUser(String nombre, String correo, String pass) {
 User? getUser() {
   return newUser;
 }
+
+PageController pageController = PageController(
+    initialPage: 0,
+    keepPage: true
+  );

@@ -12,19 +12,20 @@ class RootPage extends StatefulWidget {
 }
 
 class _RootPageState extends State<RootPage> {
-  int _changePage = getIndex();
+
   List<Widget> widgetOptions = createPages(getRegistre());
 
   void onItemTapped(int index) {
     setState(() {
-        _changePage = index;
+        setIndex(index);
+        pageController.animateToPage(index, duration: Duration(milliseconds: 500), curve: Curves.ease);
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: widgetOptions.elementAt(_changePage),
+      body: buildPageView(),
       bottomNavigationBar: BottomNavigationBar(
       items: <BottomNavigationBarItem>[
         BottomNavigationBarItem(
@@ -48,13 +49,31 @@ class _RootPageState extends State<RootPage> {
           label: 'Perfil',
         ),
       ],
-      currentIndex: _changePage,
+      currentIndex: getIndex(),
       selectedItemColor: Colors.black,
       unselectedItemColor: Colors.white,
       onTap: onItemTapped,
       type: BottomNavigationBarType.fixed,
       backgroundColor: Colors.red,
-    ),
+      ),
     );
+  }
+
+  Widget buildPageView() {
+    return PageView(
+      controller: pageController,
+      onPageChanged: (index) {
+        setState(() {
+          pageChanged(index);
+        });
+      },
+      children: createPages(getRegistre()),
+    );
+  }
+
+  void pageChanged(int index) {
+    setState(() {
+      setIndex(index);
+    });
   }
 }

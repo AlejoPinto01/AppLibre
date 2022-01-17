@@ -38,6 +38,7 @@ class _HomePageState extends State<HomePage> {
           generarCuponesCabecera(),
           Divider(),
           generarCupones(),
+          generarMiniMapa()
         ],
       ),
     );
@@ -68,12 +69,7 @@ class _HomePageState extends State<HomePage> {
             onTap: () {
               setState(() {
                 setIndex(4);
-                Navigator.pushReplacement(
-                    context,
-                    PageRouteBuilder(
-                        pageBuilder: (context, animation1, animation2) =>
-                            RootPage(),
-                        transitionDuration: Duration.zero));
+                pageController.animateToPage(getIndex(), duration: Duration(milliseconds: 500), curve: Curves.ease);
               });
             },
             child: compruebaEstado()),
@@ -162,12 +158,7 @@ class _HomePageState extends State<HomePage> {
             onTap: () {
               setState(() {
                 setIndex(2);
-                Navigator.pushReplacement(
-                    context,
-                    PageRouteBuilder(
-                        pageBuilder: (context, animation1, animation2) =>
-                            RootPage(),
-                        transitionDuration: Duration.zero));
+                pageController.animateToPage(getIndex(), duration: Duration(milliseconds: 500), curve: Curves.ease);
               });
             },
             child: FadeInImage(
@@ -192,12 +183,7 @@ class _HomePageState extends State<HomePage> {
         onPressed: () {
           setState(() {
             setIndex(1);
-            Navigator.pushReplacement(
-                context,
-                PageRouteBuilder(
-                    pageBuilder: (context, animation1, animation2) =>
-                        RootPage(),
-                    transitionDuration: Duration.zero));
+            pageController.animateToPage(getIndex(), duration: Duration(milliseconds: 500), curve: Curves.ease);
           });
         },
         child: Text('Ver todo'),
@@ -262,14 +248,55 @@ class _HomePageState extends State<HomePage> {
             actions: [
               TextButton(
                   onPressed: () => Navigator.of(context).pop(),
-                  child: Text('Cancelar')),
-              TextButton(
-                  onPressed: () => Navigator.of(context).pop(),
                   child: Text('Ok')),
             ],
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30.0)),
           );
         });
+  }
+
+  Widget generarMiniMapa() {
+    return Container(
+      child: ClipRRect(
+        child: Card(
+          elevation: 5,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+          child: Column(
+            children: <Widget>[
+              InkWell(
+                splashColor: Colors.green[700],
+                onTap: () {
+                  setState(() {
+                    setIndex(3);
+                    pageController.animateToPage(getIndex(), duration: Duration(milliseconds: 500), curve: Curves.ease);
+                  });
+                },
+                child: FadeInImage(
+                  placeholder: AssetImage('assets/cargando.gif'),
+                  image: NetworkImage(
+                      'https://i.gyazo.com/c6edda1b4038750705d0d90938b4b70a.png'),
+                  fadeInDuration: Duration(milliseconds: 100),
+                  height: 250,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  FlatButton(
+                    child: Text("Ok"),
+                    onPressed: () {
+                      Text("Ok");
+                    }),
+                ],
+              )
+            ],
+          ),
+        ),
+        borderRadius: BorderRadius.circular(30.0),
+      ),
+    );
   }
 }
