@@ -198,7 +198,7 @@ class _ProfilePageState extends State<ProfilePage> {
           setRegistre(false);
           setIndex(0);
           print(getIndex());
-          pageController.animateToPage(getIndex(), duration: Duration(milliseconds: 500), curve: Curves.ease);
+          pageController.jumpToPage(index);
         });
       }, 
     );
