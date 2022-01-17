@@ -62,6 +62,9 @@ class MenuPage extends StatelessWidget {
             child: Text(
               'Seleccione una categoria',
               textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 20,
+              ),
             ),
           ),
           Expanded(

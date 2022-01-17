@@ -31,7 +31,7 @@ class CategoryCard extends StatelessWidget {
             )
           ],
         ),
-        margin: EdgeInsets.all(20),
+        margin: EdgeInsets.only(bottom: 20, left: 15, right: 15),
         height: 150,
         child: Stack(
           children: [
@@ -77,8 +77,10 @@ class CategoryCard extends StatelessWidget {
                       ),
                     ),
                     SizedBox(width: 10),
-                    Text(category.name,
-                        style: TextStyle(color: Colors.white, fontSize: 25))
+                    Text(
+                      category.name,
+                      style: TextStyle(color: Colors.white, fontSize: 25),
+                    ),
                   ],
                 ),
               ),

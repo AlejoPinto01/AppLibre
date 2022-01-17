@@ -26,6 +26,12 @@ class CuponsPage extends StatelessWidget {
       imageURL:
           'https://kebabvarillas.com/wp-content/uploads/2020/08/Menu-Doner-Kebab-Falafel-Patatas-Bebida.png',
     ),
+    Cupon(
+        name: 'Double crispy',
+        description: 'La doble crispy del nimbuu, siuuuu',
+        code: 'D3334',
+        imageURL:
+            'https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_312,h_196,c_fill/bxwvkxjdxx5hhsjobgea')
   ];
 
   @override
