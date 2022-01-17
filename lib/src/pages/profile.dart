@@ -196,15 +196,9 @@ class _ProfilePageState extends State<ProfilePage> {
         setState(() {
           setImage(null);
           setRegistre(false);
-          setIndex(4);
+          setIndex(0);
           print(getIndex());
-          Navigator.pushReplacement(
-            context,
-            PageRouteBuilder(
-              pageBuilder: (context, animation1, animation2) => RootPage(),
-              transitionDuration: Duration.zero
-            )
-          );
+          pageController.animateToPage(getIndex(), duration: Duration(milliseconds: 500), curve: Curves.ease);
         });
       }, 
     );

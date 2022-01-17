@@ -5,26 +5,27 @@ import 'package:applibre/src/util/pages.dart';
 import 'package:flutter/material.dart';
 
 class RootPage extends StatefulWidget {
-  RootPage( {Key? key}) : super(key: key);
-  
+  RootPage({Key? key}) : super(key: key);
+
   @override
   _RootPageState createState() => _RootPageState();
 }
 
 class _RootPageState extends State<RootPage> {
-  int _changePage = getIndex();
+
   List<Widget> widgetOptions = createPages(getRegistre());
 
   void onItemTapped(int index) {
     setState(() {
-        _changePage = index;
+        setIndex(index);
+        pageController.animateToPage(index, duration: Duration(milliseconds: 500), curve: Curves.ease);
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: widgetOptions.elementAt(_changePage),
+      body: buildPageView(),
       bottomNavigationBar: BottomNavigationBar(
       items: <BottomNavigationBarItem>[
         BottomNavigationBarItem(
@@ -32,11 +33,11 @@ class _RootPageState extends State<RootPage> {
           label: 'Home',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.home),
+          icon: Icon(Icons.savings),
           label: 'Cupones',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.home),
+          icon: Icon(Icons.fastfood),
           label: 'Carta',
         ),
         BottomNavigationBarItem(
@@ -44,17 +45,35 @@ class _RootPageState extends State<RootPage> {
           label: 'Mapa',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.home),
+          icon: Icon(Icons.account_circle),
           label: 'Perfil',
         ),
       ],
-      currentIndex: _changePage,
+      currentIndex: getIndex(),
       selectedItemColor: Colors.black,
       unselectedItemColor: Colors.white,
       onTap: onItemTapped,
       type: BottomNavigationBarType.fixed,
       backgroundColor: Colors.red,
-    ),
+      ),
     );
+  }
+
+  Widget buildPageView() {
+    return PageView(
+      controller: pageController,
+      onPageChanged: (index) {
+        setState(() {
+          pageChanged(index);
+        });
+      },
+      children: createPages(getRegistre()),
+    );
+  }
+
+  void pageChanged(int index) {
+    setState(() {
+      setIndex(index);
+    });
   }
 }
