@@ -5,8 +5,8 @@ import 'package:applibre/src/util/pages.dart';
 import 'package:flutter/material.dart';
 
 class RootPage extends StatefulWidget {
-  RootPage( {Key? key}) : super(key: key);
-  
+  RootPage({Key? key}) : super(key: key);
+
   @override
   _RootPageState createState() => _RootPageState();
 }
@@ -33,11 +33,11 @@ class _RootPageState extends State<RootPage> {
           label: 'Home',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.home),
+          icon: Icon(Icons.savings),
           label: 'Cupones',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.home),
+          icon: Icon(Icons.fastfood),
           label: 'Carta',
         ),
         BottomNavigationBarItem(
@@ -45,7 +45,7 @@ class _RootPageState extends State<RootPage> {
           label: 'Mapa',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.home),
+          icon: Icon(Icons.account_circle),
           label: 'Perfil',
         ),
       ],
