@@ -18,13 +18,17 @@ class _RootPageState extends State<RootPage> {
   void onItemTapped(int index) {
     setState(() {
         setIndex(index);
-        pageController.animateToPage(index, duration: Duration(milliseconds: 500), curve: Curves.ease);
+        pageController.animateToPage(index, duration: Duration(milliseconds: 700), curve: Curves.ease);
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.red[900],
+        title: Center(child: Image(image: AssetImage('assets/logo.png'), width: 50,)),
+      ),
       body: buildPageView(),
       bottomNavigationBar: BottomNavigationBar(
       items: <BottomNavigationBarItem>[
@@ -50,11 +54,11 @@ class _RootPageState extends State<RootPage> {
         ),
       ],
       currentIndex: getIndex(),
-      selectedItemColor: Colors.black,
+      selectedItemColor: Colors.green,
       unselectedItemColor: Colors.white,
       onTap: onItemTapped,
       type: BottomNavigationBarType.fixed,
-      backgroundColor: Colors.red,
+      backgroundColor: Colors.red[900],
       ),
     );
   }

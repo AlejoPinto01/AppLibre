@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 import 'dart:io';
 
+import 'package:applibre/src/models/cupon.dart';
 import 'package:applibre/src/pages/login.dart';
 import 'package:applibre/src/pages/profile.dart';
 import 'package:applibre/src/pages/root_page.dart';
@@ -31,10 +32,9 @@ class _HomePageState extends State<HomePage> {
 
   Widget generatePage() {
     return Scaffold(
+      backgroundColor: Colors.yellow[100],
       body: ListView(
         children: [
-          generarCabecera(),
-          Divider(),
           generarTarjetaPerfil(),
           Divider(),
           generarCardImagen(),
@@ -42,7 +42,10 @@ class _HomePageState extends State<HomePage> {
           generarCuponesCabecera(),
           Divider(),
           generarCupones(),
-          generarMiniMapa()
+          generarMiniMapa(),
+          Container(
+            height: 100,
+          )
         ],
       ),
     );
@@ -73,11 +76,12 @@ class _HomePageState extends State<HomePage> {
             onTap: () {
               setState(() {
                 setIndex(4);
-                pageController.animateToPage(getIndex(), duration: Duration(milliseconds: 500), curve: Curves.ease);
+                pageController.animateToPage(getIndex(),
+                    duration: Duration(milliseconds: 700), curve: Curves.ease);
               });
             },
             child: compruebaEstado()),
-        color: Colors.red,
+        color: Colors.red[900],
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(40.0),
@@ -200,20 +204,21 @@ Widget _imgPerfil(){
             onTap: () {
               setState(() {
                 setIndex(2);
-                pageController.animateToPage(getIndex(), duration: Duration(milliseconds: 500), curve: Curves.ease);
+                pageController.animateToPage(getIndex(),
+                    duration: Duration(milliseconds: 700), curve: Curves.ease);
               });
             },
             child: FadeInImage(
               placeholder: AssetImage('assets/cargando.gif'),
               image: NetworkImage(
-                  'https://abancommercials.com/es/uploadComercial/7108.jpg'),
+                  'https://i.gyazo.com/8486de22fc88daadd7f29644bbd6b640.png'),
               fadeInDuration: Duration(milliseconds: 100),
-              height: 250,
+              height: 90,
               fit: BoxFit.cover,
             ),
           ),
         ),
-        borderRadius: BorderRadius.circular(30.0),
+        borderRadius: BorderRadius.circular(20.0),
       ),
     );
   }
@@ -225,9 +230,11 @@ Widget _imgPerfil(){
         onPressed: () {
           setState(() {
             setIndex(1);
-            pageController.animateToPage(getIndex(), duration: Duration(milliseconds: 500), curve: Curves.ease);
+            pageController.animateToPage(getIndex(),
+                duration: Duration(milliseconds: 700), curve: Curves.ease);
           });
         },
+        style: TextButton.styleFrom(primary: Colors.red[900],),
         child: Text('Ver todo'),
       ),
     );
@@ -238,106 +245,195 @@ Widget _imgPerfil(){
       margin: EdgeInsets.only(bottom: 30),
       width: double.infinity,
       height: 180,
-      // color: Colors.red,
-      child: ListView.builder(
-          itemCount: 10,
+      child: ListView.separated(
+          itemCount: getListaCupones().length,
           scrollDirection: Axis.horizontal,
-          itemBuilder: (BuildContext context, int index) =>
-              generarCuponesSlider()),
+          separatorBuilder: (BuildContext context, int index) {
+            return SizedBox(width: 5,);
+          },
+          itemBuilder: (BuildContext context, int i) =>
+              generarCuponesSlider(i)),
     );
   }
 
-  Widget generarCuponesSlider() {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 10),
-      width: 110,
-      height: 100,
-      // color: Colors.green,
-      child: InkWell(
+  Widget generarCuponesSlider(int index) {
+    final targeta = InkWell(
+      child: Container(
+        width: 110,
+        height: 100,
+        // color: Colors.green,
         child: Column(
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: FadeInImage(
-                placeholder: AssetImage('assets/cargando.gif'),
-                image: NetworkImage('https://via.placeholder.com/150x300'),
-                height: 140,
-                width: 100,
-                fit: BoxFit.cover,
-              ),
+            FadeInImage(
+              placeholder: AssetImage('assets/cargando.gif'),
+              image: NetworkImage(getListaCupones()[index].imageURL),
+              fadeInDuration: Duration(milliseconds: 100),
+              height: 150,
+              fit: BoxFit.cover,
             ),
-            SizedBox(
-              height: 5,
-            ),
+            SizedBox(height: 10,),
+            Container(
+              child: Text(getListaCupones()[index].name),
+            )
           ],
         ),
-        onTap: () {
-          setState(() {
-            _mostrarAlert(context);
-          });
-        },
       ),
+      onTap: () {
+        setState(() {
+            _mostrarAlertCupones(context, getListaCupones()[index]);
+          });
+      },
+    );
+    return Container(
+      child: ClipRRect(
+        child: targeta,
+        borderRadius: BorderRadius.circular(30.0),
+      ),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(30.0),
+        boxShadow: <BoxShadow>[
+          BoxShadow(
+              color: Colors.black26,
+              blurRadius: 5.0,
+              spreadRadius: 1.0,
+              offset: Offset(1.0, 5.0))
+        ],
+        color: Colors.white,
+      ),
+    );
+  }
+
+  void _mostrarAlertCupones(BuildContext context, Cupon cupon) {
+    showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+          ),
+          title: Text(
+            cupon.name,
+            style: TextStyle(fontSize: 20),
+          ),
+          content: FittedBox(
+            child: Column(
+              children: [
+                Container(
+                  width: 300,
+                  child: Text(
+                    cupon.description,
+                    style: TextStyle(fontSize: 20),
+                  ),
+                ),
+                SizedBox(height: 15),
+                Container(
+                  width: 300,
+                  height: 300,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: NetworkImage(cupon.qrCode),
+                      fit: BoxFit.scaleDown,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                Container(
+                  child: Text(
+                    cupon.code,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 60,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 
   void _mostrarAlert(BuildContext context) {
     showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Text('Código de promoción'),
-            content: Text('sdgfsdfgsdf'),
-            actions: [
-              TextButton(
-                  onPressed: () => Navigator.of(context).pop(),
-                  child: Text('Ok')),
-            ],
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30.0)),
-          );
-        });
+    context: context, 
+    barrierDismissible: true,
+    builder: (context) {
+      return AlertDialog(
+        title: Text('Kebab Tot Bo'),
+        content: Column (
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text('Carrer de Ponent, 1, 07300 Inca, Illes Balears'),
+            Divider(),
+            SizedBox(height: 20,),
+            Container(
+              child: FadeInImage(
+                placeholder: AssetImage('assets/cargando.gif'),
+                image: NetworkImage(
+                    'https://i.gyazo.com/5996a0545ed8c997e70b0038cf5172a9.png'),
+                fadeInDuration: Duration(milliseconds: 100),
+                fit: BoxFit.fitHeight),
+                height: 150,
+            )
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(), 
+            child: Text('Ok'), 
+            style: TextButton.styleFrom(
+              primary: Colors.red[900],
+            ),
+          ),
+        ],
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+      );
+    }
+  );
   }
 
   Widget generarMiniMapa() {
-    return Container(
-      child: ClipRRect(
-        child: Card(
-          elevation: 5,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-          child: Column(
-            children: <Widget>[
-              InkWell(
-                splashColor: Colors.green[700],
-                onTap: () {
-                  setState(() {
-                    setIndex(3);
-                    pageController.animateToPage(getIndex(), duration: Duration(milliseconds: 500), curve: Curves.ease);
-                  });
-                },
-                child: FadeInImage(
-                  placeholder: AssetImage('assets/cargando.gif'),
-                  image: NetworkImage(
-                      'https://i.gyazo.com/c6edda1b4038750705d0d90938b4b70a.png'),
-                  fadeInDuration: Duration(milliseconds: 100),
-                  height: 250,
-                  fit: BoxFit.cover,
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: <Widget>[
-                  FlatButton(
-                    child: Text("Ok"),
-                    onPressed: () {
-                      Text("Ok");
-                    }),
-                ],
-              )
-            ],
+    return Card(
+      child: Column(
+        children: <Widget>[
+          InkWell(
+            splashColor: Colors.green[900],
+            onTap: () {
+              _mostrarAlert(context);
+            },
+            child: FadeInImage(
+              placeholder: AssetImage('assets/cargando.gif'),
+              image: NetworkImage(
+                  'https://i.gyazo.com/c6edda1b4038750705d0d90938b4b70a.png'),
+              fadeInDuration: Duration(milliseconds: 100),
+              fit: BoxFit.cover,
+            ),
           ),
-        ),
-        borderRadius: BorderRadius.circular(30.0),
+          SizedBox(
+            child: Text(
+                '\nNo sabes como llegar a nosotros?\n Tranquilo aquí tienes un mapa'),
+          ),
+          Align(
+            alignment: Alignment(0.9, -1),
+            heightFactor: 0.5,
+            child: FloatingActionButton(
+              backgroundColor: Colors.red[900],
+              splashColor: Colors.green[900],
+              onPressed: () {
+                setIndex(3);
+                pageController.animateToPage(getIndex(),
+                    duration: Duration(milliseconds: 700), curve: Curves.ease);
+                print(getIndex());
+              },
+              child: Icon(Icons.map),
+            ),
+          )
+        ],
       ),
     );
   }
