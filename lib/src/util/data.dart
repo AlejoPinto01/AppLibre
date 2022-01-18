@@ -1,9 +1,15 @@
+import 'dart:io';
+
 import 'package:applibre/src/models/cupon.dart';
 import 'package:applibre/src/models/user.dart';
 import 'package:flutter/material.dart';
 
 int index = 0;
 bool registre = false;
+User? newUser;
+String nombreUsuario = '';
+File? image;
+
 int getIndex() {
   return index;
 }
@@ -20,8 +26,6 @@ void setRegistre(bool state) {
   registre = state;
 }
 
-String nombreUsuario = '';
-
 void setNombreUsuario(String nombre) {
   nombreUsuario = nombre;
 }
@@ -29,8 +33,6 @@ void setNombreUsuario(String nombre) {
 String getNombreUsuario() {
   return nombreUsuario;
 }
-
-User? newUser;
 
 void setUser(String nombre, String correo, String pass) {
   newUser = User(name: nombre, email: correo, password: pass); 
@@ -40,6 +42,13 @@ User? getUser() {
   return newUser;
 }
 
+void setImage(File? temporalImg){
+  image = temporalImg;
+}
+
+File? getImage() {
+  return image;
+}
 PageController pageController = PageController(
   initialPage: 0,
   keepPage: true  

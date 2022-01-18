@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:applibre/src/models/user.dart';
 import 'package:applibre/src/pages/profile.dart';
 import 'package:applibre/src/pages/root_page.dart';
@@ -19,48 +21,64 @@ class _LoginPageState extends State<LoginPage> {
   bool _isOpen = false;
   bool _submited = false;
   Icon _infoIcon = Icon(Icons.info);
+  bool _passwordVisible = false;
+  double appBarHeight = AppBar().preferredSize.height;
+
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-          title: Center(
-        child: Text('Registro'),
-      )),
       //Llista per mostrar els elements en forma vertical
       body: Form(
         key: _formKey,
         child: ListView(
-          //shrinkWrap: true,
-          //posar padding per a que no estigui aferrat als costats i adalt
-          padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
           children: [
-            _crearUsername(),
-            Divider(),
-            _crearEmail(),
-            Divider(),
-            IntrinsicHeight(
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Expanded(flex: 8, child: _crearPassword()),
-                  _crearInfoPass(),
-                ],
+            Container(
+              height: appBarHeight,
+              child: Center(
+                child: Text('Registro', 
+                  style: TextStyle(
+                    color: Colors.white, 
+                    fontWeight: FontWeight.bold,
+                    fontSize: 17,
+                  )
+                ),
               ),
+              color: Colors.red,
             ),
-            SizedBox(height: 5.0),
-            Text(
-              _info,
-              style: TextStyle(
-                color: (Colors.red),
-              ),
+            ListView(
+              shrinkWrap: true,
+              //posar padding per a que no estigui aferrat als costats i adalt
+              padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
+              children: [
+                _crearUsername(),
+                Divider(),
+                _crearEmail(),
+                Divider(),
+                IntrinsicHeight(
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Expanded(flex: 8, child: _crearPassword()),
+                      _crearInfoPass(),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 5.0),
+                Text(
+                  _info,
+                  style: TextStyle(
+                    color: (Colors.red),
+                  ),
+                ),
+                Divider(),
+                SizedBox(
+                  height: 20.0,
+                ),
+                _buttonLogin(context)
+              ],
             ),
-            Divider(),
-            SizedBox(
-              height: 20.0,
-            ),
-            _buttonLogin(context)
           ],
         ),
       ),
@@ -124,13 +142,28 @@ class _LoginPageState extends State<LoginPage> {
 //crear input de password, posant el valor ocult
   Widget _crearPassword() {
     return TextFormField(
-        obscureText: true,
+        obscureText: !_passwordVisible,
         decoration: InputDecoration(
           hintText: 'Password',
           labelText: 'Password',
-          suffixIcon: Icon(Icons.lock_open),
+          suffixIcon: IconButton(
+            icon: Icon(
+              // Based on passwordVisible state choose the icon
+              _passwordVisible
+              ? Icons.visibility
+              : Icons.visibility_off,
+              color: Theme.of(context).primaryColorDark,
+              ),
+            onPressed: () {
+              // Update the state i.e. toogle the state of passwordVisible variable
+              setState(() {
+                _passwordVisible = !_passwordVisible;
+              });
+            },
+          ),
           icon: Icon(Icons.lock),
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
+          
         ),
         autovalidateMode: _submited
             ? AutovalidateMode.onUserInteraction
@@ -177,24 +210,25 @@ class _LoginPageState extends State<LoginPage> {
 //boto per registrarse
   Widget _buttonLogin(BuildContext context) {
     return Center(
-        child: ElevatedButton(
-            child: Text('Login'),
-            style: ElevatedButton.styleFrom(
-              shape: StadiumBorder(),
-            ),
-            onPressed: () {
-              _submited = true;
-              if (_formKey.currentState!.validate()) {
-                setState(() {
-                  setUser(user, email, pass);
-                  setNombreUsuario(user);
-                  setRegistre(true);
-                  setIndex(0);
-                  print(getIndex());
-                  pageController.animateToPage(getIndex(), duration: Duration(milliseconds: 700), curve: Curves.ease);
-                });
-              }
-            } //_loginDialog(context),
-            ));
+      child: ElevatedButton(
+        child: Text('Login'),
+        style: ElevatedButton.styleFrom(
+          minimumSize: Size.fromHeight(40),
+          shape: StadiumBorder(),
+        ),
+        onPressed: () {
+          _submited = true;
+          if (_formKey.currentState!.validate()) {
+            setState(() {
+              setUser(user, email, pass);
+              setNombreUsuario(user);
+              setRegistre(true);
+              setIndex(0);
+              pageController.jumpToPage(getIndex());
+            });
+          }
+        } //_loginDialog(context),
+      )
+    );
   }
 }

@@ -4,6 +4,8 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:applibre/src/models/user.dart';
+import 'package:applibre/src/pages/root_page.dart';
+import 'package:applibre/src/util/data.dart';
 import 'package:applibre/src/widgets/defaultImageWidget.dart';
 import 'package:applibre/src/widgets/imageWidget.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +36,7 @@ _defaultImage() async {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  File? image;
+  File? image = getImage();
   Icon icon = Icon(Icons.edit);
   bool read = true;
   bool edit = false;
@@ -47,7 +49,10 @@ class _ProfilePageState extends State<ProfilePage> {
       if (image == null) return;
 
       final imageTemporary = File(image.path);
-      setState (() => this.image = imageTemporary);
+      setState (() { 
+        this.image = imageTemporary;
+        setImage(imageTemporary);
+      });
     } on PlatformException catch (e) {
       print('Failed to pick image: $e');
     }
@@ -78,8 +83,8 @@ class _ProfilePageState extends State<ProfilePage> {
       ),
       body: Container(
         padding: EdgeInsets.all(32),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: ListView(
+          //crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: 30),
             image != null
@@ -94,6 +99,8 @@ class _ProfilePageState extends State<ProfilePage> {
             _buildName(),
             SizedBox(height: 25),
             _buildEmail(),
+            SizedBox(height: 50,),
+            _logOut()
           ],
         ),
       ),
@@ -169,6 +176,30 @@ class _ProfilePageState extends State<ProfilePage> {
         SizedBox(height: 5,),
         Text(widget.user!.email)
       ]
+    );
+  }
+
+  Widget _logOut() {
+    return ElevatedButton(
+      child: Text("Log out"),
+      style: ElevatedButton.styleFrom(
+        minimumSize: Size.fromHeight(40),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
+          side: BorderSide(color: Colors.black)
+        ),
+        padding: EdgeInsets.all(10.0),
+        primary: Colors.white,
+        onPrimary: Colors.black
+      ),
+      onPressed: () {
+        setState(() {
+          setImage(null);
+          setRegistre(false);
+          setIndex(0);
+          pageController.jumpToPage(index);
+        });
+      }, 
     );
   }
 } 
