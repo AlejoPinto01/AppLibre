@@ -25,6 +25,7 @@ class _RootPageState extends State<RootPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.yellow[100],
       appBar: AppBar(
         backgroundColor: Colors.red[900],
         title: Center(child: Image(image: AssetImage('assets/logo.png'), width: 50,)),
@@ -45,7 +46,7 @@ class _RootPageState extends State<RootPage> {
           label: 'Carta',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.add_location_alt_outlined),
+          icon: Icon(Icons.add_location_alt),
           label: 'Mapa',
         ),
         BottomNavigationBarItem(

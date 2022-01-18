@@ -5,6 +5,7 @@ import 'package:applibre/src/pages/profile.dart';
 import 'package:applibre/src/pages/root_page.dart';
 import 'package:applibre/src/util/data.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key? key}) : super(key: key);
@@ -22,12 +23,12 @@ class _LoginPageState extends State<LoginPage> {
   bool _submited = false;
   Icon _infoIcon = Icon(Icons.info);
   bool _passwordVisible = false;
-  double appBarHeight = AppBar().preferredSize.height;
 
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.yellow[100],
       //Llista per mostrar els elements en forma vertical
       body: Form(
         key: _formKey,
@@ -37,15 +38,16 @@ class _LoginPageState extends State<LoginPage> {
               height: appBarHeight,
               child: Center(
                 child: Text('Registro', 
-                  style: TextStyle(
-                    color: Colors.white, 
+                  style: GoogleFonts.montserrat(
+                    color: Colors.brown[700], 
                     fontWeight: FontWeight.bold,
-                    fontSize: 17,
+                    fontSize: 22,
+                    height: 2
                   )
                 ),
               ),
-              color: Colors.red,
             ),
+            SizedBox(height: 5),
             ListView(
               shrinkWrap: true,
               //posar padding per a que no estigui aferrat als costats i adalt
@@ -69,7 +71,7 @@ class _LoginPageState extends State<LoginPage> {
                 Text(
                   _info,
                   style: TextStyle(
-                    color: (Colors.red),
+                    color: (Colors.red[900]),
                   ),
                 ),
                 Divider(),
@@ -93,7 +95,11 @@ class _LoginPageState extends State<LoginPage> {
           labelText: 'User',
           suffixIcon: Icon(Icons.person_outlined),
           icon: Icon(Icons.person),
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
+          focusColor: Colors.red[900],
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(20.0),
+            borderSide: BorderSide(color: Colors.red,)
+          ),
         ),
         autovalidateMode: _submited
             ? AutovalidateMode.onUserInteraction
@@ -211,10 +217,18 @@ class _LoginPageState extends State<LoginPage> {
   Widget _buttonLogin(BuildContext context) {
     return Center(
       child: ElevatedButton(
-        child: Text('Login'),
+        child: Text('Login', 
+          style: GoogleFonts.montserrat(
+            fontWeight: FontWeight.bold,
+            fontSize: 17
+          ),
+        ),
         style: ElevatedButton.styleFrom(
           minimumSize: Size.fromHeight(40),
           shape: StadiumBorder(),
+          primary: Colors.red[900],
+          shadowColor: Colors.pink[700],
+          elevation: 15
         ),
         onPressed: () {
           _submited = true;
