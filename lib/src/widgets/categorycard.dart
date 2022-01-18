@@ -1,6 +1,7 @@
 import 'package:applibre/src/models/category.dart';
 import 'package:applibre/src/pages/category_page.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CategoryCard extends StatelessWidget {
   Category category;
@@ -24,21 +25,22 @@ class CategoryCard extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(20)),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.3),
+              //color: Colors.black.withOpacity(0.3),
+              color: category.color.withOpacity(0.5),
               spreadRadius: 2,
               blurRadius: 5,
               offset: Offset(0, 3),
             )
           ],
         ),
-        margin: EdgeInsets.all(20),
+        margin: EdgeInsets.only(bottom: 10, left: 15, right: 15, top: 12),
         height: 150,
         child: Stack(
           children: [
             Positioned.fill(
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
-                child: Image.network(
+                child: Image.asset(
                   category.imageURL,
                   fit: BoxFit.cover,
                 ),
@@ -77,8 +79,16 @@ class CategoryCard extends StatelessWidget {
                       ),
                     ),
                     SizedBox(width: 10),
-                    Text(category.name,
-                        style: TextStyle(color: Colors.white, fontSize: 25))
+                    Text(
+                      category.name,
+                      style: GoogleFonts.montserrat(
+                        fontWeight: FontWeight.bold,
+                        textStyle: TextStyle(
+                          color: Colors.white,
+                          fontSize: 25,
+                        ),
+                      ),
+                    )
                   ],
                 ),
               ),

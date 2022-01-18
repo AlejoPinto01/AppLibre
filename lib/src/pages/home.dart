@@ -225,9 +225,17 @@ class _HomePageState extends State<HomePage> {
       title: Text(
         'Cupones',
         style: GoogleFonts.montserrat(
+<<<<<<< HEAD
             fontSize: 20,
             fontWeight: FontWeight.bold,
             color: Colors.brown[800]),
+=======
+          textStyle: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Colors.brown[800]),
+        ),
+>>>>>>> a56ad9658b73037ef82efe2aa27e8ca3b9f97864
       ),
       trailing: TextButton(
         onPressed: () {
@@ -236,12 +244,18 @@ class _HomePageState extends State<HomePage> {
         },
         style: TextButton.styleFrom(
           primary: Colors.red[900],
+<<<<<<< HEAD
           textStyle:
               GoogleFonts.montserrat(fontWeight: FontWeight.bold, fontSize: 15),
         ),
         child: Text(
           'Ver todo',
           style: GoogleFonts.montserrat(fontWeight: FontWeight.bold),
+=======
+          textStyle: GoogleFonts.montserrat(
+            textStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+          ),
+>>>>>>> a56ad9658b73037ef82efe2aa27e8ca3b9f97864
         ),
       ),
     );
@@ -307,7 +321,7 @@ class _HomePageState extends State<HomePage> {
           children: [
             FadeInImage(
               placeholder: AssetImage('assets/cargando.gif'),
-              image: NetworkImage(getListaCupones()[index].imageURL),
+              image: AssetImage(getListaCupones()[index].imageURL),
               fadeInDuration: Duration(milliseconds: 100),
               height: 150,
               fit: BoxFit.cover,
@@ -319,8 +333,13 @@ class _HomePageState extends State<HomePage> {
               child: Text(
                 getListaCupones()[index].name,
                 style: GoogleFonts.montserrat(
+<<<<<<< HEAD
                   fontWeight: FontWeight.bold,
                   fontSize: 13,
+=======
+                  textStyle:
+                      TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+>>>>>>> a56ad9658b73037ef82efe2aa27e8ca3b9f97864
                 ),
               ),
             ),
@@ -490,11 +509,20 @@ class _HomePageState extends State<HomePage> {
           ),
           SizedBox(
             child: Text(
+<<<<<<< HEAD
               '\nNo sabes como llegar a nosotros?\n Tranquilo, aquí tienes un mapa',
               style: GoogleFonts.montserrat(
                 fontWeight: FontWeight.bold,
                 fontSize: 15,
               ),
+=======
+              '\nNo sabes como llegar a nosotros?\n Tranquilo aquí tienes un mapa',
+              style: GoogleFonts.montserrat(
+                  textStyle: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 15,
+              )),
+>>>>>>> a56ad9658b73037ef82efe2aa27e8ca3b9f97864
             ),
           ),
           Align(
