@@ -24,6 +24,7 @@ class _RootPageState extends State<RootPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.yellow[100],
       appBar: AppBar(
         backgroundColor: Colors.red[900],
         title: Center(
@@ -39,34 +40,34 @@ class _RootPageState extends State<RootPage> {
         backgroundColor: Colors.red[900],
       ),
       bottomNavigationBar: BottomNavigationBar(
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.savings),
-            label: 'Cupones',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.fastfood),
-            label: 'Carta',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.add_location_alt_outlined),
-            label: 'Mapa',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle),
-            label: 'Perfil',
-          ),
-        ],
-        currentIndex: getIndex(),
-        selectedItemColor: Colors.green,
-        unselectedItemColor: Colors.white,
-        onTap: onItemTapped,
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.red[900],
+      items: <BottomNavigationBarItem>[
+        BottomNavigationBarItem(
+          icon: Icon(Icons.home),
+          label: 'Home',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.savings),
+          label: 'Cupones',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.fastfood),
+          label: 'Carta',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.add_location_alt),
+          label: 'Mapa',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.account_circle),
+          label: 'Perfil',
+        ),
+      ],
+      currentIndex: getIndex(),
+      selectedItemColor: Colors.green,
+      unselectedItemColor: Colors.white,
+      onTap: onItemTapped,
+      type: BottomNavigationBarType.fixed,
+      backgroundColor: Colors.red[900],
       ),
     );
   }

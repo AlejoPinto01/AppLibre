@@ -10,6 +10,7 @@ bool registre = false;
 User? newUser;
 String nombreUsuario = '';
 File? image;
+double appBarHeight = AppBar().preferredSize.height;
 
 int getIndex() {
   return index;
