@@ -25,14 +25,17 @@ class DishPage extends StatelessWidget {
                 dish.name,
                 textAlign: TextAlign.center,
                 style: GoogleFonts.montserrat(
-                  textStyle:
-                      TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+                  textStyle: TextStyle(
+                    fontSize: 40,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ),
             Container(
               height: 300,
               decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black38,
@@ -41,12 +44,68 @@ class DishPage extends StatelessWidget {
                   )
                 ],
               ),
-              child: Hero(
-                child: Image.asset(
-                  dish.image,
-                  fit: BoxFit.cover,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: Hero(
+                  child: Image.asset(
+                    dish.image,
+                    fit: BoxFit.cover,
+                  ),
+                  tag: dish.name,
                 ),
-                tag: dish.name,
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Container(
+              decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black38,
+                    spreadRadius: 1,
+                    blurRadius: 2,
+                  )
+                ],
+                borderRadius: BorderRadius.circular(20),
+                color: Colors.yellow[100],
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(15),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        'Precio: ',
+                        textAlign: TextAlign.left,
+                      ),
+                    ),
+                    Text(
+                      '${dish.price}€',
+                      textAlign: TextAlign.right,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Container(
+              decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black38,
+                    spreadRadius: 1,
+                    blurRadius: 2,
+                  )
+                ],
+                borderRadius: BorderRadius.circular(20),
+                color: Colors.yellow[100],
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(15),
+                child: Text(dish.description),
               ),
             ),
           ],

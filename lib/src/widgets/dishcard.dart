@@ -27,8 +27,8 @@ class DishCard extends StatelessWidget {
           child: Row(
             children: [
               Container(
-                width: 100,
-                height: 100,
+                width: 120,
+                height: 120,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(100),
                   child: Hero(
