@@ -1,6 +1,7 @@
 import 'package:applibre/src/models/category.dart';
 import 'package:applibre/src/widgets/categorycard.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class MenuPage extends StatelessWidget {
   List<Category> _categories = [
@@ -10,8 +11,7 @@ class MenuPage extends StatelessWidget {
           Icons.fastfood,
           color: Colors.white,
         ),
-        imageURL:
-            'https://www.gourmetkebab.es/wp-content/uploads/2021/04/kebab-que-es.jpg',
+        imageURL: 'assets/images/food/categories/kebab.jpg',
         color: Colors.orange),
     Category(
         name: 'Pizzas',
@@ -19,8 +19,7 @@ class MenuPage extends StatelessWidget {
           Icons.local_pizza,
           color: Colors.white,
         ),
-        imageURL:
-            'https://www.unileverfoodsolutions.es/dam/global-ufs/mcos/SPAIN/calcmenu/recipes/ES-recipes/general/pizza-kebab/main-header.jpg',
+        imageURL: 'assets/images/food/categories/pizza.jpg',
         color: Colors.red),
     Category(
         name: 'Bebidas',
@@ -28,8 +27,7 @@ class MenuPage extends StatelessWidget {
           Icons.local_drink,
           color: Colors.white,
         ),
-        imageURL:
-            'https://www.clikisalud.net/wp-content/uploads/2019/07/refrescos-aumentan-riesgo-cancer.jpg',
+        imageURL: 'assets/images/food/categories/drink.jpg',
         color: Colors.blue),
     Category(
         name: 'Postres',
@@ -37,7 +35,7 @@ class MenuPage extends StatelessWidget {
           Icons.cake,
           color: Colors.white,
         ),
-        imageURL: 'https://i.ytimg.com/vi/2_FUW8y2J1M/maxresdefault.jpg',
+        imageURL: 'assets/images/food/categories/dessert.jpg',
         color: Colors.pink),
     Category(
         name: 'Ensaladas',
@@ -45,8 +43,7 @@ class MenuPage extends StatelessWidget {
           Icons.restaurant,
           color: Colors.white,
         ),
-        imageURL:
-            'http://www.comedera.com/wp-content/uploads/2015/10/ensalada-de-pollo.jpg',
+        imageURL: 'assets/images/food/categories/salad.jpg',
         color: Colors.green),
   ];
 
@@ -57,21 +54,48 @@ class MenuPage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 50, bottom: 10),
-            child: Text(
-              'Seleccione una categoria',
-              textAlign: TextAlign.center,
-            ),
-          ),
+          // Padding(
+          //   padding: const EdgeInsets.only(top: 20, bottom: 20),
+          //   child: Text(
+          //     'Seleccione una categoria',
+          //     textAlign: TextAlign.center,
+          //     style: GoogleFonts.montserrat(
+          //       textStyle: TextStyle(
+          //         fontSize: 20,
+          //       ),
+          //     ),
+          //   ),
+          // ),
           Expanded(
-            child: ListView.builder(
-              itemCount: _categories.length,
-              itemBuilder: (BuildContext context, int index) {
-                return CategoryCard(
-                  category: _categories[index],
-                );
-              },
+            child: Stack(
+              children: [
+                ListView.builder(
+                  itemCount: _categories.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return CategoryCard(
+                      category: _categories[index],
+                    );
+                  },
+                ),
+                // Positioned(
+                //   left: 0,
+                //   right: 0,
+                //   top: 0,
+                //   child: Container(
+                //     height: 10,
+                //     decoration: BoxDecoration(
+                //       gradient: LinearGradient(
+                //         begin: Alignment.topCenter,
+                //         end: Alignment.bottomCenter,
+                //         colors: [
+                //           Colors.black.withOpacity(0.2),
+                //           Colors.transparent
+                //         ],
+                //       ),
+                //     ),
+                //   ),
+                // ),
+              ],
             ),
           ),
         ],

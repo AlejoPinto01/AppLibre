@@ -127,21 +127,21 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _imgDefaultPerfil(){
+  Widget _imgDefaultPerfil() {
     return ClipOval(
       child: Material(
         color: Colors.transparent,
-      child: Ink.image(
-        image: defaultimg,
-        fit: BoxFit.cover,
-        width: 50,
-        height: 50,
+        child: Ink.image(
+          image: defaultimg,
+          fit: BoxFit.cover,
+          width: 50,
+          height: 50,
         ),
       ),
     );
   }
 
-Widget _imgPerfil(){
+  Widget _imgPerfil() {
     final imagePath = image!.path;
     final finalImage = imagePath.contains('https://')
         ? NetworkImage(imagePath)
@@ -150,16 +150,16 @@ Widget _imgPerfil(){
     return ClipOval(
       child: Material(
         color: Colors.transparent,
-      child: Ink.image(
-        image: finalImage as ImageProvider,
-        fit: BoxFit.cover,
-        width: 50,
-        height: 50,
+        child: Ink.image(
+          image: finalImage as ImageProvider,
+          fit: BoxFit.cover,
+          width: 50,
+          height: 50,
         ),
       ),
     );
   }
-  
+
   Widget boxNoRegistrado() {
     return SizedBox(
       width: 300,
@@ -219,13 +219,13 @@ Widget _imgPerfil(){
 
   Widget generarCuponesCabecera() {
     return ListTile(
-      title: Text('Cupones', 
-      style: GoogleFonts.montserrat(
-        textStyle: TextStyle(
-          fontSize: 20, 
-          fontWeight: FontWeight.bold,
-          color: Colors.brown[800]
-          ),
+      title: Text(
+        'Cupones',
+        style: GoogleFonts.montserrat(
+          textStyle: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Colors.brown[800]),
         ),
       ),
       trailing: TextButton(
@@ -236,10 +236,7 @@ Widget _imgPerfil(){
         style: TextButton.styleFrom(
           primary: Colors.red[900],
           textStyle: GoogleFonts.montserrat(
-            textStyle: TextStyle(
-              fontWeight: FontWeight.bold, 
-              fontSize: 15
-            ),
+            textStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
           ),
         ),
         child: Text('Ver todo'),
@@ -275,7 +272,7 @@ Widget _imgPerfil(){
           children: [
             FadeInImage(
               placeholder: AssetImage('assets/cargando.gif'),
-              image: NetworkImage(getListaCupones()[index].imageURL),
+              image: AssetImage(getListaCupones()[index].imageURL),
               fadeInDuration: Duration(milliseconds: 100),
               height: 150,
               fit: BoxFit.cover,
@@ -284,12 +281,13 @@ Widget _imgPerfil(){
               height: 10,
             ),
             Container(
-              child: Text(getListaCupones()[index].name, style: GoogleFonts.montserrat(
-                textStyle: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 13
+              child: Text(
+                getListaCupones()[index].name,
+                style: GoogleFonts.montserrat(
+                  textStyle:
+                      TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
                 ),
-              ),),
+              ),
             ),
           ],
         ),
@@ -433,11 +431,13 @@ Widget _imgPerfil(){
           ),
           SizedBox(
             child: Text(
-                '\nNo sabes como llegar a nosotros?\n Tranquilo aquí tienes un mapa',
-                style: GoogleFonts.montserrat(textStyle: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 15,
-                )),),
+              '\nNo sabes como llegar a nosotros?\n Tranquilo aquí tienes un mapa',
+              style: GoogleFonts.montserrat(
+                  textStyle: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 15,
+              )),
+            ),
           ),
           Align(
             alignment: Alignment(0.9, -1),
