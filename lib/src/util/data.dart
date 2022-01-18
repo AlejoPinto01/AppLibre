@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:applibre/src/models/cupon.dart';
 import 'package:applibre/src/models/user.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 int index = 0;
 bool registre = false;
@@ -49,6 +50,7 @@ void setImage(File? temporalImg){
 File? getImage() {
   return image;
 }
+
 PageController pageController = PageController(
   initialPage: 0,
   keepPage: true  

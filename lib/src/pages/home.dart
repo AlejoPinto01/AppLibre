@@ -27,7 +27,14 @@ class _HomePageState extends State<HomePage> {
   AssetImage defaultimg = AssetImage("assets/noImageProfile.png");
   @override
   Widget build(BuildContext context) {
-    return generatePage();
+    return ScrollConfiguration(
+      behavior: ScrollBehavior(),
+      child: GlowingOverscrollIndicator(
+        child: generatePage(),
+        color: Colors.red,
+        axisDirection: AxisDirection.down,
+      ),
+    );
   }
 
   Widget generatePage() {
@@ -51,23 +58,6 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget generarCabecera() {
-    //Mejor una imagen con un logo
-    return Center(
-      child: Text(
-        'Kebab4U',
-        style: GoogleFonts.oswald(
-          textStyle: TextStyle(
-            color: Colors.brown[700],
-            fontSize: 25,
-            height: 1.0,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ),
-    );
-  }
-
   Widget generarTarjetaPerfil() {
     return Container(
       child: Card(
@@ -80,8 +70,16 @@ class _HomePageState extends State<HomePage> {
             child: compruebaEstado()),
         color: Colors.red[900],
       ),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(40.0),
+      decoration:
+          BoxDecoration(borderRadius: BorderRadius.circular(40.0), 
+          boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.3),
+            spreadRadius: 2,
+            blurRadius: 5,
+            offset: Offset(0, 3),
+          ),
+        ]
       ),
       height: compruebaAltura(),
     );
@@ -113,11 +111,9 @@ class _HomePageState extends State<HomePage> {
             Text(
               'Hola, ${nombreUsuario}',
               style: GoogleFonts.permanentMarker(
-                textStyle: TextStyle(
-                  color: Colors.white,
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold,
-                ),
+                color: Colors.white,
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
               ),
             ),
             getImage() != null ? _imgPerfil() : _imgDefaultPerfil(),
@@ -127,21 +123,21 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _imgDefaultPerfil(){
+  Widget _imgDefaultPerfil() {
     return ClipOval(
       child: Material(
         color: Colors.transparent,
-      child: Ink.image(
-        image: defaultimg,
-        fit: BoxFit.cover,
-        width: 50,
-        height: 50,
+        child: Ink.image(
+          image: defaultimg,
+          fit: BoxFit.cover,
+          width: 50,
+          height: 50,
         ),
       ),
     );
   }
 
-Widget _imgPerfil(){
+  Widget _imgPerfil() {
     final imagePath = image!.path;
     final finalImage = imagePath.contains('https://')
         ? NetworkImage(imagePath)
@@ -150,16 +146,16 @@ Widget _imgPerfil(){
     return ClipOval(
       child: Material(
         color: Colors.transparent,
-      child: Ink.image(
-        image: finalImage as ImageProvider,
-        fit: BoxFit.cover,
-        width: 50,
-        height: 50,
+        child: Ink.image(
+          image: finalImage as ImageProvider,
+          fit: BoxFit.cover,
+          width: 50,
+          height: 50,
         ),
       ),
     );
   }
-  
+
   Widget boxNoRegistrado() {
     return SizedBox(
       width: 300,
@@ -170,12 +166,10 @@ Widget _imgPerfil(){
             child: Text(
               'Todavía no estás registrado?',
               style: GoogleFonts.permanentMarker(
-                textStyle: TextStyle(
-                  color: Colors.white,
-                  fontSize: 25,
-                  height: 3.0,
-                  fontWeight: FontWeight.bold,
-                ),
+                color: Colors.white,
+                fontSize: 25,
+                height: 3.0,
+                fontWeight: FontWeight.bold,
               ),
             ),
           ),
@@ -183,8 +177,7 @@ Widget _imgPerfil(){
             child: Text(
               'Haz click aquí',
               style: GoogleFonts.permanentMarker(
-                  textStyle: TextStyle(
-                      color: Colors.white, fontSize: 15, height: 2.0)),
+                  color: Colors.white, fontSize: 15, height: 2.0),
             ),
           )
         ]),
@@ -214,19 +207,27 @@ Widget _imgPerfil(){
         ),
         borderRadius: BorderRadius.circular(20.0),
       ),
+      decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.3),
+            spreadRadius: 2,
+            blurRadius: 5,
+            offset: Offset(0, 3),
+          )
+        ]
+      ),
     );
   }
 
   Widget generarCuponesCabecera() {
     return ListTile(
-      title: Text('Cupones', 
-      style: GoogleFonts.montserrat(
-        textStyle: TextStyle(
-          fontSize: 20, 
-          fontWeight: FontWeight.bold,
-          color: Colors.brown[800]
-          ),
-        ),
+      title: Text(
+        'Cupones',
+        style: GoogleFonts.montserrat(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: Colors.brown[800]),
       ),
       trailing: TextButton(
         onPressed: () {
@@ -235,33 +236,64 @@ Widget _imgPerfil(){
         },
         style: TextButton.styleFrom(
           primary: Colors.red[900],
-          textStyle: GoogleFonts.montserrat(
-            textStyle: TextStyle(
-              fontWeight: FontWeight.bold, 
-              fontSize: 15
-            ),
-          ),
+          textStyle:
+              GoogleFonts.montserrat(fontWeight: FontWeight.bold, fontSize: 15),
         ),
-        child: Text('Ver todo'),
+        child: Text(
+          'Ver todo',
+          style: GoogleFonts.montserrat(fontWeight: FontWeight.bold),
+        ),
       ),
     );
   }
 
   Widget generarCupones() {
     return Container(
-      margin: EdgeInsets.only(bottom: 30),
+      margin: EdgeInsets.all(5),
       width: double.infinity,
       height: 200,
-      child: ListView.separated(
-          itemCount: getListaCupones().length,
-          scrollDirection: Axis.horizontal,
-          separatorBuilder: (BuildContext context, int index) {
-            return SizedBox(
-              width: 5,
-            );
-          },
-          itemBuilder: (BuildContext context, int i) =>
-              generarCuponesSlider(i)),
+      child: Stack(children: [
+        ListView.separated(
+            itemCount: getListaCupones().length,
+            scrollDirection: Axis.horizontal,
+            separatorBuilder: (BuildContext context, int index) {
+              return SizedBox(
+                width: 10,
+              );
+            },
+            itemBuilder: (BuildContext context, int i) =>
+                generarCuponesSlider(i)),
+        Positioned(
+            left: 0,
+            top: 0,
+            bottom: 0,
+            child: Container(
+              width: 10,
+              decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                      begin: Alignment.centerLeft,
+                      end: Alignment.centerRight,
+                      colors: [
+                    Colors.black.withOpacity(0.15),
+                    Colors.transparent
+                  ])),
+            )),
+        Positioned(
+            right: 0,
+            top: 0,
+            bottom: 0,
+            child: Container(
+              width: 10,
+              decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                      begin: Alignment.centerRight,
+                      end: Alignment.centerLeft,
+                      colors: [
+                    Colors.black.withOpacity(0.15),
+                    Colors.transparent
+                  ])),
+            ))
+      ]),
     );
   }
 
@@ -284,12 +316,13 @@ Widget _imgPerfil(){
               height: 10,
             ),
             Container(
-              child: Text(getListaCupones()[index].name, style: GoogleFonts.montserrat(
-                textStyle: TextStyle(
+              child: Text(
+                getListaCupones()[index].name,
+                style: GoogleFonts.montserrat(
                   fontWeight: FontWeight.bold,
-                  fontSize: 13
+                  fontSize: 13,
                 ),
-              ),),
+              ),
             ),
           ],
         ),
@@ -300,12 +333,13 @@ Widget _imgPerfil(){
     );
     return Container(
       margin: EdgeInsets.only(bottom: 15),
+      width: 140,
       child: ClipRRect(
         child: targeta,
-        borderRadius: BorderRadius.circular(30.0),
+        borderRadius: BorderRadius.circular(20.0),
       ),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(30.0),
+        borderRadius: BorderRadius.circular(20.0),
         boxShadow: <BoxShadow>[
           BoxShadow(
               color: Colors.black26,
@@ -329,7 +363,7 @@ Widget _imgPerfil(){
           ),
           title: Text(
             cupon.name,
-            style: TextStyle(fontSize: 20),
+            style: GoogleFonts.montserrat(fontSize: 20),
           ),
           content: FittedBox(
             child: Column(
@@ -338,7 +372,7 @@ Widget _imgPerfil(){
                   width: 300,
                   child: Text(
                     cupon.description,
-                    style: TextStyle(fontSize: 20),
+                    style: GoogleFonts.montserrat(fontSize: 20),
                   ),
                 ),
                 SizedBox(height: 15),
@@ -359,7 +393,7 @@ Widget _imgPerfil(){
                   child: Text(
                     cupon.code,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: GoogleFonts.montserrat(
                       fontSize: 60,
                       fontWeight: FontWeight.bold,
                     ),
@@ -368,6 +402,18 @@ Widget _imgPerfil(){
               ],
             ),
           ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Text(
+                'Ok',
+                style: GoogleFonts.montserrat(fontSize: 20),
+              ),
+              style: TextButton.styleFrom(
+                primary: Colors.red[900],
+              ),
+            ),
+          ],
         );
       },
     );
@@ -379,11 +425,17 @@ Widget _imgPerfil(){
         barrierDismissible: true,
         builder: (context) {
           return AlertDialog(
-            title: Text('Kebab Tot Bo'),
+            title: Text(
+              'Kebab4U',
+              style: GoogleFonts.montserrat(fontWeight: FontWeight.bold),
+            ),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text('Carrer de Ponent, 1, 07300 Inca, Illes Balears'),
+                Text(
+                  'Carrer de Ponent, 3, 07300 Inca, Illes Balears',
+                  style: GoogleFonts.montserrat(),
+                ),
                 Divider(),
                 SizedBox(
                   height: 20,
@@ -402,7 +454,12 @@ Widget _imgPerfil(){
             actions: [
               TextButton(
                 onPressed: () => Navigator.of(context).pop(),
-                child: Text('Ok'),
+                child: Text(
+                  'Ok',
+                  style: GoogleFonts.montserrat(
+                    fontSize: 18,
+                  ),
+                ),
                 style: TextButton.styleFrom(
                   primary: Colors.red[900],
                 ),
@@ -433,11 +490,12 @@ Widget _imgPerfil(){
           ),
           SizedBox(
             child: Text(
-                '\nNo sabes como llegar a nosotros?\n Tranquilo aquí tienes un mapa',
-                style: GoogleFonts.montserrat(textStyle: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 15,
-                )),),
+              '\nNo sabes como llegar a nosotros?\n Tranquilo, aquí tienes un mapa',
+              style: GoogleFonts.montserrat(
+                fontWeight: FontWeight.bold,
+                fontSize: 15,
+              ),
+            ),
           ),
           Align(
             alignment: Alignment(0.9, -1),
