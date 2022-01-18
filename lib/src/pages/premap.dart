@@ -10,7 +10,7 @@ class PreMapPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Column(
+        child: ListView(
           children: [
             Container(
               child: Center(
@@ -33,11 +33,13 @@ class PreMapPage extends StatelessWidget {
               ),
             ),
             SizedBox(height: 15),
-            Container(
-              child: Text('Gran Via Colom, 3, 07300 Inca, Illes Balears',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 17,
+            Center(
+              child: Container(
+                child: Text('Gran Via Colom, 3, 07300 Inca, Illes Balears',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 17,
+                  ),
                 ),
               ),
             ),
