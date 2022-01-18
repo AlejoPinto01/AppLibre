@@ -1,29 +1,16 @@
 import 'package:applibre/src/models/category.dart';
 import 'package:applibre/src/models/dish.dart';
+import 'package:applibre/src/util/data.dart';
 import 'package:applibre/src/widgets/dishcard.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CategoryPage extends StatelessWidget {
   Category category;
 
   CategoryPage({required this.category});
 
-  List<Dish> _dishes = [
-    Dish(
-      name: 'Kebab1234',
-      description: 'asdfasdf',
-      price: 2.45,
-      image: 'assets/images/food/dishes/kebab.jpg',
-      categoryName: 'Kebabs',
-    ),
-    Dish(
-      name: 'Pizza1234',
-      description: 'asdfasdf',
-      price: 2.45,
-      image: 'assets/images/food/dishes/kebab.jpg',
-      categoryName: 'Pizzas',
-    ),
-  ];
+  List<Dish> _dishes = getListaDishes();
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +29,12 @@ class CategoryPage extends StatelessWidget {
             shadowColor: Colors.black,
             backgroundColor: category.color,
             flexibleSpace: FlexibleSpaceBar(
-              title: Text(category.name),
+              title: Text(
+                category.name,
+                style: GoogleFonts.montserrat(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
               background: Stack(
                 fit: StackFit.expand,
                 children: <Widget>[
@@ -80,36 +72,12 @@ class CategoryPage extends StatelessWidget {
     );
   }
 
-  List<Widget> _buildList(int count) {
-    List<Widget> listItems = [];
-
-    for (int i = 0; i < count; i++) {
-      listItems.add(
-        new Padding(
-          padding: new EdgeInsets.all(20.0),
-          child: new Text(
-            'Item ${i.toString()}',
-            style: new TextStyle(fontSize: 25.0),
-          ),
-        ),
-      );
-    }
-
-    return listItems;
-  }
-
   List<Widget> _buildList2() {
     List<Widget> listItems = [];
     for (int i = 0; i < _dishes.length; i++) {
       if (_dishes[i].categoryName == category.name) {
         listItems.add(
-          new Padding(
-            padding: new EdgeInsets.all(20.0),
-            child: new Text(
-              'Item ${_dishes[i].name}',
-              style: new TextStyle(fontSize: 25.0),
-            ),
-          ),
+          DishCard(dish: _dishes[i]),
         );
       }
     }

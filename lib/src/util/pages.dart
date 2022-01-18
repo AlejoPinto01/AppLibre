@@ -3,6 +3,7 @@ import 'package:applibre/src/pages/home.dart';
 import 'package:applibre/src/pages/login.dart';
 import 'package:applibre/src/pages/maps.dart';
 import 'package:applibre/src/pages/menu.dart';
+import 'package:applibre/src/pages/premap.dart';
 import 'package:applibre/src/pages/profile.dart';
 import 'package:applibre/src/util/data.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,7 @@ List<Widget> createPages(bool registro) {
       HomePage(),
       CuponsPage(),
       MenuPage(),
-      MapsPage(),
+      PreMapPage(),
       ProfilePage(user: getUser()),
     ];
   } else {
@@ -21,7 +22,7 @@ List<Widget> createPages(bool registro) {
       HomePage(),
       CuponsPage(),
       MenuPage(),
-      MapsPage(),
+      PreMapPage(),
       LoginPage(),
     ];
   }
