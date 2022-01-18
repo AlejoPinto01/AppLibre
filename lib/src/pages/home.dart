@@ -76,8 +76,7 @@ class _HomePageState extends State<HomePage> {
             onTap: () {
               setState(() {
                 setIndex(4);
-                pageController.animateToPage(getIndex(),
-                    duration: Duration(milliseconds: 700), curve: Curves.ease);
+                pageController.jumpToPage(getIndex());
               });
             },
             child: compruebaEstado()),
@@ -204,8 +203,7 @@ Widget _imgPerfil(){
             onTap: () {
               setState(() {
                 setIndex(2);
-                pageController.animateToPage(getIndex(),
-                    duration: Duration(milliseconds: 700), curve: Curves.ease);
+                pageController.jumpToPage(getIndex());
               });
             },
             child: FadeInImage(
@@ -230,8 +228,7 @@ Widget _imgPerfil(){
         onPressed: () {
           setState(() {
             setIndex(1);
-            pageController.animateToPage(getIndex(),
-                duration: Duration(milliseconds: 700), curve: Curves.ease);
+            pageController.jumpToPage(getIndex());
           });
         },
         style: TextButton.styleFrom(primary: Colors.red[900],),
@@ -425,10 +422,10 @@ Widget _imgPerfil(){
               backgroundColor: Colors.red[900],
               splashColor: Colors.green[900],
               onPressed: () {
-                setIndex(3);
-                pageController.animateToPage(getIndex(),
-                    duration: Duration(milliseconds: 700), curve: Curves.ease);
-                print(getIndex());
+                final route = MaterialPageRoute(builder: (context) {
+                  return MapsPage();
+                });
+                Navigator.push(context, route);
               },
               child: Icon(Icons.map),
             ),

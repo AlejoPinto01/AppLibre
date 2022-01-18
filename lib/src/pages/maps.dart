@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_new, prefer_collection_literals
+
 import 'dart:collection';
 
 import 'package:flutter/foundation.dart';
@@ -50,7 +52,6 @@ class MapsPageState extends State<MapsPage> {
         title: Text("Mapa"),
       ),
       body: Container(
-        height: 400,
         child: GoogleMap(
           onMapCreated: _onMapCreated,
           initialCameraPosition: CameraPosition(
