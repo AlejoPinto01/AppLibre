@@ -191,7 +191,7 @@ class _LoginPageState extends State<LoginPage> {
                   setRegistre(true);
                   setIndex(0);
                   print(getIndex());
-                  pageController.animateToPage(getIndex(), duration: Duration(milliseconds: 700), curve: Curves.ease);
+                  pageController.jumpToPage(getIndex());
                 });
               }
             } //_loginDialog(context),

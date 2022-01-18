@@ -78,8 +78,7 @@ class _ProfilePageState extends State<ProfilePage> {
       ),
       body: Container(
         padding: EdgeInsets.all(32),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: ListView(
           children: [
             SizedBox(height: 30),
             image != null

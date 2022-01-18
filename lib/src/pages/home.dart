@@ -70,11 +70,8 @@ class _HomePageState extends State<HomePage> {
         child: InkWell(
             splashColor: Colors.green[700],
             onTap: () {
-              setState(() {
-                setIndex(4);
-                pageController.animateToPage(getIndex(),
-                    duration: Duration(milliseconds: 700), curve: Curves.ease);
-              });
+              setIndex(4);
+              pageController.jumpToPage(getIndex());
             },
             child: compruebaEstado()),
         color: Colors.red[900],
@@ -160,11 +157,8 @@ class _HomePageState extends State<HomePage> {
           child: InkWell(
             splashColor: Colors.green[700],
             onTap: () {
-              setState(() {
-                setIndex(2);
-                pageController.animateToPage(getIndex(),
-                    duration: Duration(milliseconds: 700), curve: Curves.ease);
-              });
+              setIndex(2);
+              pageController.jumpToPage(getIndex());
             },
             child: FadeInImage(
               placeholder: AssetImage('assets/cargando.gif'),
@@ -183,16 +177,29 @@ class _HomePageState extends State<HomePage> {
 
   Widget generarCuponesCabecera() {
     return ListTile(
-      title: Text('Cupones'),
+      title: Text('Cupones', 
+      style: GoogleFonts.montserrat(
+        textStyle: TextStyle(
+          fontSize: 20, 
+          fontWeight: FontWeight.bold,
+          color: Colors.brown[800]
+          ),
+        ),
+      ),
       trailing: TextButton(
         onPressed: () {
-          setState(() {
-            setIndex(1);
-            pageController.animateToPage(getIndex(),
-                duration: Duration(milliseconds: 700), curve: Curves.ease);
-          });
+          setIndex(1);
+          pageController.jumpToPage(getIndex());
         },
-        style: TextButton.styleFrom(primary: Colors.red[900],),
+        style: TextButton.styleFrom(
+          primary: Colors.red[900],
+          textStyle: GoogleFonts.montserrat(
+            textStyle: TextStyle(
+              fontWeight: FontWeight.bold, 
+              fontSize: 15
+            ),
+          ),
+        ),
         child: Text('Ver todo'),
       ),
     );
@@ -202,12 +209,14 @@ class _HomePageState extends State<HomePage> {
     return Container(
       margin: EdgeInsets.only(bottom: 30),
       width: double.infinity,
-      height: 180,
+      height: 200,
       child: ListView.separated(
           itemCount: getListaCupones().length,
           scrollDirection: Axis.horizontal,
           separatorBuilder: (BuildContext context, int index) {
-            return SizedBox(width: 5,);
+            return SizedBox(
+              width: 5,
+            );
           },
           itemBuilder: (BuildContext context, int i) =>
               generarCuponesSlider(i)),
@@ -229,20 +238,26 @@ class _HomePageState extends State<HomePage> {
               height: 150,
               fit: BoxFit.cover,
             ),
-            SizedBox(height: 10,),
+            SizedBox(
+              height: 10,
+            ),
             Container(
-              child: Text(getListaCupones()[index].name),
-            )
+              child: Text(getListaCupones()[index].name, style: GoogleFonts.montserrat(
+                textStyle: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 13
+                ),
+              ),),
+            ),
           ],
         ),
       ),
       onTap: () {
-        setState(() {
-            _mostrarAlertCupones(context, getListaCupones()[index]);
-          });
+        _mostrarAlertCupones(context, getListaCupones()[index]);
       },
     );
     return Container(
+      margin: EdgeInsets.only(bottom: 15),
       child: ClipRRect(
         child: targeta,
         borderRadius: BorderRadius.circular(30.0),
@@ -318,41 +333,43 @@ class _HomePageState extends State<HomePage> {
 
   void _mostrarAlert(BuildContext context) {
     showDialog(
-    context: context, 
-    barrierDismissible: true,
-    builder: (context) {
-      return AlertDialog(
-        title: Text('Kebab Tot Bo'),
-        content: Column (
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text('Carrer de Ponent, 1, 07300 Inca, Illes Balears'),
-            Divider(),
-            SizedBox(height: 20,),
-            Container(
-              child: FadeInImage(
-                placeholder: AssetImage('assets/cargando.gif'),
-                image: NetworkImage(
-                    'https://i.gyazo.com/5996a0545ed8c997e70b0038cf5172a9.png'),
-                fadeInDuration: Duration(milliseconds: 100),
-                fit: BoxFit.fitHeight),
-                height: 150,
-            )
-          ],
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(), 
-            child: Text('Ok'), 
-            style: TextButton.styleFrom(
-              primary: Colors.red[900],
+        context: context,
+        barrierDismissible: true,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('Kebab Tot Bo'),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text('Carrer de Ponent, 1, 07300 Inca, Illes Balears'),
+                Divider(),
+                SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  child: FadeInImage(
+                      placeholder: AssetImage('assets/cargando.gif'),
+                      image: NetworkImage(
+                          'https://i.gyazo.com/5996a0545ed8c997e70b0038cf5172a9.png'),
+                      fadeInDuration: Duration(milliseconds: 100),
+                      fit: BoxFit.fitHeight),
+                  height: 150,
+                )
+              ],
             ),
-          ),
-        ],
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
-      );
-    }
-  );
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: Text('Ok'),
+                style: TextButton.styleFrom(
+                  primary: Colors.red[900],
+                ),
+              ),
+            ],
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30.0)),
+          );
+        });
   }
 
   Widget generarMiniMapa() {
@@ -374,7 +391,11 @@ class _HomePageState extends State<HomePage> {
           ),
           SizedBox(
             child: Text(
-                '\nNo sabes como llegar a nosotros?\n Tranquilo aquí tienes un mapa'),
+                '\nNo sabes como llegar a nosotros?\n Tranquilo aquí tienes un mapa',
+                style: GoogleFonts.montserrat(textStyle: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 15,
+                )),),
           ),
           Align(
             alignment: Alignment(0.9, -1),
@@ -384,9 +405,7 @@ class _HomePageState extends State<HomePage> {
               splashColor: Colors.green[900],
               onPressed: () {
                 setIndex(3);
-                pageController.animateToPage(getIndex(),
-                    duration: Duration(milliseconds: 700), curve: Curves.ease);
-                print(getIndex());
+                pageController.jumpToPage(getIndex());
               },
               child: Icon(Icons.map),
             ),

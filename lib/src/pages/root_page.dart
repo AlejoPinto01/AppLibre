@@ -18,7 +18,7 @@ class _RootPageState extends State<RootPage> {
   void onItemTapped(int index) {
     setState(() {
         setIndex(index);
-        pageController.animateToPage(index, duration: Duration(milliseconds: 700), curve: Curves.ease);
+        pageController.jumpToPage(index);
     });
   }
 
