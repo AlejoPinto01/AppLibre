@@ -12,13 +12,12 @@ class RootPage extends StatefulWidget {
 }
 
 class _RootPageState extends State<RootPage> {
-
   List<Widget> widgetOptions = createPages(getRegistre());
 
   void onItemTapped(int index) {
     setState(() {
-        setIndex(index);
-        pageController.jumpToPage(index);
+      setIndex(index);
+      pageController.jumpToPage(index);
     });
   }
 
@@ -28,9 +27,18 @@ class _RootPageState extends State<RootPage> {
       backgroundColor: Colors.yellow[100],
       appBar: AppBar(
         backgroundColor: Colors.red[900],
-        title: Center(child: Image(image: AssetImage('assets/logo.png'), width: 50,)),
+        title: Center(
+            child: Image(
+          image: AssetImage('assets/logo.png'),
+          width: 50,
+        )),
       ),
       body: buildPageView(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: Icon(Icons.shopping_cart),
+        backgroundColor: Colors.red[900],
+      ),
       bottomNavigationBar: BottomNavigationBar(
       items: <BottomNavigationBarItem>[
         BottomNavigationBarItem(

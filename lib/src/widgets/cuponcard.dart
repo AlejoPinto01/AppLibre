@@ -9,8 +9,6 @@ class CuponCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final tarjeta = Container(
-      //clipBehavior: Clip.antiAlias,
-      //shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       child: Column(
         children: [
           Container(
@@ -20,7 +18,7 @@ class CuponCard extends StatelessWidget {
             decoration: BoxDecoration(
               image: DecorationImage(
                 fit: BoxFit.cover,
-                image: NetworkImage(cupon.imageURL),
+                image: AssetImage(cupon.imageURL),
               ),
             ),
           ),
