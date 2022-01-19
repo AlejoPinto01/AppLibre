@@ -51,4 +51,7 @@ File? getImage() {
   return image;
 }
 
-PageController pageController = PageController(initialPage: 0, keepPage: true);
+PageController pageController = PageController(
+  initialPage: 0,
+  keepPage: true,
+);

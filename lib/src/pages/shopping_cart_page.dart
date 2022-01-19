@@ -35,22 +35,20 @@ class _ShoppingPageState extends State<ShoppingPage> {
         ),
         backgroundColor: Colors.red[900],
       ),
-      body: compruebaListView()
+      body: compruebaListView(),
     );
   }
 
   getTotal() {
     double total = 0;
-
     for (int i = 0; i < getPedido().length; i++) {
       total += (getPedido()[i].price * cantidad[getPedido()[i].name]!);
     }
-    
     return total.toStringAsFixed(2);
   }
 
   compruebaLista() {
-    if(getPedido().isNotEmpty) {
+    if (getPedido().isNotEmpty) {
       return Container(
         width: 190,
         padding: EdgeInsets.all(5),
@@ -81,9 +79,9 @@ class _ShoppingPageState extends State<ShoppingPage> {
           ),
           onPressed: () {
             final route = MaterialPageRoute(builder: (context) {
-                    return DeliveryPage();
-                  });
-                  Navigator.push(context, route);
+              return DeliveryPage();
+            });
+            Navigator.push(context, route);
           },
         ),
       );
@@ -91,29 +89,29 @@ class _ShoppingPageState extends State<ShoppingPage> {
   }
 
   compruebaPrecio() {
-    if(getPedido().isNotEmpty) {
+    if (getPedido().isNotEmpty) {
       return Text(
         'Total: ${getTotal()}€',
         style: GoogleFonts.montserrat(
-          color: Colors.white, 
-          fontWeight: FontWeight.bold, 
-          fontSize: 15
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+          fontSize: 15,
         ),
       );
     } else {
       return Text(
         'Vuelve cuando sepas que comer!',
         style: GoogleFonts.montserrat(
-          color: Colors.white, 
-          fontWeight: FontWeight.bold, 
-          fontSize: 15
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+          fontSize: 15,
         ),
       );
     }
   }
 
   compruebaListView() {
-    if(getPedido().isNotEmpty) {
+    if (getPedido().isNotEmpty) {
       return new ListView.builder(
         itemCount: getPedido().length,
         itemBuilder: (BuildContext context, int index) {
@@ -131,8 +129,9 @@ class _ShoppingPageState extends State<ShoppingPage> {
                     ),
                     width: 130,
                   ),
-                  decoration:
-                      BoxDecoration(borderRadius: BorderRadius.circular(20)),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
                 ),
                 SizedBox(
                   width: 20,
@@ -144,13 +143,16 @@ class _ShoppingPageState extends State<ShoppingPage> {
                       child: Text(
                         getPedido()[index].name,
                         style: GoogleFonts.montserrat(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                            height: 1.5),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          height: 1.5,
+                        ),
                       ),
                     ),
-                    Text('${getPedido()[index].price}€',
-                        style: GoogleFonts.montserrat())
+                    Text(
+                      '${getPedido()[index].price}€',
+                      style: GoogleFonts.montserrat(),
+                    ),
                   ],
                 ),
                 Container(
@@ -161,7 +163,9 @@ class _ShoppingPageState extends State<ShoppingPage> {
                         child: Text(
                           '-',
                           style: GoogleFonts.montserrat(
-                              fontSize: 15, fontWeight: FontWeight.bold),
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                         onPressed: () {
                           setState(() {
@@ -183,7 +187,9 @@ class _ShoppingPageState extends State<ShoppingPage> {
                         child: Text(
                           '+',
                           style: GoogleFonts.montserrat(
-                              fontSize: 15, fontWeight: FontWeight.bold),
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                         onPressed: () {
                           setState(() {
@@ -219,10 +225,7 @@ class _ShoppingPageState extends State<ShoppingPage> {
       return Center(
         child: Text(
           'No hay nada :(',
-          style: GoogleFonts.montserrat(
-            fontSize: 30,
-            color: Colors.brown[700]
-          ),
+          style: GoogleFonts.montserrat(fontSize: 30, color: Colors.brown[700]),
         ),
       );
     }

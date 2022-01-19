@@ -8,3 +8,4 @@ export 'package:applibre/src/pages/menu_page.dart';
 export 'package:applibre/src/pages/premap_page.dart';
 export 'package:applibre/src/pages/profile_page.dart';
 export 'package:applibre/src/pages/root_page.dart';
+export 'package:applibre/src/pages/shopping_cart_page.dart';
