@@ -11,16 +11,17 @@ class DeliveryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-  return Scaffold(
+    return Scaffold(
       backgroundColor: const Color.fromRGBO(176, 76, 60, 1),
       body: ListView(
         children: [
           const SizedBox(height: 20),
-          Text('Tu pedido ha sido procesado con éxito,\n estamos en ello',
+          Text(
+            'Tu pedido ha sido procesado con éxito,\n estamos en ello',
             style: GoogleFonts.montserrat(
               color: Colors.white,
               fontSize: 15,
-              height: 2
+              height: 2,
             ),
             textAlign: TextAlign.center,
           ),
@@ -41,21 +42,30 @@ class DeliveryPage extends StatelessWidget {
         child: Center(
           child: AnimatedTextKit(
             animatedTexts: [
-              TypewriterAnimatedText('Procesando pedido...',
-                  textStyle: GoogleFonts.montserrat(
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white)),
-              TypewriterAnimatedText('Poniendo la carne a punto...',
-                  textStyle: GoogleFonts.montserrat(
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white)),
-              TypewriterAnimatedText('Llamándote amego...',
-                   textStyle: GoogleFonts.montserrat(
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white))
+              TypewriterAnimatedText(
+                'Procesando pedido...',
+                textStyle: GoogleFonts.montserrat(
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+              TypewriterAnimatedText(
+                'Poniendo la carne a punto...',
+                textStyle: GoogleFonts.montserrat(
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+              TypewriterAnimatedText(
+                'Llamándote amego...',
+                textStyle: GoogleFonts.montserrat(
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
             ],
           ),
         ),
@@ -70,13 +80,15 @@ class DeliveryPage extends StatelessWidget {
             cantidad.clear();
             Navigator.pushAndRemoveUntil(
               context,
-              MaterialPageRoute(builder: (context) => RootPage()),
-              (Route<dynamic> route) => false
+              MaterialPageRoute(
+                builder: (context) => RootPage(),
+              ),
+              (Route<dynamic> route) => false,
             );
           },
-          icon: const Icon(Icons.check)
+          icon: const Icon(Icons.check),
         ),
-      )
+      ),
     );
   }
 }

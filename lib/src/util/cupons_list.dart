@@ -22,9 +22,10 @@ List<Cupon> getListaCupones() {
       imageURL: 'assets/images/food/cupons/menu.png',
     ),
     Cupon(
-        name: 'Double crispy',
-        description: 'La doble crispy del nimbuu, siuuuu',
-        code: 'D3334',
-        imageURL: 'assets/images/food/cupons/doublecrispy.jfif')
+      name: 'Double crispy',
+      description: 'La doble crispy del nimbuu, siuuuu',
+      code: 'D3334',
+      imageURL: 'assets/images/food/cupons/doublecrispy.jfif',
+    )
   ];
 }

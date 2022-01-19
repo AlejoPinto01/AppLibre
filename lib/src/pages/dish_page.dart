@@ -41,7 +41,7 @@ class DishPage extends StatelessWidget {
                     color: Colors.black38,
                     spreadRadius: 2,
                     blurRadius: 2,
-                  )
+                  ),
                 ],
               ),
               child: Hero(

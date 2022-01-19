@@ -1,10 +1,12 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, prefer_const_constructors_in_immutables, prefer_final_fields
 
 import 'package:animations/animations.dart';
+import 'package:applibre/src/pages/pages.dart';
 import 'package:applibre/src/util/constants.dart';
 import 'package:applibre/src/util/pages_list.dart';
 import 'package:applibre/src/util/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class RootPage extends StatefulWidget {
   RootPage({Key? key}) : super(key: key);
@@ -31,10 +33,11 @@ class _RootPageState extends State<RootPage> {
       appBar: AppBar(
         backgroundColor: Colors.red[900],
         title: Center(
-            child: Image(
-          image: AssetImage('assets/logo.png'),
-          width: 50,
-        )),
+          child: Image(
+            image: AssetImage('assets/logo.png'),
+            width: 50,
+          ),
+        ),
       ),
       body: buildPageView(),
       floatingActionButton: OpenContainer(
@@ -65,34 +68,38 @@ class _RootPageState extends State<RootPage> {
         },
       ),
       bottomNavigationBar: BottomNavigationBar(
-      items: <BottomNavigationBarItem>[
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home),
-          label: 'Home',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.savings),
-          label: 'Cupones',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.fastfood),
-          label: 'Carta',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.add_location_alt),
-          label: 'Mapa',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.account_circle),
-          label: 'Perfil',
-        ),
-      ],
-      currentIndex: getIndex(),
-      selectedItemColor: Colors.green,
-      unselectedItemColor: Colors.white,
-      onTap: onItemTapped,
-      type: BottomNavigationBarType.fixed,
-      backgroundColor: Colors.red[900],
+        items: <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Inicio',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.savings),
+            label: 'Cupones',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.fastfood),
+            label: 'Menu',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.add_location_alt),
+            label: 'Mapa',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.account_circle),
+            label: 'Perfil',
+          ),
+        ],
+        currentIndex: getIndex(),
+        showSelectedLabels: false,
+        showUnselectedLabels: true,
+        selectedLabelStyle: GoogleFonts.montserrat(height: 0),
+        unselectedLabelStyle: GoogleFonts.montserrat(height: 1),
+        selectedIconTheme: IconThemeData(size: 35, color: Colors.white),
+        unselectedItemColor: Colors.white,
+        onTap: onItemTapped,
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: Colors.red[900],
       ),
     );
   }

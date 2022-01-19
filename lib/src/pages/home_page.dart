@@ -20,16 +20,7 @@ class _HomePageState extends State<HomePage> {
   AssetImage defaultimg = AssetImage("assets/noImageProfile.png");
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: ScrollConfiguration(
-        behavior: ScrollBehavior(),
-        child: GlowingOverscrollIndicator(
-          child: generatePage(),
-          color: Colors.red,
-          axisDirection: AxisDirection.down,
-        ),
-      ),
-    );
+    return generatePage();
   }
 
   Widget generatePage() {
@@ -47,7 +38,7 @@ class _HomePageState extends State<HomePage> {
           generarMiniMapa(),
           Container(
             height: 100,
-          )
+          ),
         ],
       ),
     );
@@ -65,15 +56,17 @@ class _HomePageState extends State<HomePage> {
             child: compruebaEstado()),
         color: Colors.red[900],
       ),
-      decoration:
-          BoxDecoration(borderRadius: BorderRadius.circular(40.0), boxShadow: [
-        BoxShadow(
-          color: Colors.black.withOpacity(0.3),
-          spreadRadius: 2,
-          blurRadius: 5,
-          offset: Offset(0, 3),
-        ),
-      ]),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(40.0),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.3),
+            spreadRadius: 2,
+            blurRadius: 5,
+            offset: Offset(0, 3),
+          ),
+        ],
+      ),
       height: compruebaAltura(),
     );
   }
@@ -154,26 +147,28 @@ class _HomePageState extends State<HomePage> {
       width: 300,
       height: 100,
       child: Center(
-        child: ListView(children: [
-          Center(
-            child: Text(
-              'Todavía no estás registrado?',
-              style: GoogleFonts.permanentMarker(
-                color: Colors.white,
-                fontSize: 25,
-                height: 3.0,
-                fontWeight: FontWeight.bold,
+        child: ListView(
+          children: [
+            Center(
+              child: Text(
+                'Todavía no estás registrado?',
+                style: GoogleFonts.permanentMarker(
+                  color: Colors.white,
+                  fontSize: 25,
+                  height: 3.0,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
-          ),
-          Center(
-            child: Text(
-              'Haz click aquí',
-              style: GoogleFonts.permanentMarker(
-                  color: Colors.white, fontSize: 15, height: 2.0),
+            Center(
+              child: Text(
+                'Haz click aquí',
+                style: GoogleFonts.permanentMarker(
+                    color: Colors.white, fontSize: 15, height: 2.0),
+              ),
             ),
-          )
-        ]),
+          ],
+        ),
       ),
     );
   }
@@ -200,14 +195,16 @@ class _HomePageState extends State<HomePage> {
         ),
         borderRadius: BorderRadius.circular(20.0),
       ),
-      decoration: BoxDecoration(boxShadow: [
-        BoxShadow(
-          color: Colors.black.withOpacity(0.3),
-          spreadRadius: 2,
-          blurRadius: 5,
-          offset: Offset(0, 3),
-        )
-      ]),
+      decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.3),
+            spreadRadius: 2,
+            blurRadius: 5,
+            offset: Offset(0, 3),
+          ),
+        ],
+      ),
     );
   }
 
@@ -243,48 +240,50 @@ class _HomePageState extends State<HomePage> {
       margin: EdgeInsets.all(5),
       width: double.infinity,
       height: 200,
-      child: Stack(children: [
-        ListView.separated(
-            itemCount: getListaCupones().length,
-            scrollDirection: Axis.horizontal,
-            separatorBuilder: (BuildContext context, int index) {
-              return SizedBox(
-                width: 10,
-              );
-            },
-            itemBuilder: (BuildContext context, int i) =>
-                generarCuponesSlider(i)),
-        Positioned(
+      child: Stack(
+        children: [
+          ListView.separated(
+              itemCount: getListaCupones().length,
+              scrollDirection: Axis.horizontal,
+              separatorBuilder: (BuildContext context, int index) {
+                return SizedBox(
+                  width: 10,
+                );
+              },
+              itemBuilder: (BuildContext context, int i) =>
+                  generarCuponesSlider(i)),
+          Positioned(
             left: 0,
             top: 0,
             bottom: 0,
             child: Container(
               width: 10,
               decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                      begin: Alignment.centerLeft,
-                      end: Alignment.centerRight,
-                      colors: [
-                    Colors.black.withOpacity(0.2),
-                    Colors.transparent
-                  ])),
-            )),
-        Positioned(
+                gradient: LinearGradient(
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                  colors: [Colors.black.withOpacity(0.2), Colors.transparent],
+                ),
+              ),
+            ),
+          ),
+          Positioned(
             right: 0,
             top: 0,
             bottom: 0,
             child: Container(
               width: 10,
               decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                      begin: Alignment.centerRight,
-                      end: Alignment.centerLeft,
-                      colors: [
-                    Colors.black.withOpacity(0.2),
-                    Colors.transparent
-                  ])),
-            ))
-      ]),
+                gradient: LinearGradient(
+                  begin: Alignment.centerRight,
+                  end: Alignment.centerLeft,
+                  colors: [Colors.black.withOpacity(0.2), Colors.transparent],
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -433,32 +432,31 @@ class _HomePageState extends State<HomePage> {
                 ),
                 SizedBox(
                   child: FadeInImage(
-                      placeholder: AssetImage('assets/cargando.gif'),
-                      image: NetworkImage(
-                          'https://i.gyazo.com/5996a0545ed8c997e70b0038cf5172a9.png'),
-                      fadeInDuration: Duration(milliseconds: 100),
-                      fit: BoxFit.fitHeight),
-                  height: 150,
-                )
-              ],
-            ),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.of(context).pop(),
-                child: Text(
-                  'Ok',
-                  style: GoogleFonts.montserrat(
-                    fontSize: 18,
+                    placeholder: AssetImage('assets/cargando.gif'),
+                    image: NetworkImage('https://i.gyazo.com/5996a0545ed8c997e70b0038cf5172a9.png'),
+                    fadeInDuration: Duration(milliseconds: 100),
+                    fit: BoxFit.fitHeight
                   ),
-                ),
-                style: TextButton.styleFrom(
-                  primary: Colors.red[900],
+                height: 150,
+              )
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Text(
+                'Ok',
+                style: GoogleFonts.montserrat(
+                  fontSize: 18,
                 ),
               ),
-            ],
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(30.0)
-          ),
+              style: TextButton.styleFrom(
+                primary: Colors.red[900],
+              ),
+            ),
+          ],
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(30.0)),
         );
       }
     );
@@ -491,31 +489,31 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           Align(
-            alignment: Alignment(0.95,0),
+            alignment: Alignment(0.95, 0),
             child: Container(
               margin: EdgeInsets.only(bottom: 10),
               width: 50,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(50),
-                color: Colors.red[900]
-              ),                
-                child: TextButton(
-                  child: Icon(Icons.map),
-                  style: TextButton.styleFrom(
-                    primary: Colors.white,
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      PageRouteBuilder(
-                        pageBuilder: (context, animation1, animation2) => MapsPage(),
-                        transitionDuration: Duration.zero,
-                      ),
-                    );
-                  },
+                  borderRadius: BorderRadius.circular(50),
+                  color: Colors.red[900]),
+              child: TextButton(
+                child: Icon(Icons.map),
+                style: TextButton.styleFrom(
+                  primary: Colors.white,
                 ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                      pageBuilder: (context, animation1, animation2) =>
+                          MapsPage(),
+                      transitionDuration: Duration.zero,
+                    ),
+                  );
+                },
               ),
             ),
+          ),
         ],
       ),
     );

@@ -1,4 +1,4 @@
-// ignore_for_file: unnecessary_new, prefer_collection_literals, use_key_in_widget_constructors, prefer_final_fields, unused_field, prefer_const_constructors, avoid_unnecessary_containers
+// ignore_for_file: unnecessary_new, prefer_collection_literals, use_key_in_widget_constructors, prefer_final_fields, unused_field, prefer_const_constructors, avoid_unnecessary_containers, unnecessary_const, avoid_print, avoid_types_as_parameter_names, non_constant_identifier_names, sized_box_for_whitespace
 
 import 'dart:collection';
 
