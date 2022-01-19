@@ -42,7 +42,7 @@ class _ProfilePageState extends State<ProfilePage> {
   bool read = true;
   bool edit = false;
   String? userName;
-  String? text;
+  String? _text;
   final _formKey = GlobalKey<FormState>();
   Future pickImage(ImageSource imageSource) async {
     try {
@@ -136,7 +136,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         return null;
                       },
                       onChanged: (text) => setState(() {
-                        text = text;
+                        _text = text;
                       }),
                     )),
                 IconButton(
@@ -149,7 +149,8 @@ class _ProfilePageState extends State<ProfilePage> {
                           read = false;
                         } else {
                           edit = false;
-                          userName = text;
+                          userName = _text;
+                          nombreUsuario = _text!;
                           icon = Icon(Icons.edit);
                           read = true;
                         }
