@@ -50,7 +50,6 @@ class CuponCard extends StatelessWidget {
         margin: EdgeInsets.all(10),
       ),
       onTap: () {
-        print('kebab');
         _mostarCupon(context);
       },
     );

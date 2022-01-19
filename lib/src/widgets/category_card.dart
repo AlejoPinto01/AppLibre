@@ -12,7 +12,6 @@ class CategoryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        print(category.name);
         final route = MaterialPageRoute(
           builder: (context) {
             return CategoryPage(category: category);
