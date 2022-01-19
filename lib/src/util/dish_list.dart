@@ -1,4 +1,4 @@
-import 'package:applibre/src/models/dish.dart';
+import 'package:applibre/src/models/models.dart';
 
 List<Dish> getListaDishes() {
   return [

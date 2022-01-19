@@ -1,5 +1,5 @@
 //ignore_for_file: unnecessary_new, prefer_const_constructors, prefer_const_constructors_in_immutables, use_key_in_widget_constructors, sized_box_for_whitespace
-import 'package:applibre/src/util/dish_list.dart';
+import 'package:applibre/src/util/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 

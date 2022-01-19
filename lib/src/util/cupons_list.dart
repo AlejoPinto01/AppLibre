@@ -1,4 +1,4 @@
-import 'package:applibre/src/models/cupon.dart';
+import 'package:applibre/src/models/models.dart';
 
 List<Cupon> getListaCupones() {
   return [

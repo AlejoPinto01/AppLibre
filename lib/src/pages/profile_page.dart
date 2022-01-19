@@ -3,12 +3,12 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:applibre/src/models/user.dart';
-import 'package:applibre/src/util/data.dart';
-import 'package:applibre/src/widgets/defaultImageWidget.dart';
-import 'package:applibre/src/widgets/imageWidget.dart';
+import 'package:applibre/src/models/models.dart';
+import 'package:applibre/src/util/utils.dart';
+import 'package:applibre/src/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:path_provider/path_provider.dart';
@@ -37,7 +37,7 @@ class _ProfilePageState extends State<ProfilePage> {
   bool read = true;
   bool edit = false;
   String? userName;
-  String? text;
+  String? _text;
   final _formKey = GlobalKey<FormState>();
   Future pickImage(ImageSource imageSource) async {
     try {
@@ -73,13 +73,11 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.amberAccent,
-      appBar: AppBar(
-        title: Text('Tu perfil'),
-      ),
+      backgroundColor: Colors.yellow[100],
       body: Container(
         padding: EdgeInsets.all(32),
         child: ListView(
+          shrinkWrap: true,
           //crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: 30),
@@ -133,7 +131,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         return null;
                       },
                       onChanged: (text) => setState(() {
-                        text = text;
+                        _text = text;
                       }),
                     )),
                 IconButton(
@@ -146,7 +144,8 @@ class _ProfilePageState extends State<ProfilePage> {
                           read = false;
                         } else {
                           edit = false;
-                          userName = text;
+                          userName = _text;
+                          nombreUsuario = _text!;
                           icon = Icon(Icons.edit);
                           read = true;
                         }
@@ -178,15 +177,23 @@ class _ProfilePageState extends State<ProfilePage> {
 
   Widget _logOut() {
     return ElevatedButton(
-      child: Text("Log out"),
+      child: Text("Log out", 
+        style:  GoogleFonts.montserrat(
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+          fontSize: 17
+        ),
+      ),
       style: ElevatedButton.styleFrom(
-          minimumSize: Size.fromHeight(40),
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10.0),
-              side: BorderSide(color: Colors.black)),
-          padding: EdgeInsets.all(10.0),
-          primary: Colors.white,
-          onPrimary: Colors.black),
+        minimumSize: Size.fromHeight(40),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        padding: EdgeInsets.all(10.0),
+        primary: Colors.red[900],
+        shadowColor: Colors.pink[700],
+        elevation: 15
+      ),
       onPressed: () {
         setState(() {
           setImage(null);

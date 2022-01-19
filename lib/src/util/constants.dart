@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:applibre/src/models/user.dart';
+import 'package:applibre/src/models/models.dart';
 import 'package:flutter/material.dart';
 
 int index = 0;
@@ -8,6 +9,7 @@ bool registre = false;
 User? newUser;
 String nombreUsuario = '';
 File? image;
+double appBarHeight = AppBar().preferredSize.height;
 
 int getIndex() {
   return index;
