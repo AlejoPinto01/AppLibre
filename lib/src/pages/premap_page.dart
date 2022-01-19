@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, sized_box_for_whitespace, avoid_unnecessary_containers
 
 import 'package:applibre/src/pages/pages.dart';
 import 'package:flutter/material.dart';

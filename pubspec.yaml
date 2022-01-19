@@ -37,6 +37,8 @@ dependencies:
   google_fonts: ^2.2.0
   image_picker: ^0.8.4+4
   google_maps_flutter: ^2.1.1
+  animations: ^2.0.2
+  animated_text_kit: ^4.2.1
   font_awesome_flutter: ^9.2.0
   
 dev_dependencies:

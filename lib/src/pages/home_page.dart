@@ -1,9 +1,10 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, prefer_const_constructors_in_immutables, avoid_unnecessary_containers, unnecessary_brace_in_string_interps
 import 'dart:io';
+import 'maps_page.dart';
 
 import 'package:applibre/src/models/models.dart';
-import 'package:applibre/src/pages/pages.dart';
 import 'package:applibre/src/util/utils.dart';
+import 'package:applibre/src/pages/pages.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
 
@@ -23,9 +24,9 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget generatePage() {
-    return Scaffold(
-      backgroundColor: Colors.yellow[100],
-      body: ListView(
+    return Container(
+      color: Colors.yellow[100],
+      child: ListView(
         children: [
           generarTarjetaPerfil(),
           Divider(),
@@ -37,25 +38,8 @@ class _HomePageState extends State<HomePage> {
           generarMiniMapa(),
           Container(
             height: 100,
-          )
-        ],
-      ),
-    );
-  }
-
-  Widget generarCabecera() {
-    //Mejor una imagen con un logo
-    return Center(
-      child: Text(
-        'Kebab4U',
-        style: GoogleFonts.oswald(
-          textStyle: TextStyle(
-            color: Colors.brown[700],
-            fontSize: 25,
-            height: 1.0,
-            fontWeight: FontWeight.bold,
           ),
-        ),
+        ],
       ),
     );
   }
@@ -74,6 +58,14 @@ class _HomePageState extends State<HomePage> {
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(40.0),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.3),
+            spreadRadius: 2,
+            blurRadius: 5,
+            offset: Offset(0, 3),
+          ),
+        ],
       ),
       height: compruebaAltura(),
     );
@@ -105,11 +97,9 @@ class _HomePageState extends State<HomePage> {
             Text(
               'Hola, ${nombreUsuario}',
               style: GoogleFonts.permanentMarker(
-                textStyle: TextStyle(
-                  color: Colors.white,
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold,
-                ),
+                color: Colors.white,
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
               ),
             ),
             getImage() != null ? _imgPerfil() : _imgDefaultPerfil(),
@@ -157,12 +147,12 @@ class _HomePageState extends State<HomePage> {
       width: 300,
       height: 100,
       child: Center(
-        child: ListView(children: [
-          Center(
-            child: Text(
-              'Todavía no estás registrado?',
-              style: GoogleFonts.permanentMarker(
-                textStyle: TextStyle(
+        child: ListView(
+          children: [
+            Center(
+              child: Text(
+                'Todavía no estás registrado?',
+                style: GoogleFonts.permanentMarker(
                   color: Colors.white,
                   fontSize: 25,
                   height: 3.0,
@@ -170,16 +160,15 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-          ),
-          Center(
-            child: Text(
-              'Haz click aquí',
-              style: GoogleFonts.permanentMarker(
-                  textStyle: TextStyle(
-                      color: Colors.white, fontSize: 15, height: 2.0)),
+            Center(
+              child: Text(
+                'Haz click aquí',
+                style: GoogleFonts.permanentMarker(
+                    color: Colors.white, fontSize: 15, height: 2.0),
+              ),
             ),
-          )
-        ]),
+          ],
+        ),
       ),
     );
   }
@@ -206,6 +195,16 @@ class _HomePageState extends State<HomePage> {
         ),
         borderRadius: BorderRadius.circular(20.0),
       ),
+      decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.3),
+            spreadRadius: 2,
+            blurRadius: 5,
+            offset: Offset(0, 3),
+          ),
+        ],
+      ),
     );
   }
 
@@ -214,11 +213,9 @@ class _HomePageState extends State<HomePage> {
       title: Text(
         'Cupones',
         style: GoogleFonts.montserrat(
-          textStyle: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: Colors.brown[800]),
-        ),
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: Colors.brown[800]),
       ),
       trailing: TextButton(
         onPressed: () {
@@ -227,39 +224,74 @@ class _HomePageState extends State<HomePage> {
         },
         style: TextButton.styleFrom(
           primary: Colors.red[900],
-          textStyle: GoogleFonts.montserrat(
-            textStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-          ),
+          textStyle:
+              GoogleFonts.montserrat(fontWeight: FontWeight.bold, fontSize: 15),
         ),
-        child: Text('Ver todo'),
+        child: Text(
+          'Ver todo',
+          style: GoogleFonts.montserrat(fontWeight: FontWeight.bold),
+        ),
       ),
     );
   }
 
   Widget generarCupones() {
     return Container(
-      margin: EdgeInsets.only(bottom: 30),
+      margin: EdgeInsets.all(5),
       width: double.infinity,
       height: 200,
-      child: ListView.separated(
-          itemCount: getListaCupones().length,
-          scrollDirection: Axis.horizontal,
-          separatorBuilder: (BuildContext context, int index) {
-            return SizedBox(
-              width: 5,
-            );
-          },
-          itemBuilder: (BuildContext context, int i) =>
-              generarCuponesSlider(i)),
+      child: Stack(
+        children: [
+          ListView.separated(
+              itemCount: getListaCupones().length,
+              scrollDirection: Axis.horizontal,
+              separatorBuilder: (BuildContext context, int index) {
+                return SizedBox(
+                  width: 10,
+                );
+              },
+              itemBuilder: (BuildContext context, int i) =>
+                  generarCuponesSlider(i)),
+          Positioned(
+            left: 0,
+            top: 0,
+            bottom: 0,
+            child: Container(
+              width: 10,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                  colors: [Colors.black.withOpacity(0.2), Colors.transparent],
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            right: 0,
+            top: 0,
+            bottom: 0,
+            child: Container(
+              width: 10,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.centerRight,
+                  end: Alignment.centerLeft,
+                  colors: [Colors.black.withOpacity(0.2), Colors.transparent],
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 
   Widget generarCuponesSlider(int index) {
     final targeta = InkWell(
-      child: Container(
+      child: SizedBox(
         width: 110,
         height: 100,
-        // color: Colors.green,
         child: Column(
           children: [
             FadeInImage(
@@ -267,6 +299,7 @@ class _HomePageState extends State<HomePage> {
               image: AssetImage(getListaCupones()[index].imageURL),
               fadeInDuration: Duration(milliseconds: 100),
               height: 150,
+              width: 150,
               fit: BoxFit.cover,
             ),
             SizedBox(
@@ -276,8 +309,8 @@ class _HomePageState extends State<HomePage> {
               child: Text(
                 getListaCupones()[index].name,
                 style: GoogleFonts.montserrat(
-                  textStyle:
-                      TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                  fontWeight: FontWeight.bold,
+                  fontSize: 13,
                 ),
               ),
             ),
@@ -290,12 +323,13 @@ class _HomePageState extends State<HomePage> {
     );
     return Container(
       margin: EdgeInsets.only(bottom: 15),
+      width: 140,
       child: ClipRRect(
         child: targeta,
-        borderRadius: BorderRadius.circular(30.0),
+        borderRadius: BorderRadius.circular(20.0),
       ),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(30.0),
+        borderRadius: BorderRadius.circular(20.0),
         boxShadow: <BoxShadow>[
           BoxShadow(
               color: Colors.black26,
@@ -319,16 +353,16 @@ class _HomePageState extends State<HomePage> {
           ),
           title: Text(
             cupon.name,
-            style: TextStyle(fontSize: 20),
+            style: GoogleFonts.montserrat(fontSize: 20),
           ),
           content: FittedBox(
             child: Column(
               children: [
-                Container(
+                SizedBox(
                   width: 300,
                   child: Text(
                     cupon.description,
-                    style: TextStyle(fontSize: 20),
+                    style: GoogleFonts.montserrat(fontSize: 20),
                   ),
                 ),
                 SizedBox(height: 15),
@@ -349,7 +383,7 @@ class _HomePageState extends State<HomePage> {
                   child: Text(
                     cupon.code,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: GoogleFonts.montserrat(
                       fontSize: 60,
                       fontWeight: FontWeight.bold,
                     ),
@@ -358,6 +392,18 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
           ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Text(
+                'Ok',
+                style: GoogleFonts.montserrat(fontSize: 20),
+              ),
+              style: TextButton.styleFrom(
+                primary: Colors.red[900],
+              ),
+            ),
+          ],
         );
       },
     );
@@ -369,39 +415,51 @@ class _HomePageState extends State<HomePage> {
         barrierDismissible: true,
         builder: (context) {
           return AlertDialog(
-            title: Text('Kebab Tot Bo'),
+            title: Text(
+              'Kebab4U',
+              style: GoogleFonts.montserrat(fontWeight: FontWeight.bold),
+            ),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text('Carrer de Ponent, 1, 07300 Inca, Illes Balears'),
+                Text(
+                  'Carrer de Ponent, 3, 07300 Inca, Illes Balears',
+                  style: GoogleFonts.montserrat(),
+                ),
                 Divider(),
                 SizedBox(
                   height: 20,
                 ),
-                Container(
+                SizedBox(
                   child: FadeInImage(
-                      placeholder: AssetImage('assets/cargando.gif'),
-                      image: NetworkImage(
-                          'https://i.gyazo.com/5996a0545ed8c997e70b0038cf5172a9.png'),
-                      fadeInDuration: Duration(milliseconds: 100),
-                      fit: BoxFit.fitHeight),
-                  height: 150,
-                )
-              ],
-            ),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.of(context).pop(),
-                child: Text('Ok'),
-                style: TextButton.styleFrom(
-                  primary: Colors.red[900],
+                    placeholder: AssetImage('assets/cargando.gif'),
+                    image: NetworkImage('https://i.gyazo.com/5996a0545ed8c997e70b0038cf5172a9.png'),
+                    fadeInDuration: Duration(milliseconds: 100),
+                    fit: BoxFit.fitHeight
+                  ),
+                height: 150,
+              )
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Text(
+                'Ok',
+                style: GoogleFonts.montserrat(
+                  fontSize: 18,
                 ),
               ),
-            ],
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30.0)),
-          );
-        });
+              style: TextButton.styleFrom(
+                primary: Colors.red[900],
+              ),
+            ),
+          ],
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(30.0)),
+        );
+      }
+    );
   }
 
   Widget generarMiniMapa() {
@@ -423,29 +481,39 @@ class _HomePageState extends State<HomePage> {
           ),
           SizedBox(
             child: Text(
-              '\nNo sabes como llegar a nosotros?\n Tranquilo aquí tienes un mapa',
+              '\nNo sabes como llegar a nosotros?\n Tranquilo, aquí tienes un mapa',
               style: GoogleFonts.montserrat(
-                  textStyle: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 15,
-              )),
+              ),
             ),
           ),
           Align(
-            alignment: Alignment(0.9, -1),
-            heightFactor: 0.5,
-            child: FloatingActionButton(
-              backgroundColor: Colors.red[900],
-              splashColor: Colors.green[900],
-              onPressed: () {
-                final route = MaterialPageRoute(builder: (context) {
-                  return MapsPage();
-                });
-                Navigator.push(context, route);
-              },
-              child: Icon(Icons.map),
+            alignment: Alignment(0.95, 0),
+            child: Container(
+              margin: EdgeInsets.only(bottom: 10),
+              width: 50,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(50),
+                  color: Colors.red[900]),
+              child: TextButton(
+                child: Icon(Icons.map),
+                style: TextButton.styleFrom(
+                  primary: Colors.white,
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                      pageBuilder: (context, animation1, animation2) =>
+                          MapsPage(),
+                      transitionDuration: Duration.zero,
+                    ),
+                  );
+                },
+              ),
             ),
-          )
+          ),
         ],
       ),
     );

@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, prefer_const_constructors_in_immutables, avoid_print
 
 import 'dart:async';
 import 'dart:io';
@@ -29,11 +29,6 @@ Future<File> getImageFileFromAssets(String path) async {
       .asUint8List(byteData.offsetInBytes, byteData.lengthInBytes));
 
   return file;
-}
-
-_defaultImage() async {
-  File f = await getImageFileFromAssets('noImageProgile.png');
-  return f;
 }
 
 class _ProfilePageState extends State<ProfilePage> {

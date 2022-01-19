@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable, use_key_in_widget_constructors, prefer_const_constructors
+
 import 'package:applibre/src/models/models.dart';
 import 'package:applibre/src/pages/pages.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +14,6 @@ class CategoryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        print(category.name);
         final route = MaterialPageRoute(
           builder: (context) {
             return CategoryPage(category: category);
