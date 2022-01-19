@@ -1,6 +1,5 @@
-import 'package:applibre/src/pages/home.dart';
-import 'package:applibre/src/pages/root_page.dart';
-import 'package:applibre/src/util/data.dart';
+import 'package:applibre/src/pages/pages.dart';
+import 'package:applibre/src/util/utils.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());

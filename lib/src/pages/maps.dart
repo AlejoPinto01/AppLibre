@@ -243,7 +243,7 @@ class MapsPageState extends State<MapsPage> {
         SizedBox(height: 5.0),
         Container(
           child: Text(
-            "Hindu \u00B7 \u0024\u0024",
+            "Gran Via Colom, 3, 07300 Inca\nIlles Balears",
             style: TextStyle(
               color: Colors.black54,
               fontSize: 18.0,

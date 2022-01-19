@@ -1,8 +1,6 @@
 import 'dart:io';
 
-import 'package:applibre/src/models/cupon.dart';
-import 'package:applibre/src/models/dish.dart';
-import 'package:applibre/src/models/user.dart';
+import 'package:applibre/src/models/models.dart';
 import 'package:flutter/material.dart';
 
 int index = 0;

@@ -1,6 +1,6 @@
-import 'package:applibre/src/models/cupon.dart';
-import 'package:applibre/src/util/data.dart';
-import 'package:applibre/src/widgets/cuponcard.dart';
+import 'package:applibre/src/models/models.dart';
+import 'package:applibre/src/util/utils.dart';
+import 'package:applibre/src/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
 class CuponsPage extends StatelessWidget {

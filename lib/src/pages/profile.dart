@@ -3,11 +3,9 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:applibre/src/models/user.dart';
-import 'package:applibre/src/pages/root_page.dart';
-import 'package:applibre/src/util/data.dart';
-import 'package:applibre/src/widgets/defaultImageWidget.dart';
-import 'package:applibre/src/widgets/imageWidget.dart';
+import 'package:applibre/src/models/models.dart';
+import 'package:applibre/src/util/utils.dart';
+import 'package:applibre/src/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -44,7 +42,7 @@ class _ProfilePageState extends State<ProfilePage> {
   bool read = true;
   bool edit = false;
   String? userName;
-  String? text;
+  String? _text;
   final _formKey = GlobalKey<FormState>();
   Future pickImage(ImageSource imageSource) async {
     try {
@@ -138,7 +136,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         return null;
                       },
                       onChanged: (text) => setState(() {
-                        text = text;
+                        _text = text;
                       }),
                     )),
                 IconButton(
@@ -151,7 +149,8 @@ class _ProfilePageState extends State<ProfilePage> {
                           read = false;
                         } else {
                           edit = false;
-                          userName = text;
+                          userName = _text;
+                          nombreUsuario = _text!;
                           icon = Icon(Icons.edit);
                           read = true;
                         }

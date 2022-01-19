@@ -1,5 +1,5 @@
-import 'package:applibre/src/models/dish.dart';
-import 'package:applibre/src/pages/dish_page.dart';
+import 'package:applibre/src/models/models.dart';
+import 'package:applibre/src/pages/pages.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
