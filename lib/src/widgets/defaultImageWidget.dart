@@ -112,11 +112,11 @@ class DefaultImageWidget extends StatelessWidget {
     required double all,
     required Color color,
   }) =>
-      ClipOval(
-        child: Container(
-          padding: EdgeInsets.all(all),
-          color: color,
-          child: child,
-        ),
-      );
+  ClipOval(
+    child: Container(
+      padding: EdgeInsets.all(all),
+      color: color,
+      child: child,
+    ),
+  );
 }

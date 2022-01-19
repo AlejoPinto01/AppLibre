@@ -78,24 +78,21 @@ class _ProfilePageState extends State<ProfilePage> {
         padding: EdgeInsets.all(32),
         child: ListView(
           shrinkWrap: true,
-          //crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: 30),
             image != null
-                ? ImageWidget(
-                    image: image!,
-                    onClicked: (source) => pickImage(source),
-                  )
-                : DefaultImageWidget(
-                    onClicked: (source) => pickImage(source),
-                  ),
+              ? ImageWidget(
+                  image: image!,
+                  onClicked: (source) => pickImage(source),
+                )
+              : DefaultImageWidget(
+                  onClicked: (source) => pickImage(source),
+                ),
             SizedBox(height: 30),
             _buildName(),
             SizedBox(height: 25),
             _buildEmail(),
-            SizedBox(
-              height: 50,
-            ),
+            SizedBox(height: 50,),
             _logOut()
           ],
         ),
@@ -105,74 +102,79 @@ class _ProfilePageState extends State<ProfilePage> {
 
   _buildName() {
     return Form(
-        key: _formKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "Nombre",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
-            ),
-            Row(
-              children: [
-                Expanded(
-                    flex: 8,
-                    child: TextFormField(
-                      controller: controller,
-                      readOnly: read,
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: (text) {
-                        if (text == null || text.isEmpty) {
-                          return 'El usuario no puede estar vacío';
-                        }
-                        if (text.length < 4) {
-                          return 'El nombre de usuario es muy corto';
-                        }
-                        return null;
-                      },
-                      onChanged: (text) => setState(() {
-                        _text = text;
-                      }),
-                    )),
-                IconButton(
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      setState(() {
-                        if (!edit) {
-                          edit = true;
-                          icon = Icon(Icons.check);
-                          read = false;
-                        } else {
-                          edit = false;
-                          userName = _text;
-                          nombreUsuario = _text!;
-                          icon = Icon(Icons.edit);
-                          read = true;
-                        }
-                      });
-                    } else {
-                      null;
+      key: _formKey,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "Nombre",
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+          ),
+          Row(
+            children: [
+              Expanded(
+                flex: 8,
+                child: TextFormField(
+                  controller: controller,
+                  readOnly: read,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  validator: (text) {
+                    if (text == null || text.isEmpty) {
+                      return 'El usuario no puede estar vacío';
                     }
+                    if (text.length < 4) {
+                      return 'El nombre de usuario es muy corto';
+                    }
+                    return null;
                   },
-                  icon: icon,
-                )
-              ],
-            )
-          ],
-        ));
+                  onChanged: (text) => setState(() {
+                    _text = text;
+                  }),
+                ),
+              ),
+              IconButton(
+                onPressed: () {
+                  if (_formKey.currentState!.validate()) {
+                    setState(() {
+                      if (!edit) {
+                        edit = true;
+                        icon = Icon(Icons.check);
+                        read = false;
+                      } else {
+                        edit = false;
+                        userName = _text;
+                        nombreUsuario = _text!;
+                        icon = Icon(Icons.edit);
+                        read = true;
+                      }
+                    });
+                  } else {
+                    null;
+                  }
+                },
+                icon: icon,
+              )
+            ],
+          )
+        ],
+      )
+    );
   }
 
   _buildEmail() {
-    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Text(
-        "Correo",
-        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
-      ),
-      SizedBox(
-        height: 5,
-      ),
-      Text(widget.user!.email)
-    ]);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start, 
+      children: [
+        Text(
+          "Correo",
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+        ),
+        SizedBox(
+          height: 5,
+        ),
+        Text(widget.user!.email)
+      ]
+    );
   }
 
   Widget _logOut() {
