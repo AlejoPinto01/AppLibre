@@ -1,19 +1,14 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, prefer_const_constructors_in_immutables, avoid_unnecessary_containers, unnecessary_brace_in_string_interps
 import 'dart:io';
+import 'maps.dart';
 
 import 'package:applibre/src/models/cupon.dart';
-import 'package:applibre/src/pages/login.dart';
-import 'package:applibre/src/pages/profile.dart';
-import 'package:applibre/src/pages/root_page.dart';
-import 'package:applibre/src/util/pages.dart';
-import 'package:applibre/src/widgets/imageWidget.dart';
+import 'package:applibre/src/util/cupons_list.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:applibre/src/util/data.dart';
 import 'package:flutter/material.dart';
 
-import 'cupons.dart';
-import 'maps.dart';
-import 'menu.dart';
+
 
 class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
@@ -27,20 +22,22 @@ class _HomePageState extends State<HomePage> {
   AssetImage defaultimg = AssetImage("assets/noImageProfile.png");
   @override
   Widget build(BuildContext context) {
-    return ScrollConfiguration(
-      behavior: ScrollBehavior(),
-      child: GlowingOverscrollIndicator(
-        child: generatePage(),
-        color: Colors.red,
-        axisDirection: AxisDirection.down,
+    return Container(
+      child: ScrollConfiguration(
+        behavior: ScrollBehavior(),
+        child: GlowingOverscrollIndicator(
+          child: generatePage(),
+          color: Colors.red,
+          axisDirection: AxisDirection.down,
+        ),
       ),
     );
   }
 
   Widget generatePage() {
-    return Scaffold(
-      backgroundColor: Colors.yellow[100],
-      body: ListView(
+    return Container(
+      color: Colors.yellow[100],
+      child: ListView(
         children: [
           generarTarjetaPerfil(),
           Divider(),
@@ -71,16 +68,14 @@ class _HomePageState extends State<HomePage> {
         color: Colors.red[900],
       ),
       decoration:
-          BoxDecoration(borderRadius: BorderRadius.circular(40.0), 
-          boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.3),
-            spreadRadius: 2,
-            blurRadius: 5,
-            offset: Offset(0, 3),
-          ),
-        ]
-      ),
+          BoxDecoration(borderRadius: BorderRadius.circular(40.0), boxShadow: [
+        BoxShadow(
+          color: Colors.black.withOpacity(0.3),
+          spreadRadius: 2,
+          blurRadius: 5,
+          offset: Offset(0, 3),
+        ),
+      ]),
       height: compruebaAltura(),
     );
   }
@@ -207,16 +202,14 @@ class _HomePageState extends State<HomePage> {
         ),
         borderRadius: BorderRadius.circular(20.0),
       ),
-      decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.3),
-            spreadRadius: 2,
-            blurRadius: 5,
-            offset: Offset(0, 3),
-          )
-        ]
-      ),
+      decoration: BoxDecoration(boxShadow: [
+        BoxShadow(
+          color: Colors.black.withOpacity(0.3),
+          spreadRadius: 2,
+          blurRadius: 5,
+          offset: Offset(0, 3),
+        )
+      ]),
     );
   }
 
@@ -225,17 +218,9 @@ class _HomePageState extends State<HomePage> {
       title: Text(
         'Cupones',
         style: GoogleFonts.montserrat(
-<<<<<<< HEAD
             fontSize: 20,
             fontWeight: FontWeight.bold,
             color: Colors.brown[800]),
-=======
-          textStyle: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: Colors.brown[800]),
-        ),
->>>>>>> a56ad9658b73037ef82efe2aa27e8ca3b9f97864
       ),
       trailing: TextButton(
         onPressed: () {
@@ -244,18 +229,12 @@ class _HomePageState extends State<HomePage> {
         },
         style: TextButton.styleFrom(
           primary: Colors.red[900],
-<<<<<<< HEAD
           textStyle:
               GoogleFonts.montserrat(fontWeight: FontWeight.bold, fontSize: 15),
         ),
         child: Text(
           'Ver todo',
           style: GoogleFonts.montserrat(fontWeight: FontWeight.bold),
-=======
-          textStyle: GoogleFonts.montserrat(
-            textStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-          ),
->>>>>>> a56ad9658b73037ef82efe2aa27e8ca3b9f97864
         ),
       ),
     );
@@ -288,7 +267,7 @@ class _HomePageState extends State<HomePage> {
                       begin: Alignment.centerLeft,
                       end: Alignment.centerRight,
                       colors: [
-                    Colors.black.withOpacity(0.15),
+                    Colors.black.withOpacity(0.2),
                     Colors.transparent
                   ])),
             )),
@@ -303,7 +282,7 @@ class _HomePageState extends State<HomePage> {
                       begin: Alignment.centerRight,
                       end: Alignment.centerLeft,
                       colors: [
-                    Colors.black.withOpacity(0.15),
+                    Colors.black.withOpacity(0.2),
                     Colors.transparent
                   ])),
             ))
@@ -313,10 +292,9 @@ class _HomePageState extends State<HomePage> {
 
   Widget generarCuponesSlider(int index) {
     final targeta = InkWell(
-      child: Container(
+      child: SizedBox(
         width: 110,
         height: 100,
-        // color: Colors.green,
         child: Column(
           children: [
             FadeInImage(
@@ -324,6 +302,7 @@ class _HomePageState extends State<HomePage> {
               image: AssetImage(getListaCupones()[index].imageURL),
               fadeInDuration: Duration(milliseconds: 100),
               height: 150,
+              width: 150,
               fit: BoxFit.cover,
             ),
             SizedBox(
@@ -333,13 +312,8 @@ class _HomePageState extends State<HomePage> {
               child: Text(
                 getListaCupones()[index].name,
                 style: GoogleFonts.montserrat(
-<<<<<<< HEAD
                   fontWeight: FontWeight.bold,
                   fontSize: 13,
-=======
-                  textStyle:
-                      TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
->>>>>>> a56ad9658b73037ef82efe2aa27e8ca3b9f97864
                 ),
               ),
             ),
@@ -387,7 +361,7 @@ class _HomePageState extends State<HomePage> {
           content: FittedBox(
             child: Column(
               children: [
-                Container(
+                SizedBox(
                   width: 300,
                   child: Text(
                     cupon.description,
@@ -459,7 +433,7 @@ class _HomePageState extends State<HomePage> {
                 SizedBox(
                   height: 20,
                 ),
-                Container(
+                SizedBox(
                   child: FadeInImage(
                       placeholder: AssetImage('assets/cargando.gif'),
                       image: NetworkImage(
@@ -485,9 +459,11 @@ class _HomePageState extends State<HomePage> {
               ),
             ],
             shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30.0)),
-          );
-        });
+              borderRadius: BorderRadius.circular(30.0)
+          ),
+        );
+      }
+    );
   }
 
   Widget generarMiniMapa() {
@@ -509,37 +485,39 @@ class _HomePageState extends State<HomePage> {
           ),
           SizedBox(
             child: Text(
-<<<<<<< HEAD
               '\nNo sabes como llegar a nosotros?\n Tranquilo, aquí tienes un mapa',
               style: GoogleFonts.montserrat(
                 fontWeight: FontWeight.bold,
                 fontSize: 15,
               ),
-=======
-              '\nNo sabes como llegar a nosotros?\n Tranquilo aquí tienes un mapa',
-              style: GoogleFonts.montserrat(
-                  textStyle: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 15,
-              )),
->>>>>>> a56ad9658b73037ef82efe2aa27e8ca3b9f97864
             ),
           ),
           Align(
-            alignment: Alignment(0.9, -1),
-            heightFactor: 0.5,
-            child: FloatingActionButton(
-              backgroundColor: Colors.red[900],
-              splashColor: Colors.green[900],
-              onPressed: () {
-                final route = MaterialPageRoute(builder: (context) {
-                  return MapsPage();
-                });
-                Navigator.push(context, route);
-              },
-              child: Icon(Icons.map),
+            alignment: Alignment(0.95,0),
+            child: Container(
+              margin: EdgeInsets.only(bottom: 10),
+              width: 50,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(50),
+                color: Colors.red[900]
+              ),                
+                child: TextButton(
+                  child: Icon(Icons.map),
+                  style: TextButton.styleFrom(
+                    primary: Colors.white,
+                  ),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      PageRouteBuilder(
+                        pageBuilder: (context, animation1, animation2) => MapsPage(),
+                        transitionDuration: Duration.zero,
+                      ),
+                    );
+                  },
+                ),
+              ),
             ),
-          )
         ],
       ),
     );

@@ -1,4 +1,7 @@
+// ignore_for_file: must_be_immutable, use_key_in_widget_constructors, prefer_const_constructors, prefer_const_literals_to_create_immutables
+
 import 'package:applibre/src/models/dish.dart';
+import 'package:applibre/src/util/dish_list.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -54,10 +57,25 @@ class DishPage extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add_shopping_cart),
-        onPressed: () {},
+        onPressed: () {
+          calcularPedido(dish);
+        },
         backgroundColor: Colors.red[900],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
+  }
+
+  void calcularPedido(Dish dish) {
+    if(cantidad.containsKey(dish.name)) {
+      int actual = cantidad[dish.name]!;
+      cantidad[dish.name] = (actual + 1);
+      if(cantidad[dish.name] == 1) {
+        addPedido(dish);
+      }
+    } else {
+      cantidad[dish.name] = 1;
+      addPedido(dish);
+    }
   }
 }

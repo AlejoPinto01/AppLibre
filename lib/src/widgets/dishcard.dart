@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable, use_key_in_widget_constructors, sized_box_for_whitespace, prefer_const_constructors
+
 import 'package:applibre/src/models/dish.dart';
 import 'package:applibre/src/pages/dish_page.dart';
 import 'package:flutter/material.dart';

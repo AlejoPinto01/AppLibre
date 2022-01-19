@@ -1,8 +1,5 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, prefer_const_constructors_in_immutables, unnecessary_new, prefer_adjacent_string_concatenation
 
-import 'package:applibre/src/models/user.dart';
-import 'package:applibre/src/pages/profile.dart';
-import 'package:applibre/src/pages/root_page.dart';
 import 'package:applibre/src/util/data.dart';
 import 'package:flutter/material.dart';
 
