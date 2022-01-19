@@ -1,5 +1,5 @@
-import 'package:applibre/src/models/category.dart';
-import 'package:applibre/src/pages/category_page.dart';
+import 'package:applibre/src/models/models.dart';
+import 'package:applibre/src/pages/pages.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 

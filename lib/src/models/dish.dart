@@ -1,5 +1,3 @@
-import 'package:applibre/src/models/category.dart';
-
 class Dish {
   String name;
   String description;

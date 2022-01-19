@@ -1,19 +1,11 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 import 'dart:io';
 
-import 'package:applibre/src/models/cupon.dart';
-import 'package:applibre/src/pages/login.dart';
-import 'package:applibre/src/pages/profile.dart';
-import 'package:applibre/src/pages/root_page.dart';
-import 'package:applibre/src/util/pages.dart';
-import 'package:applibre/src/widgets/imageWidget.dart';
+import 'package:applibre/src/models/models.dart';
+import 'package:applibre/src/pages/pages.dart';
+import 'package:applibre/src/util/utils.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:applibre/src/util/data.dart';
 import 'package:flutter/material.dart';
-
-import 'cupons.dart';
-import 'maps.dart';
-import 'menu.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);

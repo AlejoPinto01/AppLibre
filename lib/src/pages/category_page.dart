@@ -1,7 +1,6 @@
-import 'package:applibre/src/models/category.dart';
-import 'package:applibre/src/models/dish.dart';
-import 'package:applibre/src/util/data.dart';
-import 'package:applibre/src/widgets/dishcard.dart';
+import 'package:applibre/src/models/models.dart';
+import 'package:applibre/src/util/utils.dart';
+import 'package:applibre/src/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 

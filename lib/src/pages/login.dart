@@ -1,9 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:applibre/src/models/user.dart';
-import 'package:applibre/src/pages/profile.dart';
-import 'package:applibre/src/pages/root_page.dart';
-import 'package:applibre/src/util/data.dart';
+import 'package:applibre/src/util/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
