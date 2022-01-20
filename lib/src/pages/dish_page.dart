@@ -2,10 +2,13 @@
 
 import 'dart:async';
 
+import 'package:animations/animations.dart';
 import 'package:applibre/src/models/dish.dart';
 import 'package:applibre/src/util/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import 'pages.dart';
 
 class DishPage extends StatefulWidget {
   Dish dish;
@@ -23,6 +26,7 @@ class _DishPageState extends State<DishPage> {
   double _height = 250;
   double _radius = 20;
   bool _visible = false;
+  bool _buttonVisible = false;
   Timer? _timer;
 
   TextStyle _style = GoogleFonts.montserrat(
@@ -46,88 +50,49 @@ class _DishPageState extends State<DishPage> {
         color: Colors.yellow[100],
         child: Stack(
           children: [
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: ListView(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      bottom: 10,
-                    ),
-                    child: Text(
-                      widget.dish.name,
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.montserrat(
-                        textStyle: TextStyle(
-                          fontSize: 40,
-                          fontWeight: FontWeight.bold,
-                        ),
+            ListView(
+              physics: BouncingScrollPhysics(),
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 10,
+                  ),
+                  child: Text(
+                    widget.dish.name,
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.montserrat(
+                      textStyle: TextStyle(
+                        fontSize: 40,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
-                  _dishImageContainer(),
-                  SizedBox(
-                    height: 20,
+                ),
+                _dishImageContainer(),
+                SizedBox(
+                  height: 20,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
                   ),
-                  Container(
-                    decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black38,
-                          spreadRadius: 1,
-                          blurRadius: 2,
-                        )
-                      ],
-                      borderRadius: BorderRadius.circular(20),
-                      color: Colors.white,
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(15),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Text(
-                              'Precio: ',
-                              textAlign: TextAlign.left,
-                              style: _style,
-                            ),
-                          ),
-                          Text(
-                            '${widget.dish.price.toStringAsFixed(2)}€',
-                            textAlign: TextAlign.right,
-                            style: _style,
-                          ),
-                        ],
+                  child: Column(
+                    children: [
+                      _priceContainer(),
+                      SizedBox(
+                        height: 20,
                       ),
-                    ),
+                      _descriptionContainer(),
+                    ],
                   ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black38,
-                          spreadRadius: 1,
-                          blurRadius: 2,
-                        )
-                      ],
-                      borderRadius: BorderRadius.circular(20),
-                      color: Colors.white,
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(15),
-                      child: Text(
-                        widget.dish.description,
-                        style: _style,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+                ),
+                SizedBox(
+                  height: 85,
+                ),
+              ],
             ),
             _addDishAnimation(),
+            _openCartButtom(),
           ],
         ),
       ),
@@ -139,8 +104,9 @@ class _DishPageState extends State<DishPage> {
               _width = 30;
               _height = 30;
               _bottom = 20;
-              _left = 190;
+              _left = 20;
               _visible = true;
+              _buttonVisible = true;
               _timer = Timer(
                 Duration(
                   milliseconds: 1100,
@@ -164,26 +130,31 @@ class _DishPageState extends State<DishPage> {
   }
 
   _dishImageContainer() {
-    return Container(
-      height: 300,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black38,
-            spreadRadius: 2,
-            blurRadius: 2,
-          )
-        ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 10,
       ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(20),
-        child: Hero(
-          child: Image.asset(
-            widget.dish.image,
-            fit: BoxFit.cover,
+      child: Container(
+        height: 300,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black38,
+              spreadRadius: 2,
+              blurRadius: 2,
+            )
+          ],
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(20),
+          child: Hero(
+            child: Image.asset(
+              widget.dish.image,
+              fit: BoxFit.cover,
+            ),
+            tag: widget.dish.name,
           ),
-          tag: widget.dish.name,
         ),
       ),
     );
@@ -213,7 +184,7 @@ class _DishPageState extends State<DishPage> {
         ),
       ),
       bottom: _bottom,
-      left: _left,
+      right: _left,
       duration: Duration(
         seconds: 1,
       ),
@@ -241,5 +212,110 @@ class _DishPageState extends State<DishPage> {
       cantidad[dish.name] = 1;
       addPedido(dish);
     }
+  }
+
+  _openCartButtom() {
+    return Positioned(
+      right: 10,
+      bottom: 15,
+      child: AnimatedScale(
+        duration: Duration(
+          milliseconds: 700,
+        ),
+        curve: Curves.bounceOut,
+        scale: _buttonVisible ? 1 : 0,
+        child: OpenContainer(
+          transitionType: ContainerTransitionType.fade,
+          openBuilder: (BuildContext context, VoidCallback _) {
+            return ShoppingPage(
+              includeMarkAsDoneButton: false,
+            );
+          },
+          closedElevation: 6.0,
+          closedShape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(56 / 2),
+            ),
+          ),
+          closedColor: Color.fromRGBO(184, 28, 28, 1),
+          closedBuilder: (BuildContext context, VoidCallback openContainer) {
+            return SizedBox(
+              height: 56,
+              width: 56,
+              child: Center(
+                child: Icon(
+                  Icons.shopping_cart_outlined,
+                  color: Theme.of(context).colorScheme.onSecondary,
+                ),
+              ),
+            );
+          },
+        ),
+      ),
+    );
+  }
+
+  _priceContainer() {
+    return Container(
+      decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black38,
+            spreadRadius: 1,
+            blurRadius: 2,
+          )
+        ],
+        borderRadius: BorderRadius.circular(20),
+        color: Colors.white,
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(15),
+        child: Row(
+          children: [
+            Expanded(
+              child: Text(
+                'Precio: ',
+                textAlign: TextAlign.left,
+                style: _style,
+              ),
+            ),
+            Text(
+              '${widget.dish.price.toStringAsFixed(2)}€',
+              textAlign: TextAlign.right,
+              style: _style,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  _descriptionContainer() {
+    return Container(
+      decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black38,
+            spreadRadius: 1,
+            blurRadius: 2,
+          )
+        ],
+        borderRadius: BorderRadius.circular(20),
+        color: Colors.white,
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(15),
+        child: Row(
+          children: [
+            Expanded(
+              child: Text(
+                widget.dish.description,
+                style: _style,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

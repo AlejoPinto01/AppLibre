@@ -1,4 +1,4 @@
-// ignore_for_file: must_be_immutable, use_key_in_widget_constructors, prefer_final_fields
+// ignore_for_file: must_be_immutable, use_key_in_widget_constructors, prefer_final_fields, prefer_const_constructors
 
 import 'package:applibre/src/models/models.dart';
 import 'package:applibre/src/util/cupons_list.dart';
@@ -13,6 +13,7 @@ class CuponsPage extends StatelessWidget {
     return Container(
       color: Colors.yellow[100],
       child: GridView.count(
+        physics: BouncingScrollPhysics(),
         crossAxisCount: 2,
         children: List.generate(_cuponsList.length, (index) {
           return Center(

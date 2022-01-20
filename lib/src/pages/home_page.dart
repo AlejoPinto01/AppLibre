@@ -27,6 +27,7 @@ class _HomePageState extends State<HomePage> {
     return Container(
       color: Colors.yellow[100],
       child: ListView(
+        physics: BouncingScrollPhysics(),
         children: [
           generarTarjetaPerfil(),
           Divider(),
@@ -117,7 +118,7 @@ class _HomePageState extends State<HomePage> {
           children: [
             Text(
               'Hola, ${nombreUsuario}',
-              style: GoogleFonts.permanentMarker(
+              style: GoogleFonts.montserrat(
                 color: Colors.white,
                 fontSize: 25,
                 fontWeight: FontWeight.bold,
@@ -173,7 +174,7 @@ class _HomePageState extends State<HomePage> {
             Center(
               child: Text(
                 'Todavía no estás registrado?',
-                style: GoogleFonts.permanentMarker(
+                style: GoogleFonts.montserrat(
                   color: Colors.white,
                   fontSize: 25,
                   height: 3.0,
@@ -184,7 +185,7 @@ class _HomePageState extends State<HomePage> {
             Center(
               child: Text(
                 'Haz click aquí',
-                style: GoogleFonts.permanentMarker(
+                style: GoogleFonts.montserrat(
                     color: Colors.white, fontSize: 15, height: 2.0),
               ),
             ),

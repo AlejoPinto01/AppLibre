@@ -199,21 +199,21 @@ List<Dish> getListaDishes() {
       name: 'Ensalada de col y manzana',
       description: 'Ensalada con col y manzana',
       price: 3.45,
-      image: 'assets/images/food/dishes/tartacolmanzana.jpg',
+      image: 'assets/images/food/dishes/ensaladacolmanzana.jpg',
       categoryName: 'Ensaladas',
     ),
     Dish(
       name: 'Fanta naranja',
       description: 'Bebida gaseaosa de naranja',
       price: 1.50,
-      image: 'fantanaranja.jpg',
+      image: 'assets/images/food/dishes/fantanaranja.jpg',
       categoryName: 'Bebidas',
     ),
     Dish(
       name: 'Cerveza estrella galicia',
       description: 'Cerveza estrella galicia',
       price: 2.00,
-      image: 'cerveza.jpg',
+      image: 'assets/images/food/dishes/cerveza.jpg',
       categoryName: 'Bebidas',
     )
   ];

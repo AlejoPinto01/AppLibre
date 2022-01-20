@@ -52,6 +52,22 @@ class CategoryPage extends StatelessWidget {
         ),
         slivers: <Widget>[
           SliverAppBar(
+            leading: Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: Ink(
+                decoration: ShapeDecoration(
+                  color: category.color,
+                  shape: CircleBorder(),
+                ),
+                child: new IconButton(
+                  icon: Icon(Icons.arrow_back),
+                  color: Colors.white,
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
+              ),
+            ),
             stretch: true,
             pinned: true,
             snap: false,
