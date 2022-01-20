@@ -131,31 +131,33 @@ class MapsPageState extends State<MapsPage> {
           width: 180,
           child: new FittedBox(
             child: Material(
-                color: Colors.white,
-                elevation: 14.0,
-                borderRadius: BorderRadius.circular(24.0),
-                shadowColor: Color(0x802196F3),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Container(
-                      width: 180,
-                      height: 200,
-                      child: ClipRRect(
-                        borderRadius: new BorderRadius.circular(24.0),
-                        child: Image(
-                            fit: BoxFit.fill,
-                            image: AssetImage('assets/kebab_restaurant.jpg')),
+              color: Colors.white,
+              elevation: 14.0,
+              borderRadius: BorderRadius.circular(24.0),
+              shadowColor: Color(0x802196F3),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Container(
+                    width: 180,
+                    height: 200,
+                    child: ClipRRect(
+                      borderRadius: new BorderRadius.circular(24.0),
+                      child: Image(
+                        fit: BoxFit.fill,
+                        image: AssetImage('assets/kebab_restaurant.jpg')
                       ),
                     ),
-                    Container(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: detallsRestaurant(),
-                      ),
+                  ),
+                  Container(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: detallsRestaurant(),
                     ),
-                  ],
-                )),
+                  ),
+                ],
+              )
+            ),
           ),
         ),
       ),

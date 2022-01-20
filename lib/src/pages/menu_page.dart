@@ -55,18 +55,6 @@ class MenuPage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          // Padding(
-          //   padding: const EdgeInsets.only(top: 20, bottom: 20),
-          //   child: Text(
-          //     'Seleccione una categoria',
-          //     textAlign: TextAlign.center,
-          //     style: GoogleFonts.montserrat(
-          //       textStyle: TextStyle(
-          //         fontSize: 20,
-          //       ),
-          //     ),
-          //   ),
-          // ),
           Expanded(
             child: Stack(
               children: [
@@ -78,24 +66,6 @@ class MenuPage extends StatelessWidget {
                     );
                   },
                 ),
-                // Positioned(
-                //   left: 0,
-                //   right: 0,
-                //   top: 0,
-                //   child: Container(
-                //     height: 10,
-                //     decoration: BoxDecoration(
-                //       gradient: LinearGradient(
-                //         begin: Alignment.topCenter,
-                //         end: Alignment.bottomCenter,
-                //         colors: [
-                //           Colors.black.withOpacity(0.2),
-                //           Colors.transparent
-                //         ],
-                //       ),
-                //     ),
-                //   ),
-                // ),
               ],
             ),
           ),

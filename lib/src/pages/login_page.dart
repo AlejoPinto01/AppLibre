@@ -45,7 +45,6 @@ class _LoginPageState extends State<LoginPage> {
             SizedBox(height: 5),
             ListView(
               shrinkWrap: true,
-              //posar padding per a que no estigui aferrat als costats i adalt
               padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
               children: [
                 _crearUsername(),
@@ -92,10 +91,11 @@ class _LoginPageState extends State<LoginPage> {
           icon: Icon(Icons.person),
           focusColor: Colors.red[900],
           border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(20.0),
-              borderSide: BorderSide(
-                color: Colors.red,
-              )),
+            borderRadius: BorderRadius.circular(20.0),
+            borderSide: BorderSide(
+              color: Colors.red,
+            ),
+          ),
         ),
         autovalidateMode: _submited
             ? AutovalidateMode.onUserInteraction
@@ -109,8 +109,6 @@ class _LoginPageState extends State<LoginPage> {
           }
           return null;
         },
-
-        //el valor es posa dins la variable user
         onChanged: (text) => setState(() => user = text));
   }
 
@@ -137,7 +135,6 @@ class _LoginPageState extends State<LoginPage> {
             return 'El correo introducido no tiene el formato correcto';
           }
         },
-        //el valor es posa dins la variable _email
         onChanged: (text) => setState(() => email = text));
   }
 
@@ -211,37 +208,37 @@ class _LoginPageState extends State<LoginPage> {
   Widget _buttonLogin(BuildContext context) {
     return Center(
       child: ElevatedButton(
-        child: Text(
-          'Login',
-          style: GoogleFonts.montserrat(
-            fontWeight: FontWeight.bold,
-            fontSize: 17,
+          child: Text(
+            'Login',
+            style: GoogleFonts.montserrat(
+              fontWeight: FontWeight.bold,
+              fontSize: 17,
+            ),
           ),
-        ),
-        style: ElevatedButton.styleFrom(
-          minimumSize: Size.fromHeight(45),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10.0),
+          style: ElevatedButton.styleFrom(
+            minimumSize: Size.fromHeight(45),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10.0),
+            ),
+            primary: Colors.red[900],
+            shadowColor: Colors.pink[700],
+            elevation: 15,
           ),
-          primary: Colors.red[900],
-          shadowColor: Colors.pink[700],
-          elevation: 15,
-        ),
-        onPressed: () {
-          _submited = true;
-          if (_formKey.currentState!.validate()) {
-            setState(() {
-              setUser(user, email, pass);
-              setNombreUsuario(user);
-              setRegistre(true);
-              setIndex(0);
-              pageController.jumpToPage(
-                getIndex(),
-              );
-            });
-          }
-        } //_loginDialog(context),
-      ),
+          onPressed: () {
+            _submited = true;
+            if (_formKey.currentState!.validate()) {
+              setState(() {
+                setUser(user, email, pass);
+                setNombreUsuario(user);
+                setRegistre(true);
+                setIndex(0);
+                pageController.jumpToPage(
+                  getIndex(),
+                );
+              });
+            }
+          } //_loginDialog(context),
+          ),
     );
   }
 }

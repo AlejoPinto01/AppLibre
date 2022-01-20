@@ -78,7 +78,6 @@ class _ProfilePageState extends State<ProfilePage> {
         padding: EdgeInsets.all(32),
         child: ListView(
           shrinkWrap: true,
-          //crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: 30),
             image != null
@@ -116,24 +115,25 @@ class _ProfilePageState extends State<ProfilePage> {
             Row(
               children: [
                 Expanded(
-                    flex: 8,
-                    child: TextFormField(
-                      controller: controller,
-                      readOnly: read,
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: (text) {
-                        if (text == null || text.isEmpty) {
-                          return 'El usuario no puede estar vacío';
-                        }
-                        if (text.length < 4) {
-                          return 'El nombre de usuario es muy corto';
-                        }
-                        return null;
-                      },
-                      onChanged: (text) => setState(() {
-                        _text = text;
-                      }),
-                    )),
+                  flex: 8,
+                  child: TextFormField(
+                    controller: controller,
+                    readOnly: read,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    validator: (text) {
+                      if (text == null || text.isEmpty) {
+                        return 'El usuario no puede estar vacío';
+                      }
+                      if (text.length < 4) {
+                        return 'El nombre de usuario es muy corto';
+                      }
+                      return null;
+                    },
+                    onChanged: (text) => setState(() {
+                      _text = text;
+                    }),
+                  ),
+                ),
                 IconButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
@@ -177,23 +177,20 @@ class _ProfilePageState extends State<ProfilePage> {
 
   Widget _logOut() {
     return ElevatedButton(
-      child: Text("Log out", 
-        style:  GoogleFonts.montserrat(
-          color: Colors.white,
-          fontWeight: FontWeight.bold,
-          fontSize: 17
-        ),
+      child: Text(
+        "Log out",
+        style: GoogleFonts.montserrat(
+            color: Colors.white, fontWeight: FontWeight.bold, fontSize: 17),
       ),
       style: ElevatedButton.styleFrom(
-        minimumSize: Size.fromHeight(40),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.0),
-        ),
-        padding: EdgeInsets.all(10.0),
-        primary: Colors.red[900],
-        shadowColor: Colors.pink[700],
-        elevation: 15
-      ),
+          minimumSize: Size.fromHeight(40),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          padding: EdgeInsets.all(10.0),
+          primary: Colors.red[900],
+          shadowColor: Colors.pink[700],
+          elevation: 15),
       onPressed: () {
         setState(() {
           setImage(null);
