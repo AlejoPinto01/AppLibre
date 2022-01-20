@@ -2,6 +2,7 @@
 
 import 'package:applibre/src/models/models.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CuponCard extends StatelessWidget {
   Cupon cupon;
@@ -68,16 +69,16 @@ class CuponCard extends StatelessWidget {
           ),
           title: Text(
             cupon.name,
-            style: TextStyle(fontSize: 20),
+            style: GoogleFonts.montserrat(fontSize: 20),
           ),
           content: FittedBox(
             child: Column(
               children: [
-                Container(
+                SizedBox(
                   width: 300,
                   child: Text(
                     cupon.description,
-                    style: TextStyle(fontSize: 20),
+                    style: GoogleFonts.montserrat(fontSize: 20),
                   ),
                 ),
                 SizedBox(height: 15),
@@ -98,7 +99,7 @@ class CuponCard extends StatelessWidget {
                   child: Text(
                     cupon.code,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: GoogleFonts.montserrat(
                       fontSize: 60,
                       fontWeight: FontWeight.bold,
                     ),
@@ -107,6 +108,18 @@ class CuponCard extends StatelessWidget {
               ],
             ),
           ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Text(
+                'Ok',
+                style: GoogleFonts.montserrat(fontSize: 20),
+              ),
+              style: TextButton.styleFrom(
+                primary: Colors.red[900],
+              ),
+            ),
+          ],
         );
       },
     );

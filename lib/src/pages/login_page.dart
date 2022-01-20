@@ -34,14 +34,12 @@ class _LoginPageState extends State<LoginPage> {
             Container(
               height: appBarHeight,
               child: Center(
-                child: Text('Registro', 
-                  style: GoogleFonts.montserrat(
-                    color: Colors.brown[700], 
-                    fontWeight: FontWeight.bold,
-                    fontSize: 22,
-                    height: 2
-                  )
-                ),
+                child: Text('Registro',
+                    style: GoogleFonts.montserrat(
+                        color: Colors.brown[700],
+                        fontWeight: FontWeight.bold,
+                        fontSize: 22,
+                        height: 2)),
               ),
             ),
             SizedBox(height: 5),
@@ -94,9 +92,10 @@ class _LoginPageState extends State<LoginPage> {
           icon: Icon(Icons.person),
           focusColor: Colors.red[900],
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(20.0),
-            borderSide: BorderSide(color: Colors.red,)
-          ),
+              borderRadius: BorderRadius.circular(20.0),
+              borderSide: BorderSide(
+                color: Colors.red,
+              )),
         ),
         autovalidateMode: _submited
             ? AutovalidateMode.onUserInteraction
@@ -152,11 +151,9 @@ class _LoginPageState extends State<LoginPage> {
           suffixIcon: IconButton(
             icon: Icon(
               // Based on passwordVisible state choose the icon
-              _passwordVisible
-              ? Icons.visibility
-              : Icons.visibility_off,
+              _passwordVisible ? Icons.visibility : Icons.visibility_off,
               color: Theme.of(context).primaryColorDark,
-              ),
+            ),
             onPressed: () {
               // Update the state i.e. toogle the state of passwordVisible variable
               setState(() {
@@ -166,14 +163,13 @@ class _LoginPageState extends State<LoginPage> {
           ),
           icon: Icon(Icons.lock),
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
-          
         ),
         autovalidateMode: _submited
             ? AutovalidateMode.onUserInteraction
             : AutovalidateMode.disabled,
         validator: (String? value) {
           RegExp passRegEx =
-              new RegExp(r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$");
+              new RegExp(r"^(?=.*[a-zñ])(?=.*[A-Z])(?=.*\d)[a-zñA-ZÑ\d]{8,}$");
           if (value == null || value.isEmpty) {
             return 'La contraseña no puede estar vacia';
           } else if (!passRegEx.hasMatch(value)) {
@@ -197,7 +193,8 @@ class _LoginPageState extends State<LoginPage> {
                       "Al menos 1 mayúscula\n" +
                       "Al menos 1 minúsucla\n" +
                       "Mínimo 8 carácteres\n" +
-                      "Al menos 1 número";
+                      "Al menos 1 número\n" +
+                      "Ha de contener solo carácteres y números";
             } else {
               _isOpen = false;
               _infoIcon = Icon(Icons.info);
@@ -214,18 +211,21 @@ class _LoginPageState extends State<LoginPage> {
   Widget _buttonLogin(BuildContext context) {
     return Center(
       child: ElevatedButton(
-        child: Text('Login', 
+        child: Text(
+          'Login',
           style: GoogleFonts.montserrat(
             fontWeight: FontWeight.bold,
-            fontSize: 17
+            fontSize: 17,
           ),
         ),
         style: ElevatedButton.styleFrom(
-          minimumSize: Size.fromHeight(40),
-          shape: StadiumBorder(),
+          minimumSize: Size.fromHeight(45),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+          ),
           primary: Colors.red[900],
           shadowColor: Colors.pink[700],
-          elevation: 15
+          elevation: 15,
         ),
         onPressed: () {
           _submited = true;
@@ -235,11 +235,13 @@ class _LoginPageState extends State<LoginPage> {
               setNombreUsuario(user);
               setRegistre(true);
               setIndex(0);
-              pageController.jumpToPage(getIndex());
+              pageController.jumpToPage(
+                getIndex(),
+              );
             });
           }
         } //_loginDialog(context),
-      )
+      ),
     );
   }
 }

@@ -112,7 +112,9 @@ class _RootPageState extends State<RootPage> {
           pageChanged(index);
         });
       },
-      children: createPages(getRegistre()),
+      children: createPages(
+        getRegistre(),
+      ),
     );
   }
 
