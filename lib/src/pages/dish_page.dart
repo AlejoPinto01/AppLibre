@@ -21,6 +21,7 @@ class _DishPageState extends State<DishPage> {
   double _height = 250;
   double _radius = 20;
   bool _visible = false;
+  Timer? _timer;
 
   TextStyle _style = GoogleFonts.montserrat(
     textStyle: TextStyle(fontSize: 20),
@@ -131,7 +132,7 @@ class _DishPageState extends State<DishPage> {
               _bottom = 20;
               _left = 190;
               _visible = true;
-              Timer(
+              _timer = Timer(
                 Duration(
                   milliseconds: 1100,
                 ),
