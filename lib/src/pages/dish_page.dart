@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, must_be_immutable, prefer_final_fields, use_key_in_widget_constructors,prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, must_be_immutable, prefer_final_fields, use_key_in_widget_constructors,prefer_const_literals_to_create_immutables, unused_field
 
 import 'dart:async';
 
@@ -23,6 +23,7 @@ class _DishPageState extends State<DishPage> {
   double _height = 250;
   double _radius = 20;
   bool _visible = false;
+  Timer? _timer;
 
   TextStyle _style = GoogleFonts.montserrat(
     textStyle: TextStyle(fontSize: 20),
@@ -140,7 +141,7 @@ class _DishPageState extends State<DishPage> {
               _bottom = 20;
               _left = 190;
               _visible = true;
-              Timer(
+              _timer = Timer(
                 Duration(
                   milliseconds: 1100,
                 ),
