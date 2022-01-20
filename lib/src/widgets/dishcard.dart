@@ -60,7 +60,7 @@ class DishCard extends StatelessWidget {
                       height: 7,
                     ),
                     Text(
-                      '${dish.price}€',
+                      '${dish.price.toStringAsFixed(2)}€',
                       style: GoogleFonts.montserrat(
                         textStyle: TextStyle(
                           fontSize: 17,
