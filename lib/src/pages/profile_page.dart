@@ -1,15 +1,14 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, prefer_const_constructors_in_immutables, avoid_print
 
 import 'dart:async';
 import 'dart:io';
 
-import 'package:applibre/src/models/user.dart';
-import 'package:applibre/src/pages/root_page.dart';
-import 'package:applibre/src/util/data.dart';
-import 'package:applibre/src/widgets/defaultImageWidget.dart';
-import 'package:applibre/src/widgets/imageWidget.dart';
+import 'package:applibre/src/models/models.dart';
+import 'package:applibre/src/util/utils.dart';
+import 'package:applibre/src/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:path_provider/path_provider.dart';
@@ -32,18 +31,13 @@ Future<File> getImageFileFromAssets(String path) async {
   return file;
 }
 
-_defaultImage() async {
-  File f = await getImageFileFromAssets('noImageProgile.png');
-  return f;
-}
-
 class _ProfilePageState extends State<ProfilePage> {
   File? image = getImage();
   Icon icon = Icon(Icons.edit);
   bool read = true;
   bool edit = false;
   String? userName;
-  String? text;
+  String? _text;
   final _formKey = GlobalKey<FormState>();
   Future pickImage(ImageSource imageSource) async {
     try {
@@ -79,14 +73,11 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.amberAccent,
-      appBar: AppBar(
-        title: Text('Tu perfil'),
-      ),
+      backgroundColor: Colors.yellow[100],
       body: Container(
         padding: EdgeInsets.all(32),
         child: ListView(
-          //crossAxisAlignment: CrossAxisAlignment.start,
+          shrinkWrap: true,
           children: [
             SizedBox(height: 30),
             image != null
@@ -124,24 +115,25 @@ class _ProfilePageState extends State<ProfilePage> {
             Row(
               children: [
                 Expanded(
-                    flex: 8,
-                    child: TextFormField(
-                      controller: controller,
-                      readOnly: read,
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: (text) {
-                        if (text == null || text.isEmpty) {
-                          return 'El usuario no puede estar vacío';
-                        }
-                        if (text.length < 4) {
-                          return 'El nombre de usuario es muy corto';
-                        }
-                        return null;
-                      },
-                      onChanged: (text) => setState(() {
-                        text = text;
-                      }),
-                    )),
+                  flex: 8,
+                  child: TextFormField(
+                    controller: controller,
+                    readOnly: read,
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    validator: (text) {
+                      if (text == null || text.isEmpty) {
+                        return 'El usuario no puede estar vacío';
+                      }
+                      if (text.length < 4) {
+                        return 'El nombre de usuario es muy corto';
+                      }
+                      return null;
+                    },
+                    onChanged: (text) => setState(() {
+                      _text = text;
+                    }),
+                  ),
+                ),
                 IconButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
@@ -152,7 +144,8 @@ class _ProfilePageState extends State<ProfilePage> {
                           read = false;
                         } else {
                           edit = false;
-                          userName = text;
+                          userName = _text;
+                          nombreUsuario = _text!;
                           icon = Icon(Icons.edit);
                           read = true;
                         }
@@ -184,15 +177,20 @@ class _ProfilePageState extends State<ProfilePage> {
 
   Widget _logOut() {
     return ElevatedButton(
-      child: Text("Log out"),
+      child: Text(
+        "Log out",
+        style: GoogleFonts.montserrat(
+            color: Colors.white, fontWeight: FontWeight.bold, fontSize: 17),
+      ),
       style: ElevatedButton.styleFrom(
           minimumSize: Size.fromHeight(40),
           shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10.0),
-              side: BorderSide(color: Colors.black)),
+            borderRadius: BorderRadius.circular(10.0),
+          ),
           padding: EdgeInsets.all(10.0),
-          primary: Colors.white,
-          onPrimary: Colors.black),
+          primary: Colors.red[900],
+          shadowColor: Colors.pink[700],
+          elevation: 15),
       onPressed: () {
         setState(() {
           setImage(null);

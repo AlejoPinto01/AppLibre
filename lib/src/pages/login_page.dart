@@ -1,10 +1,8 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, prefer_const_constructors_in_immutables, unnecessary_new, prefer_adjacent_string_concatenation, sized_box_for_whitespace
 
-import 'package:applibre/src/models/user.dart';
-import 'package:applibre/src/pages/profile.dart';
-import 'package:applibre/src/pages/root_page.dart';
-import 'package:applibre/src/util/data.dart';
+import 'package:applibre/src/util/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key? key}) : super(key: key);
@@ -22,12 +20,12 @@ class _LoginPageState extends State<LoginPage> {
   bool _submited = false;
   Icon _infoIcon = Icon(Icons.info);
   bool _passwordVisible = false;
-  double appBarHeight = AppBar().preferredSize.height;
 
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.yellow[100],
       //Llista per mostrar els elements en forma vertical
       body: Form(
         key: _formKey,
@@ -37,18 +35,18 @@ class _LoginPageState extends State<LoginPage> {
               height: appBarHeight,
               child: Center(
                 child: Text('Registro', 
-                  style: TextStyle(
-                    color: Colors.white, 
+                  style: GoogleFonts.montserrat(
+                    color: Colors.brown[700], 
                     fontWeight: FontWeight.bold,
-                    fontSize: 17,
+                    fontSize: 22,
+                    height: 2
                   )
                 ),
               ),
-              color: Colors.red,
             ),
+            SizedBox(height: 5),
             ListView(
               shrinkWrap: true,
-              //posar padding per a que no estigui aferrat als costats i adalt
               padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
               children: [
                 _crearUsername(),
@@ -69,7 +67,7 @@ class _LoginPageState extends State<LoginPage> {
                 Text(
                   _info,
                   style: TextStyle(
-                    color: (Colors.red),
+                    color: (Colors.red[900]),
                   ),
                 ),
                 Divider(),
@@ -88,97 +86,95 @@ class _LoginPageState extends State<LoginPage> {
 //crear el input d'username
   Widget _crearUsername() {
     return TextFormField(
-        decoration: InputDecoration(
-          hintText: 'Nombre de usuario',
-          labelText: 'User',
-          suffixIcon: Icon(Icons.person_outlined),
-          icon: Icon(Icons.person),
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
+      decoration: InputDecoration(
+        hintText: 'Nombre de usuario',
+        labelText: 'User',
+        suffixIcon: Icon(Icons.person_outlined),
+        icon: Icon(Icons.person),
+        focusColor: Colors.red[900],
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(20.0),
+          borderSide: BorderSide(color: Colors.red,)
         ),
-        autovalidateMode: _submited
-            ? AutovalidateMode.onUserInteraction
-            : AutovalidateMode.disabled,
-        validator: (text) {
-          if (text == null || text.isEmpty) {
-            return 'El usuario no puede estar vacío';
-          }
-          if (text.length < 4) {
-            return 'El nombre de usuario es muy corto';
-          }
-          return null;
-        },
-
-        //el valor es posa dins la variable user
-        onChanged: (text) => setState(() => user = text));
+      ),
+      autovalidateMode: _submited
+        ? AutovalidateMode.onUserInteraction
+        : AutovalidateMode.disabled,
+      validator: (text) {
+        if (text == null || text.isEmpty) {
+          return 'El usuario no puede estar vacío';
+        }
+        if (text.length < 4) {
+          return 'El nombre de usuario es muy corto';
+        }
+        return null;
+      },
+      onChanged: (text) => setState(() => user = text)
+    );
   }
 
 //crear el input d'email
   Widget _crearEmail() {
     return TextFormField(
-        keyboardType: TextInputType.emailAddress,
-        decoration: InputDecoration(
-          hintText: 'Correu electrònic',
-          labelText: 'Email',
-          suffixIcon: Icon(Icons.alternate_email),
-          icon: Icon(Icons.email),
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
-        ),
-        autovalidateMode: _submited
-            ? AutovalidateMode.onUserInteraction
-            : AutovalidateMode.disabled,
-        validator: (String? value) {
-          RegExp mailExp = new RegExp(
-              r"^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$");
-          if (value == null || value.isEmpty) {
-            return 'El correo no puede estar vacío';
-          } else if (!mailExp.hasMatch(value)) {
-            return 'El correo introducido no tiene el formato correcto';
-          }
-        },
-        //el valor es posa dins la variable _email
-        onChanged: (text) => setState(() => email = text));
+      keyboardType: TextInputType.emailAddress,
+      decoration: InputDecoration(
+        hintText: 'Correu electrònic',
+        labelText: 'Email',
+        suffixIcon: Icon(Icons.alternate_email),
+        icon: Icon(Icons.email),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
+      ),
+      autovalidateMode: _submited
+        ? AutovalidateMode.onUserInteraction
+        : AutovalidateMode.disabled,
+      validator: (String? value) {
+        RegExp mailExp = new RegExp(r"^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$");
+        if (value == null || value.isEmpty) {
+          return 'El correo no puede estar vacío';
+        } else if (!mailExp.hasMatch(value)) {
+          return 'El correo introducido no tiene el formato correcto';
+        }
+      },
+      onChanged: (text) => setState(() => email = text)
+    );
   }
 
 //crear input de password, posant el valor ocult
   Widget _crearPassword() {
     return TextFormField(
-        obscureText: !_passwordVisible,
-        decoration: InputDecoration(
-          hintText: 'Password',
-          labelText: 'Password',
-          suffixIcon: IconButton(
-            icon: Icon(
-              // Based on passwordVisible state choose the icon
-              _passwordVisible
+      obscureText: !_passwordVisible,
+      decoration: InputDecoration(
+        hintText: 'Password',
+        labelText: 'Password',
+        suffixIcon: IconButton(
+          icon: Icon(
+            _passwordVisible
               ? Icons.visibility
               : Icons.visibility_off,
-              color: Theme.of(context).primaryColorDark,
-              ),
-            onPressed: () {
-              // Update the state i.e. toogle the state of passwordVisible variable
-              setState(() {
-                _passwordVisible = !_passwordVisible;
-              });
-            },
+            color: Theme.of(context).primaryColorDark,
           ),
-          icon: Icon(Icons.lock),
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
-          
+          onPressed: () {
+            setState(() {
+              _passwordVisible = !_passwordVisible;
+            });
+          },
         ),
-        autovalidateMode: _submited
-            ? AutovalidateMode.onUserInteraction
-            : AutovalidateMode.disabled,
-        validator: (String? value) {
-          RegExp passRegEx =
-              new RegExp(r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$");
-          if (value == null || value.isEmpty) {
-            return 'La contraseña no puede estar vacia';
-          } else if (!passRegEx.hasMatch(value)) {
-            return 'La contraseña no està en el formato correcto';
-          }
-        },
-        //el valor es posa dins la variable _passs
-        onChanged: (text) => setState(() => pass = text));
+        icon: Icon(Icons.lock),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
+      ),
+      autovalidateMode: _submited
+        ? AutovalidateMode.onUserInteraction
+        : AutovalidateMode.disabled,
+      validator: (String? value) {
+        RegExp passRegEx = new RegExp(r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$");
+        if (value == null || value.isEmpty) {
+          return 'La contraseña no puede estar vacia';
+        } else if (!passRegEx.hasMatch(value)) {
+          return 'La contraseña no està en el formato correcto';
+        }
+      },
+      onChanged: (text) => setState(() => pass = text)
+    );
   }
 
   Widget _crearInfoPass() {
@@ -211,10 +207,18 @@ class _LoginPageState extends State<LoginPage> {
   Widget _buttonLogin(BuildContext context) {
     return Center(
       child: ElevatedButton(
-        child: Text('Login'),
+        child: Text('Login', 
+          style: GoogleFonts.montserrat(
+            fontWeight: FontWeight.bold,
+            fontSize: 17
+          ),
+        ),
         style: ElevatedButton.styleFrom(
           minimumSize: Size.fromHeight(40),
           shape: StadiumBorder(),
+          primary: Colors.red[900],
+          shadowColor: Colors.pink[700],
+          elevation: 15,
         ),
         onPressed: () {
           _submited = true;

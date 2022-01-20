@@ -1,7 +1,8 @@
-import 'package:applibre/src/models/category.dart';
-import 'package:applibre/src/widgets/categorycard.dart';
+// ignore_for_file: use_key_in_widget_constructors, prefer_final_fields,prefer_const_constructors, must_be_immutable
+
+import 'package:applibre/src/models/models.dart';
+import 'package:applibre/src/widgets/widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class MenuPage extends StatelessWidget {
   List<Category> _categories = [

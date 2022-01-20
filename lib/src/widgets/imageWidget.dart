@@ -1,4 +1,4 @@
-// ignore_for_file: file_names
+// ignore_for_file: file_names, prefer_const_constructors
 
 import 'dart:io';
 
@@ -98,30 +98,31 @@ class ImageWidget extends StatelessWidget {
       );
     }
   }
+
   Widget buildEditIcon(Color color) => buildCircle(
+    color: Colors.white,
+    all: 3,
+    child: buildCircle(
+      color: color,
+      all: 8,
+      child: Icon(
+        Icons.add_a_photo,
         color: Colors.white,
-        all: 3,
-        child: buildCircle(
-          color: color,
-          all: 8,
-          child: Icon(
-            Icons.add_a_photo,
-            color: Colors.white,
-            size: 20,
-          ),
-        ),
-      );
+        size: 20,
+      ),
+    ),
+  );
 
   Widget buildCircle({
     required Widget child,
     required double all,
     required Color color,
   }) =>
-      ClipOval(
-        child: Container(
-          padding: EdgeInsets.all(all),
-          color: color,
-          child: child,
-        ),
-      );
+  ClipOval(
+    child: Container(
+      padding: EdgeInsets.all(all),
+      color: color,
+      child: child,
+    ),
+  );
 }

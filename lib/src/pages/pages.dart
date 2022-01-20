@@ -1,0 +1,11 @@
+export 'package:applibre/src/pages/category_page.dart';
+export 'package:applibre/src/pages/cupons_page.dart';
+export 'package:applibre/src/pages/dish_page.dart';
+export 'package:applibre/src/pages/home_page.dart';
+export 'package:applibre/src/pages/login_page.dart';
+export 'package:applibre/src/pages/maps_page.dart';
+export 'package:applibre/src/pages/menu_page.dart';
+export 'package:applibre/src/pages/premap_page.dart';
+export 'package:applibre/src/pages/profile_page.dart';
+export 'package:applibre/src/pages/root_page.dart';
+export 'package:applibre/src/pages/shopping_cart_page.dart';

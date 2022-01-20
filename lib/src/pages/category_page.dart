@@ -1,7 +1,8 @@
-import 'package:applibre/src/models/category.dart';
-import 'package:applibre/src/models/dish.dart';
-import 'package:applibre/src/util/data.dart';
-import 'package:applibre/src/widgets/dishcard.dart';
+// ignore_for_file: must_be_immutable, use_key_in_widget_constructors, prefer_final_fields, prefer_const_literals_to_create_immutables, unnecessary_new
+
+import 'package:applibre/src/models/models.dart';
+import 'package:applibre/src/util/utils.dart';
+import 'package:applibre/src/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 

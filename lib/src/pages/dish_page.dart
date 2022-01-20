@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:applibre/src/models/dish.dart';
+import 'package:applibre/src/util/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -144,6 +145,7 @@ class _DishPageState extends State<DishPage> {
               );
             },
           );
+          calcularPedido(widget.dish);
         },
         backgroundColor: Colors.red[900],
       ),
@@ -216,5 +218,18 @@ class _DishPageState extends State<DishPage> {
     _height = 250;
     _radius = 20;
     _visible = false;
+  }
+
+  void calcularPedido(Dish dish) {
+    if (cantidad.containsKey(dish.name)) {
+      int actual = cantidad[dish.name]!;
+      cantidad[dish.name] = (actual + 1);
+      if (cantidad[dish.name] == 1) {
+        addPedido(dish);
+      }
+    } else {
+      cantidad[dish.name] = 1;
+      addPedido(dish);
+    }
   }
 }

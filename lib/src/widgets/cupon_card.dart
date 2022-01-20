@@ -1,5 +1,8 @@
-import 'package:applibre/src/models/cupon.dart';
+// ignore_for_file: must_be_immutable, use_key_in_widget_constructors, avoid_unnecessary_containers, prefer_const_constructors, prefer_const_literals_to_create_immutables, sized_box_for_whitespace
+
+import 'package:applibre/src/models/models.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CuponCard extends StatelessWidget {
   Cupon cupon;
@@ -13,8 +16,7 @@ class CuponCard extends StatelessWidget {
         children: [
           Container(
             width: 160,
-            height: 130,
-            //color: Colors.green,
+            height: 135,
             decoration: BoxDecoration(
               image: DecorationImage(
                 fit: BoxFit.cover,
@@ -23,8 +25,14 @@ class CuponCard extends StatelessWidget {
             ),
           ),
           Container(
-            child: Text(cupon.name),
-            padding: EdgeInsets.only(top: 20),
+            child: Text(
+              cupon.name,
+              style: GoogleFonts.montserrat(
+                fontWeight: FontWeight.bold,
+                fontSize: 17,
+              ),
+            ),
+            padding: EdgeInsets.only(top: 15),
           ),
         ],
       ),
@@ -39,10 +47,9 @@ class CuponCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(15.0),
           boxShadow: <BoxShadow>[
             BoxShadow(
-              color: Colors.grey,
-              blurRadius: 10,
+              color: Colors.black54,
+              blurRadius: 5,
               spreadRadius: 2,
-              offset: Offset(2, 2),
             ),
           ],
           color: Colors.white,
@@ -50,7 +57,6 @@ class CuponCard extends StatelessWidget {
         margin: EdgeInsets.all(10),
       ),
       onTap: () {
-        print('kebab');
         _mostarCupon(context);
       },
     );
@@ -67,7 +73,11 @@ class CuponCard extends StatelessWidget {
           ),
           title: Text(
             cupon.name,
-            style: TextStyle(fontSize: 20),
+            textAlign: TextAlign.center,
+            style: GoogleFonts.montserrat(
+              fontSize: 30,
+              fontWeight: FontWeight.bold,
+            ),
           ),
           content: FittedBox(
             child: Column(
@@ -76,7 +86,7 @@ class CuponCard extends StatelessWidget {
                   width: 300,
                   child: Text(
                     cupon.description,
-                    style: TextStyle(fontSize: 20),
+                    style: GoogleFonts.montserrat(),
                   ),
                 ),
                 SizedBox(height: 15),
@@ -97,7 +107,7 @@ class CuponCard extends StatelessWidget {
                   child: Text(
                     cupon.code,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: GoogleFonts.montserrat(
                       fontSize: 60,
                       fontWeight: FontWeight.bold,
                     ),

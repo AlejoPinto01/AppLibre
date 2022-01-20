@@ -1,8 +1,12 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, prefer_const_constructors_in_immutables, prefer_final_fields
 
-import 'package:applibre/src/util/data.dart';
-import 'package:applibre/src/util/pages.dart';
+import 'package:animations/animations.dart';
+import 'package:applibre/src/pages/pages.dart';
+import 'package:applibre/src/util/constants.dart';
+import 'package:applibre/src/util/pages_list.dart';
+import 'package:applibre/src/util/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class RootPage extends StatefulWidget {
   RootPage({Key? key}) : super(key: key);
@@ -12,6 +16,7 @@ class RootPage extends StatefulWidget {
 }
 
 class _RootPageState extends State<RootPage> {
+  ContainerTransitionType _transitionType = ContainerTransitionType.fade;
   List<Widget> widgetOptions = createPages(getRegistre());
 
   void onItemTapped(int index) {
@@ -24,25 +29,49 @@ class _RootPageState extends State<RootPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.yellow[100],
       appBar: AppBar(
         backgroundColor: Colors.red[900],
         title: Center(
-            child: Image(
-          image: AssetImage('assets/logo.png'),
-          width: 50,
-        )),
+          child: Image(
+            image: AssetImage('assets/logo.png'),
+            width: 50,
+          ),
+        ),
       ),
       body: buildPageView(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: Icon(Icons.shopping_cart),
-        backgroundColor: Colors.red[900],
+      floatingActionButton: OpenContainer(
+        transitionType: _transitionType,
+        openBuilder: (BuildContext context, VoidCallback _) {
+          return ShoppingPage(
+            includeMarkAsDoneButton: false,
+          );
+        },
+        closedElevation: 6.0,
+        closedShape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(56 / 2),
+          ),
+        ),
+        closedColor: Color.fromRGBO(184, 28, 28, 1),
+        closedBuilder: (BuildContext context, VoidCallback openContainer) {
+          return SizedBox(
+            height: 56,
+            width: 56,
+            child: Center(
+              child: Icon(
+                Icons.shopping_cart_outlined,
+                color: Theme.of(context).colorScheme.onSecondary,
+              ),
+            ),
+          );
+        },
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: 'Home',
+            label: 'Inicio',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.savings),
@@ -50,10 +79,10 @@ class _RootPageState extends State<RootPage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.fastfood),
-            label: 'Carta',
+            label: 'Menu',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.add_location_alt_outlined),
+            icon: Icon(Icons.add_location_alt),
             label: 'Mapa',
           ),
           BottomNavigationBarItem(
@@ -62,7 +91,11 @@ class _RootPageState extends State<RootPage> {
           ),
         ],
         currentIndex: getIndex(),
-        selectedItemColor: Colors.green,
+        showSelectedLabels: false,
+        showUnselectedLabels: true,
+        selectedLabelStyle: GoogleFonts.montserrat(height: 0),
+        unselectedLabelStyle: GoogleFonts.montserrat(height: 1),
+        selectedIconTheme: IconThemeData(size: 35, color: Colors.white),
         unselectedItemColor: Colors.white,
         onTap: onItemTapped,
         type: BottomNavigationBarType.fixed,
