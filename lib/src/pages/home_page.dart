@@ -498,7 +498,7 @@ class _HomePageState extends State<HomePage> {
             child: FadeInImage(
               placeholder: AssetImage('assets/cargando.gif'),
               image: NetworkImage(
-                  'https://i.gyazo.com/0560d0bfa852c7ba0969b4d9b7c7126c.jpg'),
+                  'https://i.gyazo.com/c6edda1b4038750705d0d90938b4b70a.png'),
               fadeInDuration: Duration(milliseconds: 100),
               fit: BoxFit.cover,
             ),
