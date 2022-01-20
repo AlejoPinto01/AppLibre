@@ -147,112 +147,119 @@ class _ShoppingPageState extends State<ShoppingPage> {
   compruebaListView() {
     if (getPedido().isNotEmpty) {
       return new ListView.builder(
-        itemCount: getPedido().length,
+        physics: BouncingScrollPhysics(),
+        itemCount: getPedido().length + 1,
         itemBuilder: (BuildContext context, int index) {
-          return Container(
-            color: Colors.yellow[100],
-            height: 70,
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              children: [
-                Container(
-                  child: Container(
-                    child: Image.asset(
-                      getPedido()[index].image,
-                      fit: BoxFit.fitWidth,
-                    ),
-                    width: 130,
-                  ),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                ),
-                SizedBox(
-                  width: 20,
-                ),
-                Column(
-                  children: [
-                    Container(
-                      width: 80,
-                      child: Text(
-                        getPedido()[index].name,
-                        style: GoogleFonts.montserrat(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                          height: 1.5,
-                        ),
+          if (index < getPedido().length) {
+            return Container(
+              color: Colors.yellow[100],
+              height: 70,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: [
+                  Container(
+                    child: Container(
+                      child: Image.asset(
+                        getPedido()[index].image,
+                        fit: BoxFit.fitWidth,
                       ),
+                      width: 130,
                     ),
-                    Text(
-                      '${getPedido()[index].price}€',
-                      style: GoogleFonts.montserrat(),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
                     ),
-                  ],
-                ),
-                Container(
-                  width: 150,
-                  child: Row(
+                  ),
+                  SizedBox(
+                    width: 20,
+                  ),
+                  Column(
                     children: [
-                      TextButton(
+                      Container(
+                        width: 80,
                         child: Text(
-                          '-',
+                          getPedido()[index].name,
                           style: GoogleFonts.montserrat(
-                            fontSize: 15,
                             fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            height: 1.5,
                           ),
                         ),
-                        onPressed: () {
-                          setState(() {
-                            int actual = cantidad[getPedido()[index].name]!;
-                            if (actual != 0) {
-                              cantidad[getPedido()[index].name] = actual - 1;
-                            }
-                            if (cantidad[getPedido()[index].name] == 0) {
-                              deleteDish(getPedido()[index]);
-                            }
-                          });
-                        },
                       ),
                       Text(
-                        '${cantidad[getPedido()[index].name]}',
+                        '${getPedido()[index].price}€',
                         style: GoogleFonts.montserrat(),
-                      ),
-                      TextButton(
-                        child: Text(
-                          '+',
-                          style: GoogleFonts.montserrat(
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            int actual = cantidad[getPedido()[index].name]!;
-                            cantidad[getPedido()[index].name] = actual + 1;
-                          });
-                        },
                       ),
                     ],
                   ),
-                ),
-                Container(
-                  width: 40,
-                  child: Icon(Icons.arrow_right),
-                  color: Colors.yellow[200],
-                ),
-                Container(
-                  width: 70,
-                  color: Colors.yellow[200],
-                  child: Center(
-                    child: Text(
-                      '${calcularPrecio(index, cantidad[getPedido()[index].name]!)}€',
-                      style: GoogleFonts.montserrat(),
+                  Container(
+                    width: 150,
+                    child: Row(
+                      children: [
+                        TextButton(
+                          child: Text(
+                            '-',
+                            style: GoogleFonts.montserrat(
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              int actual = cantidad[getPedido()[index].name]!;
+                              if (actual != 0) {
+                                cantidad[getPedido()[index].name] = actual - 1;
+                              }
+                              if (cantidad[getPedido()[index].name] == 0) {
+                                deleteDish(getPedido()[index]);
+                              }
+                            });
+                          },
+                        ),
+                        Text(
+                          '${cantidad[getPedido()[index].name]}',
+                          style: GoogleFonts.montserrat(),
+                        ),
+                        TextButton(
+                          child: Text(
+                            '+',
+                            style: GoogleFonts.montserrat(
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              int actual = cantidad[getPedido()[index].name]!;
+                              cantidad[getPedido()[index].name] = actual + 1;
+                            });
+                          },
+                        ),
+                      ],
                     ),
                   ),
-                ),
-              ],
-            ),
-          );
+                  Container(
+                    width: 40,
+                    child: Icon(Icons.arrow_right),
+                    color: Colors.yellow[200],
+                  ),
+                  Container(
+                    width: 70,
+                    color: Colors.yellow[200],
+                    child: Center(
+                      child: Text(
+                        '${calcularPrecio(index, cantidad[getPedido()[index].name]!)}€',
+                        style: GoogleFonts.montserrat(),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          } else {
+            return SizedBox(
+              height: 100,
+            );
+          }
         },
       );
     } else {

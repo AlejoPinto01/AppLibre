@@ -15,6 +15,7 @@ class PreMapPage extends StatelessWidget {
       backgroundColor: Colors.yellow[100],
       body: Center(
         child: ListView(
+          physics: BouncingScrollPhysics(),
           children: [
             Container(
               child: Center(
@@ -27,7 +28,7 @@ class PreMapPage extends StatelessWidget {
                 ),
               ),
               height: appBarHeight,
-              color: Colors.red[700]
+              color: Colors.red[900]
             ),
             Container(
               height: 420,
@@ -91,7 +92,7 @@ class PreMapPage extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 5)
+            SizedBox(height: 50,),
           ],
         ),
       )

@@ -59,6 +59,7 @@ class MenuPage extends StatelessWidget {
             child: Stack(
               children: [
                 ListView.builder(
+                  physics: BouncingScrollPhysics(),
                   itemCount: _categories.length,
                   itemBuilder: (BuildContext context, int index) {
                     return CategoryCard(

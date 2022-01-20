@@ -13,6 +13,7 @@ class CuponsPage extends StatelessWidget {
     return Container(
       color: Colors.yellow[100],
       child: GridView.count(
+        physics: BouncingScrollPhysics(),
         crossAxisCount: 2,
         children: List.generate(_cuponsList.length, (index) {
           return Center(
