@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, prefer_const_constructors_in_immutables, avoid_unnecessary_containers, unnecessary_brace_in_string_interps
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, prefer_const_constructors_in_immutables, avoid_unnecessary_containers, unnecessary_brace_in_string_interps, sized_box_for_whitespace
 import 'dart:io';
 import 'maps_page.dart';
 

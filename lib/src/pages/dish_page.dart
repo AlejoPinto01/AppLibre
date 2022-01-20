@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, must_be_immutable, prefer_final_fields, use_key_in_widget_constructors,prefer_const_literals_to_create_immutables
+
 import 'dart:async';
 
 import 'package:applibre/src/models/dish.dart';
@@ -31,6 +33,13 @@ class _DishPageState extends State<DishPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.red[900],
+        title: Align(
+          alignment: Alignment(-0.2,0),
+          child: Image(
+            image: AssetImage('assets/logo.png'),
+            width: 50,
+          ),
+        ),
       ),
       body: Container(
         color: Colors.yellow[100],

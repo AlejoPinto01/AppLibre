@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_final_fields, use_key_in_widget_constructors, must_be_immutable
+
 import 'package:applibre/src/models/models.dart';
 import 'package:applibre/src/util/utils.dart';
 import 'package:applibre/src/widgets/widgets.dart';
