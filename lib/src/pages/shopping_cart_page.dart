@@ -159,7 +159,7 @@ class _ShoppingPageState extends State<ShoppingPage> {
                   child: Container(
                     child: Image.asset(
                       getPedido()[index].image,
-                      fit: BoxFit.fitWidth,
+                      fit: BoxFit.cover,
                     ),
                     width: 130,
                   ),
@@ -173,13 +173,13 @@ class _ShoppingPageState extends State<ShoppingPage> {
                 Column(
                   children: [
                     Container(
-                      width: 80,
+                      width: 100,
                       child: Text(
                         getPedido()[index].name,
                         style: GoogleFonts.montserrat(
                           fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                          height: 1.5,
+                          fontSize: 12,
+                          height: 2,
                         ),
                       ),
                     ),

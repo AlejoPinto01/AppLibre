@@ -3,19 +3,27 @@ import 'package:applibre/src/models/models.dart';
 List<Dish> getListaDishes() {
   return [
     Dish(
-      name: 'Kebab',
+      name: 'Kebab de ternera',
       description:
-          'Kebab tradicional. Laminas de carne de cordero, ternera, pollo o pavo (condimentadas) asada como bocadillo en pan de pita junto con vegetales (cebolla, perejil, tomate …etc.) y salsas.',
+          'Kebab tradicional. Laminas de carne de ternera (condimentadas) asada como bocadillo en pan de pita junto con vegetales (cebolla, perejil, tomate …etc.) y salsas.',
       price: 3.50,
       image: 'assets/images/food/dishes/kebab.jpg',
       categoryName: 'Kebabs',
     ),
     Dish(
-      name: 'Durum',
+      name: 'Kebab de pollo',
       description:
-          'Döner enrollado en un pan plano, muy empleado en la cocina turca.',
-      price: 4.50,
-      image: 'assets/images/food/dishes/durum.jpg',
+          'Kebab tradicional. Laminas de carne de pollo (condimentadas) asada como bocadillo en pan de pita junto con vegetales (cebolla, perejil, tomate …etc.) y salsas.',
+      price: 3.50,
+      image: 'assets/images/food/dishes/kebabpollo.jpg',
+      categoryName: 'Kebabs',
+    ),
+    Dish(
+      name: 'Kebab vegano',
+      description:
+          'Kebab tradicional. Laminas de tofu (condimentada) asada como bocadillo en pan de pita junto con vegetales (cebolla, perejil, tomate …etc.) y salsas.',
+      price: 3.50,
+      image: 'assets/images/food/dishes/kebab vegano.jpg',
       categoryName: 'Kebabs',
     ),
     Dish(
@@ -23,6 +31,37 @@ List<Dish> getListaDishes() {
       description: 'Kebab pero al plato... ¿que te esperabas?',
       price: 3.50,
       image: 'assets/images/food/dishes/kebabplato.jpg',
+      categoryName: 'Kebabs',
+    ),
+    Dish(
+      name: 'Durum de ternera',
+      description:
+          'Durum Kebab de ternera, con verduras y salsa especia',
+      price: 4.50,
+      image: 'assets/images/food/dishes/durum.jpg',
+      categoryName: 'Kebabs',
+    ),
+    Dish(
+      name: 'Durum de pollo',
+      description:
+          'Durum Kebab de pollo, con verduras y salsa especial',
+      price: 4.50,
+      image: 'assets/images/food/dishes/durumpollo.jpg',
+      categoryName: 'Kebabs',
+    ),
+    Dish(
+      name: 'Durum mixto',
+      description:
+          'Durum Kebab de pollo y ternera, con verduras y salsa especial',
+      price: 5.50,
+      image: 'assets/images/food/dishes/durummixto.png',
+      categoryName: 'Kebabs',
+    ),
+    Dish(
+      name: 'Durum rústico',
+      description: 'Durum Kebab de pollo y ternera, con verduras, aceitunas negras y salsa especial con un repaso por el horno de piedra',
+      price: 6.50,
+      image: 'assets/images/food/dishes/durumrustico.png',
       categoryName: 'Kebabs',
     ),
     Dish(
@@ -37,6 +76,39 @@ List<Dish> getListaDishes() {
       description: 'asdfasdf',
       price: 5.50,
       image: 'assets/images/food/dishes/pizzamargarita.jpg',
+      categoryName: 'Pizzas',
+    ),
+    Dish(
+      name: 'Pizza pepperoni',
+      description: 'Pizza con pepperoni por encima.',
+      price: 5.50,
+      image: 'assets/images/food/dishes/pizza pepperoni.jfif',
+      categoryName: 'Pizzas',
+    ),
+    Dish(
+      name: 'Pizza pollo',
+      description: 'Pizza con pollo por encima.',
+      price: 5.50,
+      image: 'assets/images/food/dishes/pizza pollo.jpg',
+      categoryName: 'Pizzas',
+    ),Dish(
+      name: 'Pizza romana',
+      description: 'Pizza con queso de cabra y aceitunas negras.',
+      price: 5.50,
+      image: 'assets/images/food/dishes/pizza romana.jpg',
+      categoryName: 'Pizzas',
+    ),
+    Dish(
+      name: 'Pizza variada',
+      description: 'Una pizza con un trozo de cada pizza de la carta',
+      price: 5.50,
+      image: 'assets/images/food/dishes/pizza variada.jfif',
+      categoryName: 'Pizzas',
+    ),Dish(
+      name: 'Pizza bacon',
+      description: 'Pizza con trozos de carne de kebab encima.',
+      price: 5.50,
+      image: 'assets/images/food/dishes/pizzabacon.jpg',
       categoryName: 'Pizzas',
     ),
     Dish(
