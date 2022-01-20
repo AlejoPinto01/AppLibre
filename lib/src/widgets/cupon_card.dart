@@ -82,7 +82,7 @@ class CuponCard extends StatelessWidget {
           content: FittedBox(
             child: Column(
               children: [
-                Container(
+                SizedBox(
                   width: 300,
                   child: Text(
                     cupon.description,
@@ -116,6 +116,18 @@ class CuponCard extends StatelessWidget {
               ],
             ),
           ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Text(
+                'Ok',
+                style: GoogleFonts.montserrat(fontSize: 20),
+              ),
+              style: TextButton.styleFrom(
+                primary: Colors.red[900],
+              ),
+            ),
+          ],
         );
       },
     );

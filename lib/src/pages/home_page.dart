@@ -38,6 +38,27 @@ class _HomePageState extends State<HomePage> {
           generarMiniMapa(),
           Container(
             height: 100,
+            child: Center(
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 40,
+                  ),
+                  Text(
+                    'kebab4u@gmail.com',
+                    style: GoogleFonts.montserrat(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    '971836441',
+                    style: GoogleFonts.montserrat(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
         ],
       ),
@@ -60,7 +81,7 @@ class _HomePageState extends State<HomePage> {
         borderRadius: BorderRadius.circular(40.0),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.3),
+            color: Colors.red.withOpacity(0.3),
             spreadRadius: 2,
             blurRadius: 5,
             offset: Offset(0, 3),
@@ -198,7 +219,7 @@ class _HomePageState extends State<HomePage> {
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.3),
+            color: Colors.red.withOpacity(0.2),
             spreadRadius: 2,
             blurRadius: 5,
             offset: Offset(0, 3),
@@ -243,15 +264,16 @@ class _HomePageState extends State<HomePage> {
       child: Stack(
         children: [
           ListView.separated(
-              itemCount: getListaCupones().length,
-              scrollDirection: Axis.horizontal,
-              separatorBuilder: (BuildContext context, int index) {
-                return SizedBox(
-                  width: 10,
-                );
-              },
-              itemBuilder: (BuildContext context, int i) =>
-                  generarCuponesSlider(i)),
+            itemCount: getListaCupones().length,
+            scrollDirection: Axis.horizontal,
+            separatorBuilder: (BuildContext context, int index) {
+              return SizedBox(
+                width: 10,
+              );
+            },
+            itemBuilder: (BuildContext context, int i) =>
+                generarCuponesSlider(i),
+          ),
           Positioned(
             left: 0,
             top: 0,
@@ -262,7 +284,10 @@ class _HomePageState extends State<HomePage> {
                 gradient: LinearGradient(
                   begin: Alignment.centerLeft,
                   end: Alignment.centerRight,
-                  colors: [Colors.black.withOpacity(0.2), Colors.transparent],
+                  colors: [
+                    Colors.black.withOpacity(0.2),
+                    Colors.transparent,
+                  ],
                 ),
               ),
             ),
@@ -432,34 +457,33 @@ class _HomePageState extends State<HomePage> {
                 ),
                 SizedBox(
                   child: FadeInImage(
-                    placeholder: AssetImage('assets/cargando.gif'),
-                    image: NetworkImage('https://i.gyazo.com/5996a0545ed8c997e70b0038cf5172a9.png'),
-                    fadeInDuration: Duration(milliseconds: 100),
-                    fit: BoxFit.fitHeight
+                      placeholder: AssetImage('assets/cargando.gif'),
+                      image: NetworkImage(
+                          'https://i.gyazo.com/2cf6fa3e62cd925f9f9795f3186693f3.jpg'),
+                      fadeInDuration: Duration(milliseconds: 100),
+                      fit: BoxFit.fitHeight),
+                  height: 150,
+                )
+              ],
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: Text(
+                  'Ok',
+                  style: GoogleFonts.montserrat(
+                    fontSize: 18,
                   ),
-                height: 150,
-              )
-            ],
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(),
-              child: Text(
-                'Ok',
-                style: GoogleFonts.montserrat(
-                  fontSize: 18,
+                ),
+                style: TextButton.styleFrom(
+                  primary: Colors.red[900],
                 ),
               ),
-              style: TextButton.styleFrom(
-                primary: Colors.red[900],
-              ),
-            ),
-          ],
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(30.0)),
-        );
-      }
-    );
+            ],
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30.0)),
+          );
+        });
   }
 
   Widget generarMiniMapa() {

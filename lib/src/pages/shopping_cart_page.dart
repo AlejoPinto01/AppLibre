@@ -35,7 +35,41 @@ class _ShoppingPageState extends State<ShoppingPage> {
         ),
         backgroundColor: Colors.red[900],
       ),
-      body: compruebaListView(),
+      body: Stack(
+        children: [
+          compruebaListView(),
+          Positioned(
+            left: 0,
+            top: 0,
+            bottom: 0,
+            child: Container(
+              width: 10,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                  colors: [Colors.black.withOpacity(0.3), Colors.transparent],
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            right: 0,
+            top: 0,
+            bottom: 0,
+            child: Container(
+              width: 10,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.centerRight,
+                  end: Alignment.centerLeft,
+                  colors: [Colors.black.withOpacity(0.3), Colors.transparent],
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 
