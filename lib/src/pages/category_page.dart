@@ -1,4 +1,4 @@
-// ignore_for_file: must_be_immutable, use_key_in_widget_constructors, prefer_final_fields, prefer_const_literals_to_create_immutables, unnecessary_new
+// ignore_for_file: must_be_immutable, use_key_in_widget_constructors, prefer_final_fields, prefer_const_literals_to_create_immutables, unnecessary_new, prefer_const_constructors
 
 import 'package:animations/animations.dart';
 import 'package:applibre/src/models/models.dart';

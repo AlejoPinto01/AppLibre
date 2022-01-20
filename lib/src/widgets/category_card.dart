@@ -19,7 +19,6 @@ class _CategoryCardState extends State<CategoryCard> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        print(widget.category.name);
         final route = MaterialPageRoute(
           builder: (context) {
             return CategoryPage(category: widget.category);

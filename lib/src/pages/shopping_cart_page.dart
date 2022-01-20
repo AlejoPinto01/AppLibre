@@ -153,7 +153,7 @@ class _ShoppingPageState extends State<ShoppingPage> {
           if (index < getPedido().length) {
             return Container(
               color: Colors.yellow[100],
-              height: 70,
+              height: 110,
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 children: [
@@ -161,7 +161,7 @@ class _ShoppingPageState extends State<ShoppingPage> {
                     child: Container(
                       child: Image.asset(
                         getPedido()[index].image,
-                        fit: BoxFit.fitWidth,
+                        fit: BoxFit.cover,
                       ),
                       width: 130,
                     ),
@@ -180,10 +180,13 @@ class _ShoppingPageState extends State<ShoppingPage> {
                           getPedido()[index].name,
                           style: GoogleFonts.montserrat(
                             fontWeight: FontWeight.bold,
-                            fontSize: 20,
+                            fontSize: 15,
                             height: 1.5,
                           ),
                         ),
+                      ),
+                      SizedBox(
+                        height: 5,
                       ),
                       Text(
                         '${getPedido()[index].price}€',

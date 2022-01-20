@@ -1,4 +1,4 @@
-// ignore_for_file: must_be_immutable, use_key_in_widget_constructors, prefer_final_fields
+// ignore_for_file: must_be_immutable, use_key_in_widget_constructors, prefer_final_fields, prefer_const_constructors
 
 import 'package:applibre/src/models/models.dart';
 import 'package:applibre/src/util/cupons_list.dart';
