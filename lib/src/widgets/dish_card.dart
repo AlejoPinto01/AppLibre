@@ -29,8 +29,8 @@ class DishCard extends StatelessWidget {
           child: Row(
             children: [
               Container(
-                width: 100,
-                height: 100,
+                width: 120,
+                height: 120,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(100),
                   child: Hero(
@@ -62,7 +62,7 @@ class DishCard extends StatelessWidget {
                       height: 7,
                     ),
                     Text(
-                      '${dish.price}€',
+                      '${dish.price.toStringAsFixed(2)}€',
                       style: GoogleFonts.montserrat(
                         textStyle: TextStyle(
                           fontSize: 17,
