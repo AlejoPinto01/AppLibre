@@ -29,17 +29,19 @@ class DishCard extends StatelessWidget {
           child: Row(
             children: [
               Container(
+                decoration: BoxDecoration(shape: BoxShape.circle),
+                clipBehavior: Clip.antiAlias,
                 width: 120,
                 height: 120,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(100),
                   child: Hero(
                     tag: dish.name,
-                    child: Image.asset(
-                      dish.image,
-                      fit: BoxFit.cover,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(200),
+                      child: Image.asset(
+                        dish.image,
+                        fit: BoxFit.cover,
+                      ),
                     ),
-                  ),
                 ),
               ),
               SizedBox(

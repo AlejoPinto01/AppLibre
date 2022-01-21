@@ -39,7 +39,7 @@ class _DishPageState extends State<DishPage> {
       appBar: AppBar(
         backgroundColor: Colors.red[900],
         title: Align(
-          alignment: Alignment(-0.2,0),
+          alignment: Alignment(-0.2, 0),
           child: Image(
             image: AssetImage('assets/logo.png'),
             width: 50,
@@ -149,9 +149,12 @@ class _DishPageState extends State<DishPage> {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(20),
           child: Hero(
-            child: Image.asset(
-              widget.dish.image,
-              fit: BoxFit.cover,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: Image.asset(
+                widget.dish.image,
+                fit: BoxFit.cover,
+              ),
             ),
             tag: widget.dish.name,
           ),

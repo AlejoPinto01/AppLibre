@@ -19,10 +19,13 @@ class _RootPageState extends State<RootPage> {
   ContainerTransitionType _transitionType = ContainerTransitionType.fade;
   List<Widget> widgetOptions = createPages(getRegistre());
 
+  bool _buttonVisible = true;
+
   void onItemTapped(int index) {
     setState(() {
       setIndex(index);
       pageController.jumpToPage(index);
+      _setCartButtonVisibility();
     });
   }
 
@@ -40,32 +43,32 @@ class _RootPageState extends State<RootPage> {
         ),
       ),
       body: buildPageView(),
-      floatingActionButton: OpenContainer(
-        transitionType: _transitionType,
-        openBuilder: (BuildContext context, VoidCallback _) {
-          return ShoppingPage(
-            includeMarkAsDoneButton: false,
-          );
-        },
-        closedElevation: 6.0,
-        closedShape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(56 / 2),
-          ),
-        ),
-        closedColor: Color.fromRGBO(184, 28, 28, 1),
-        closedBuilder: (BuildContext context, VoidCallback openContainer) {
-          return SizedBox(
-            height: 56,
-            width: 56,
-            child: Center(
-              child: Icon(
-                Icons.shopping_cart_outlined,
-                color: Theme.of(context).colorScheme.onSecondary,
+      floatingActionButton: !_buttonVisible ? null : OpenContainer(
+            transitionType: _transitionType,
+            openBuilder: (BuildContext context, VoidCallback _) {
+              return ShoppingPage(
+                includeMarkAsDoneButton: false,
+              );
+            },
+            closedElevation: 6.0,
+            closedShape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(56 / 2),
               ),
             ),
-          );
-        },
+            closedColor: Color.fromRGBO(184, 28, 28, 1),
+            closedBuilder: (BuildContext context, VoidCallback openContainer) {
+              return SizedBox(
+                height: 56,
+                width: 56,
+                child: Center(
+                  child: Icon(
+                    Icons.shopping_cart_outlined,
+                    color: Theme.of(context).colorScheme.onSecondary,
+                  ),
+                ),
+              );
+            },
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
@@ -122,5 +125,13 @@ class _RootPageState extends State<RootPage> {
     setState(() {
       setIndex(index);
     });
+  }
+
+  void _setCartButtonVisibility() {
+    if(getIndex()==4) {
+      _buttonVisible = false;
+    } else {
+      _buttonVisible = true;
+    }
   }
 }
